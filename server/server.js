@@ -27,6 +27,31 @@ app.get('/', (req, res) => {
     res.send('Welcome to E-Refill App!')
 })
 
+// USERS
+app.get('/api/v1/users', (req, res) => {
+    res.send('Users Endpoints')
+})
+
+// DELIVERY_ADDRESSES
+app.get('/api/v1/delivery_addresses', (req, res) => {
+    res.send('Delivery Addresses Endpoints')
+})
+
+// ORDERS
+app.get('/api/v1/orders', (req, res) => {
+    res.send('Orders Endpoints')
+})
+
+// ORDER_ITEMS
+app.get('/api/v1/order_items', (req, res) => {
+    res.send('Order Items Endpoints')
+})
+
+// CONTAINERS
+app.get('/api/v1/containers', (req, res) => {
+    res.send('Containers Endpoints')
+})
+
 // Express Listening Port
 app.listen(port, () => {
     console.log(`Server listening on the port: ${port}`)
