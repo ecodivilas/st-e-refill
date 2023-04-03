@@ -29,7 +29,13 @@ app.get('/', (req, res) => {
 
 // USERS
 app.get('/api/v1/users', (req, res) => {
-    res.send('Users Endpoints')
+    // res.send('Users Endpoints')
+    // http://localhost:8080/api/v1/users
+    // do something here to get your data from the database
+    // res.json({'username1': 'Ely', 'username2':'Celine'})
+    // res.json({'message':'Everything went well', 'status_code': 200})
+    usersController.getUsers().then((users) => res.json(users))
+    // usersController.chickenSalad().then((data)=>res.json(data))
 })
 
 // DELIVERY_ADDRESSES
