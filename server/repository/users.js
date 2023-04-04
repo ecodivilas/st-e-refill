@@ -6,6 +6,10 @@ class UsersRepository {
     constructor() {
         this.db = connect()
     }
+
+    // CREATE
+    // async createUser() {}
+
     async getUsers() {
         console.log('GETTING/FETCH/READ USERS IN THE REPOSITORY')
 
@@ -19,9 +23,29 @@ class UsersRepository {
             console.log('Error in getting users', error)
             return []
         }
-        // const data = {'message':'Everything went well dude in repository hahahaha'}
-        // return data
+        
     }
+
+    // UPDATE
+    // async updateUser() {}
+
+
+    // DELETE
+    // async deleteUser() {}
+    async deleteUser() {
+        console.log('DELETE USERS IN THE REPOSITORY')
+    }
+
+    // models.User.destroy({
+    //     where: {
+    //      id: id
+    //     }
+    //    }).then(count => {
+    //     if (!count) {
+    //      return res.status(404).send({error: 'No user'});
+    //     }
+    //     res.status(204).send();
+    //    });
 }
 
 module.exports = new UsersRepository()
