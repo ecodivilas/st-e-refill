@@ -27,6 +27,14 @@ app.get('/', (req, res) => {
 })
 
 // USERS
+
+// create
+app.post('/api/v1/users', (req,res) => {
+    const data = req.body
+    usersController.createUser(data).then((data) => res.send("successful"))
+})
+
+// get
 app.get('/api/v1/users', (req, res) => {
     // res.send('Users Endpoints')
     usersController.getUsers().then((users) => res.json(users))

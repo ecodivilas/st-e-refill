@@ -1,6 +1,13 @@
 const usersRepository = require('../repository/users')
 
 class usersService {
+
+    // CREATE
+    async createUser(user) {
+        return await userRepository.createUser(user)
+    }
+
+    // GET
     async getUsers() {
         console.log('GETTING USERS IN THE REPOSITORY')
         return await usersRepository.getUsers()

@@ -9,6 +9,16 @@ class UsersRepository {
 
     // CREATE
     // async createUser() {}
+    // CREATE
+    async createUser(user) {
+        try {
+            return await this.db.users.create(user)
+        } catch (error) {
+            console.log('Error', error)
+        }
+    }
+
+    // GET
 
     async getUsers() {
         console.log('GETTING/FETCH/READ USERS IN THE REPOSITORY')
@@ -23,7 +33,6 @@ class UsersRepository {
             console.log('Error in getting users', error)
             return []
         }
-        
     }
 
     // UPDATE
