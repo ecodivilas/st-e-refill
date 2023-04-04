@@ -9,7 +9,6 @@ class UsersRepository {
 
     // CREATE
     // async createUser() {}
-    // CREATE
     async createUser(user) {
         try {
             return await this.db.users.create(user)
@@ -19,7 +18,6 @@ class UsersRepository {
     }
 
     // GET
-
     async getUsers() {
         console.log('GETTING/FETCH/READ USERS IN THE REPOSITORY')
 
@@ -41,20 +39,24 @@ class UsersRepository {
 
     // DELETE
     // async deleteUser() {}
-    async deleteUser() {
+    async deleteUser(id) {
         console.log('DELETE USERS IN THE REPOSITORY')
-    }
 
-    // models.User.destroy({
-    //     where: {
-    //      id: id
-    //     }
-    //    }).then(count => {
-    //     if (!count) {
-    //      return res.status(404).send({error: 'No user'});
-    //     }
-    //     res.status(204).send();
-    //    });
+        try {
+            const user = await this.db.users.findByPk(id);
+            console.log(user)
+          if (user) {
+            await user.destroy();
+            console.log('User deleted successfully');
+          } else {
+            console.log('User not found');
+          }
+          
+        } catch (err) {
+            console.error(err.message);
+        }
+        
+    }
 }
 
 module.exports = new UsersRepository()

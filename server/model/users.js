@@ -3,7 +3,11 @@ module.exports = (sequelize, DataTypes, Model) => {
 
     // READ SEQUELIZE ORM API DOCUMENTATIONS
     Users.init(
-        {
+        {   id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+            },
             username: {
                 type: DataTypes.STRING,
                 primaryKey: true,

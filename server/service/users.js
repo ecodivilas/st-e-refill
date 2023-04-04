@@ -4,7 +4,7 @@ class usersService {
 
     // CREATE
     async createUser(user) {
-        return await userRepository.createUser(user)
+        return await usersRepository.createUser(user)
     }
 
     // GET
@@ -14,6 +14,12 @@ class usersService {
         // const data = {'message': 'Where here in the service'}
         // return data
     }
+
+    // DELETE
+    async deleteUser(id) {
+        return await usersRepository.deleteUser(id)
+    }
+
 }
 
 module.exports = new usersService()

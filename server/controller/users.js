@@ -4,7 +4,8 @@ class usersController {
 
     // CREATE
     async createUser(user) {
-        return await userService.createUser(user)
+        console.log('CREATING USER IN THE CONTROLLER')
+        return await usersService.createUser(user)
     }
 
     // GET
@@ -12,7 +13,12 @@ class usersController {
         console.log('GETTING USERS IN THE CONTROLLER')
         return await usersService.getUsers()
     }
-
+    
+    // DELETE
+    async deleteUser(id) {
+        console.log('DELETE USER IN THE CONTROLLER')
+        return await usersService.deleteUser(id)
+    }
 
 } 
 

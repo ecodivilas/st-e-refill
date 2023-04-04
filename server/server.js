@@ -40,6 +40,13 @@ app.get('/api/v1/users', (req, res) => {
     usersController.getUsers().then((users) => res.json(users))
 })
 
+// delete
+app.delete('/api/v1/users/:id', (req,res) => {
+    const id = req.params.id;
+    // console.log("This is the damn id: ", id)
+    usersController.deleteUser(id).then((id) => res.send("successful"))
+})
+
 // DELIVERY_ADDRESSES
 app.get('/api/v1/delivery_addresses', (req, res) => {
     res.send('Delivery Addresses Endpoints')
