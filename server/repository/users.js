@@ -17,7 +17,7 @@ class UsersRepository {
         }
     }
 
-    // GET
+    // GET ALL USERS
     async getUsers() {
         console.log('GETTING/FETCH/READ USERS IN THE REPOSITORY')
 
@@ -33,12 +33,20 @@ class UsersRepository {
         }
     }
 
-    // UPDATE
-    // async updateUser() {}
+    // GET USER BY ID
+    async getUser(id) {
+        console.log('DELETE USERS IN THE REPOSITORY')
 
+        try {
+            const user = await this.db.users.findByPk(id);
+            // console.log(user)
+            return user
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
 
     // DELETE
-    // async deleteUser() {}
     async deleteUser(id) {
         console.log('DELETE USERS IN THE REPOSITORY')
 
@@ -57,6 +65,43 @@ class UsersRepository {
         }
         
     }
+
+    // // UPDATE
+    // async updateUser(id, updated_data) {
+    //     console.log('UPDATE USERS IN THE REPOSITORY')
+
+    //     try {
+    //         const user = await this.db.users.findByPk(id);
+    //         console.log(user)
+
+    //       if (user) {
+    //         await user.update(updated_data)
+    //       } else {
+    //         console.log('User not found');
+    //       }
+         
+    //     } catch (err) {
+    //         console.log('There was an error', err);
+    //     }
+    // }
+    async updateUser(user) {
+        // console.log("Updating User");
+        let data = {};
+    
+        try {
+          data = await this.db.users.update(
+            { ...user },
+            {
+              where: {
+                id: user.id,
+              },
+            }
+          );
+        } catch (error) {
+          console.log("Error:", error);
+        }
+        return data;
+      }
 }
 
 module.exports = new UsersRepository()
