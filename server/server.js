@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/api/v1/users', (req,res) => {
-    usersController.createUser(req.body).then((data) => res.json(data))
+    usersController.createUser(req.body.user).then((data) => res.json(data))
 })
 
 app.get('/api/v1/users', (req, res) => {
@@ -36,7 +36,7 @@ app.delete('/api/v1/users/:id', (req,res) => {
     usersController.deleteUser(req.params.id).then((data) => res.json(data))
 })
 
-app.put("/api/users", (req, res) => {
+app.put("/api/v1/users", (req, res) => {
     usersController.updateUser(req.body.user).then((data) => res.json(data));
 })
 

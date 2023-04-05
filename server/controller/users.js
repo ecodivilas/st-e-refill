@@ -19,17 +19,17 @@ class usersController {
         console.log('GETTING A USER BY ID IN THE CONTROLLER')
         return await usersService.getUser(id)
     }
+
+    // UPDATE
+    async updateUser(user) {
+        console.log('UPDATE USER IN THE CONTROLLER')
+        return await usersService.updateUser(user)
+    }
     
     // DELETE
     async deleteUser(id) {
         console.log('DELETE USER IN THE CONTROLLER')
         return await usersService.deleteUser(id)
-    }
-
-    // UPDATE
-    async updateUser(id) {
-        console.log('UPDATE USER IN THE CONTROLLER')
-        return await usersService.updateUser(id, updated_data)
     }
 
 } 

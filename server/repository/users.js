@@ -7,8 +7,6 @@ class UsersRepository {
         this.db = connect()
     }
 
-    // CREATE
-    // async createUser() {}
     async createUser(user) {
         try {
             return await this.db.users.create(user)
@@ -85,10 +83,11 @@ class UsersRepository {
     //     }
     // }
     async updateUser(user) {
-        // console.log("Updating User");
+        console.log("Updating User");
         let data = {};
     
         try {
+            console.log("user: ", user);
           data = await this.db.users.update(
             { ...user },
             {
