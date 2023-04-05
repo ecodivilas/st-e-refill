@@ -32,12 +32,12 @@ app.get('/api/v1/users/:id', (req,res) => {
     usersController.getUser(req.params.id).then((data) => res.json(data))
 })
 
-app.delete('/api/v1/users/:id', (req,res) => {
-    usersController.deleteUser(req.params.id).then((data) => res.json(data))
-})
-
 app.put("/api/v1/users", (req, res) => {
     usersController.updateUser(req.body.user).then((data) => res.json(data));
+})
+
+app.delete('/api/v1/users/:id', (req,res) => {
+    usersController.deleteUser(req.params.id).then((data) => res.json(data))
 })
 
 app.get('/api/v1/delivery_addresses', (req, res) => {
