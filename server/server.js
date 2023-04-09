@@ -16,10 +16,6 @@ app.use(cors())
 app.use(express.json())
 app.use(bodyParser.json())
 
-app.get('/', (req, res) => {
-    res.send('Welcome to E-Refill App!')
-})
-
 app.post('/api/v1/users', (req,res) => {
     usersController.createUser(req.body.user).then((data) => res.json(data))
 })

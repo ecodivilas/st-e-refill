@@ -1,7 +1,6 @@
 module.exports = (sequelize, DataTypes, Model) => {
     class Users extends Model {}
 
-    // READ SEQUELIZE ORM API DOCUMENTATIONS
     Users.init(
         {   id: {
                 type: DataTypes.INTEGER,
