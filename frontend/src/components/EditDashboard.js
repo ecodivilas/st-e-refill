@@ -40,7 +40,7 @@ const handleChange = (e) => {
   return (
     <Fragment>
       {/* Button to open the modal */}
-      <div className="flex justify-center items-center py-4 mx-10">
+      <div className="flex justify-center items-center py-4 mx-4 w-50">
         <button
           className="bg-blue-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded mr-2"
           onClick={toggleModal}
@@ -52,10 +52,11 @@ const handleChange = (e) => {
       {/* Modal code */}
       {showModal && (
         <div className="fixed z-10 inset-0 overflow-y-auto">
+          {/* <div className="flex items-center justify-center min-h-screen"> */}
           <div className="flex items-center justify-center min-h-screen">
-            <div className="bg-white rounded-lg">
+            <div className="bg-blue-50 dark:bg-slate-900 rounded-lg text-black">
               <div className="p-4">
-                <h2 className="text-lg font-bold mb-4">Edit user information</h2>
+                <h2 className="text-lg font-bold mb-4 text-white">Edit user information</h2>
                 <div className="mb-4">
                   <input
                     type="text"

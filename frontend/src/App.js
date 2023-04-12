@@ -9,9 +9,9 @@ function App() {
     <div className="bg-gray-700">
         <div className="flex justify-center items-center h-[100vh]">
           <p className="text-white">Cool Application!!!</p> 🎉
-          </div>
-    <CreateUser />
-    <UserDashboard />
+        </div>
+        <CreateUser />
+        <UserDashboard />
     </div>
   )
 }

@@ -1,32 +1,44 @@
+// CREATE/POST User
 export async function createUser(userDetails) {
-    const response = await fetch('/api/v1/users', {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ "user": userDetails }),
-    });
-
+    try {
+        const response = await fetch('/api/v1/users', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ "user": userDetails }),
+        });
     return await response.json();
+    } catch (error) {
+        console.log('Error: ', error);
+    }
 }
 
+// READ/FETCH/GET User
 export async function getAllUsers() {
-    const response = await fetch('/api/v1/users');
-    return await response.json()
+    try {
+        const response = await fetch('/api/v1/users');
+        return await response.json()
+    } catch (error) {
+        console.log('Error: ', error);
+    }
 }
 
+// EDIT/UPDATE User
 export async function editUser(userDetails) {
-    const response = await fetch('/api/v1/users', {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ "user": userDetails }),
-    });
-    return await response.json()
+    try {
+        const response = await fetch('/api/v1/users', {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ "user": userDetails }),
+        });
+        return await response.json()
 
-    // console.log(JSON.stringify({ "user": userDetails }))
+    } catch (error) {
+        console.log('Error: ', error)
+    }
 }
 
+// DELETE User
 export async function deleteUser(userId) {
-    // console.log(`Here am I: ${userId}`)
-    // const response = await fetch(`/api/v1/users/${userId}`, { method: "DELETE" });
     try {
         const confirmed = window.confirm('Are you sure you want to delete this user?')
         if (confirmed) {
@@ -35,9 +47,10 @@ export async function deleteUser(userId) {
                 { method: 'DELETE' }
             )
             return await response.json();
-            // setUser(user.filter((u) => u.id !== userId))
         }
     } catch (error) {
-        console.error(error.message)
+        console.log('Error: ', error)
     }
 }
+
+// console.log(JSON.stringify({ "user": userDetails }))
