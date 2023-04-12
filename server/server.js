@@ -6,6 +6,7 @@ const express = require('express')
 const path = require('path')
 
 const usersController = require('./controller/users')
+const containersController = require('./controller/containers')
 
 const app = express()
 
@@ -48,8 +49,11 @@ app.get('/api/v1/order_items', (req, res) => {
     res.send('Order Items Endpoints')
 })
 
+// Containers
 app.get('/api/v1/containers', (req, res) => {
-    res.send('Containers Endpoints')
+    // res.send('Containers Endpoints')
+    containersController.getContainers().then((data) => res.json(data))
+    
 })
 
 app.listen(port, () => {

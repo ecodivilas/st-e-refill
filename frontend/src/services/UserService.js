@@ -6,7 +6,7 @@ export async function createUser(userDetails) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ "user": userDetails }),
         });
-    return await response.json();
+        return await response.json();
     } catch (error) {
         console.log('Error: ', error);
     }
@@ -30,7 +30,10 @@ export async function editUser(userDetails) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ "user": userDetails }),
         });
-        return await response.json()
+
+        if (response.status === 200) {
+            return await response.json()
+        }
 
     } catch (error) {
         console.log('Error: ', error)

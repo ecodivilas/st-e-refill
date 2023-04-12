@@ -8,7 +8,6 @@ class UsersRepository {
         this.db = connect()
     }
 
-
     async createUser(user) {
         let userData = {}
 
