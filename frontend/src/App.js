@@ -1,21 +1,27 @@
 import React from 'react'
-// import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Navbar from './common/NavBar'
-import Splash from './components/Splash'
-import UserDashboard from './components/UserDashboard'
+import Login from './aunthentication/Login'
+
+import Dashboard from './pages/Dashboard'
+
+
 import CreateUser from './components/CreateUserDashboard'
-import Footer from './common/Footer'
+import SignUp from './aunthentication/Signup'
+
 
 function App() {
   return (
-    // <div className="bg-gray-700">
     <div>
-      <Navbar />
-      <Splash />
-      <CreateUser />
-      <UserDashboard />
-      <Footer />
+      <BrowserRouter>
+            <Navbar />
+            <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/sign-up" element={<SignUp /> } />
+                <Route path="/login" element={<Login /> } />
+            </Routes>
+        </BrowserRouter>
     </div>
   )
 }
