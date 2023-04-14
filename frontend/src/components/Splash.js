@@ -15,14 +15,16 @@ function Splash() {
       }}
     >
       <div className="flex justify-center group relative py-4 px-2">
-                 <a href="/" className="" data-tooltip-target="tooltip-hover">
-                    <img className="h-4/6 ml-6 z-10" src={require("./img/robots.png")} alt="robot" />
-                 </a>
-                  <span className="absolute -top-10 left-1/2 transform -translate-x-4/8 scale-0 rounded bg-gray-300 p-2 text-lg text-black group-hover:scale-100">
-                    Need help?  Chat with us
-                  </span>
-                  <div class="tooltip-arrow" data-popper-arrow></div>       
-            </div>
+        <div className="mt-32">
+          <a href="/" className="" data-tooltip-target="tooltip-hover">
+            <img className="h-4/6 ml-6 z-10" src={require("./img/robots.png")} alt="robot" />
+          </a>
+          <span className="absolute top-10 left-1/2 transform -translate-x-4/8 scale-0 rounded bg-gray-300 p-2 text-lg text-black group-hover:scale-100">
+            Need help?  Chat with us
+          </span>     
+        </div>
+                 
+      </div>
 
       <div className="flex flex-col justify-end w-5/12 h-28 gap-3">
         <div className="flex justify-center h-14">
