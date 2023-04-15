@@ -12,7 +12,7 @@ import HelpCenter from './pages/HelpCenter'
 import Inquiry from './pages/Inquiry'
 
 import CreateUser from './components/CreateUserDashboard'
-import SignUp from './aunthentication/Signup'
+import Register from './aunthentication/Register'
 
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
             <Navbar />
             <Routes>
                 <Route path="/" element={<Dashboard />} />
-                <Route path="/sign-up" element={<SignUp /> } />
+                <Route path="/register" element={<Register /> } />
                 <Route path="/login" element={<Login /> } />
 
                 <Route path="/products-and-services" element={<ProductsnServices />} />

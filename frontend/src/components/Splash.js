@@ -30,7 +30,7 @@ function Splash() {
         <div className="flex justify-center h-14">
           <button type="button" onClick={() => navigate('/login')} class="text-white bg-slate-900 hover:bg-orange-500 focus:ring-4 focus:bg-slate-500 font-medium text-lg px-5 py-2.5 w-2/6">Order Now</button>
         </div>
-        <div className="flex justify-center text-lg"><p>Not a Member Yet? <button className="text-orange-600 font-medium text-lg" onClick={() => navigate('/sign-up')}>Create an Account</button></p></div>
+        <div className="flex justify-center text-lg"><p>Not a Member Yet? <button className="text-orange-600 font-medium text-lg" onClick={() => navigate('/register')}>Create an Account</button></p></div>
       </div>
     </div>
  

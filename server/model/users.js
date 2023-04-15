@@ -5,19 +5,31 @@ module.exports = (sequelize, DataTypes, Model) => {
         {   id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
-                autoIncrement: true
+                autoIncrement: true,
+                allowNull: false
             },
             username: {
                 type: DataTypes.STRING,
+                allowNull: false
+            },
+            email: {
+                type: DataTypes.STRING,
+                allowNull: false
             },
             password: {
                 type: DataTypes.STRING,
+                allowNull: false
             },
             first_name: {
                 type: DataTypes.STRING,
+                allowNull: false
+            },
+            middle_name: {
+                type: DataTypes.STRING
             },
             last_name: {
                 type: DataTypes.STRING,
+                allowNull: false
             },
             gender: {
                 type: DataTypes.STRING,
@@ -25,17 +37,13 @@ module.exports = (sequelize, DataTypes, Model) => {
             age: {
                 type: DataTypes.INTEGER,
             },
-            delivery_address: {
+            mobile_no: {
                 type: DataTypes.STRING,
-            },
-            phone: {
-                type: DataTypes.STRING,
-            },
-            email: {
-                type: DataTypes.STRING,
+                allowNull: false
             },
             role: {
                 type: DataTypes.STRING,
+                allowNull: false
             },
         },
         {

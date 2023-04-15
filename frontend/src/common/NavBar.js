@@ -15,9 +15,9 @@ function Navbar() {
           <div className="flex justify-start items-center pt-1.5 w-3/4 pl-2">
             <button type="button" onClick={() => navigate('/')}> <img className="h-12  mt-0.75" src={require("./img/e_refill_logo.png")} alt="logo" /> </button>
           </div>
-          
+
           <div className="flex justify-end align-bottom w-1/4 gap-4 mr-2 my-2 h-12">
-            <button type="button" onClick={() => navigate('/sign-up')} className="text-white bg-orange-600 hover:bg-slate-900 font-medium text-base px-5 dark:bg-orange-500 dark:hover:bg-orange-900 w-1/2">Register</button>
+            <button type="button" onClick={() => navigate('/register')} className="text-white bg-orange-600 hover:bg-slate-900 font-medium text-base px-5 dark:bg-orange-500 dark:hover:bg-orange-900 w-1/2">Register</button>
             <button type="button" onClick={() => navigate('/login')} className="text-white bg-orange-600 hover:bg-orange-600 font-medium text-base px-5 dark:bg-slate-900 dark:hover:bg-slate-800 w-1/2">Login</button>
           </div>
         </div>
@@ -28,11 +28,13 @@ function Navbar() {
           </button>
 
           <ul className="hidden md:flex space-x-10 text-gray-600 dark:text-gray-100 font-bold text-sm capitalize font-medium">
+
           {pagesNavigations.map(({ id, link, path }) => (
               <li key={id} className="hover:text-orange-500">
                 <button onClick={() => navigate(path)}> {link}</button>
               </li>
           ))}    
+          
           </ul>
 
           <img

@@ -7,6 +7,6 @@ export const navigation = [
     {
         id: 2,
         link: 'Register',
-        path: "/sign-up"
+        path: "/register"
     },
 ]
