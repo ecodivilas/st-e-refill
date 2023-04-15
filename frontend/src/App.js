@@ -14,6 +14,7 @@ import Inquiry from './pages/Inquiry'
 import CreateUser from './components/CreateUserDashboard'
 import Register from './aunthentication/Register'
 
+import './customTableStyle.css';
 
 function App() {
   return (
