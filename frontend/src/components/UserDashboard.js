@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { getAllUsers, deleteUser } from '../services/UserService'
-import EditDashboard from './EditDashboard';
+import { getAllUsers } from '../services/UserService'
+
+import DataTable from 'react-data-table-component';
 
 function UserDashboard() {
     const [users, setUsers] = useState([])
@@ -11,52 +12,72 @@ function UserDashboard() {
         })
     }, [])
 
+    console.log("Ito ang listahan nang mga users: ", users)
+
+    const columns = [
+        {
+            name: 'Username',
+            selector: row => row.username,
+            sortable: true
+        },
+        {
+            name: 'Email',
+            selector: row => row.email,
+            sortable: true
+        },
+        {
+            name: 'First Name',
+            selector: row => row.first_name,
+            sortable: true
+        },
+        {
+            name: 'Middle Name',
+            selector: row => row.middle_name,
+            sortable: true
+        },
+        {
+            name: 'Last Name',
+            selector: row => row.last_name,
+            sortable: true
+        },
+        {
+            name: 'Gender',
+            selector: row => row.gender,
+            sortable: true
+        },
+        {
+            name: 'Mobile No.',
+            selector: row => row.mobile_no,
+            sortable: true
+        },
+        {
+            name: 'Role',
+            selector: row => row.role,
+            sortable: true
+        },
+        {
+            name: 'Edit',
+            selector: row => row.role,
+            sortable: true
+        },
+        {
+            name: 'Delete',
+            selector: row => row.role,
+            sortable: true
+        },
+    ]
+
     return (
-        <section className="bg-gray-500 dark:bg-slate-900 p-10">
-                <div className="shadow bg-gray-300 rounded-lg">
-                    <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-                        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                                <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">
-                                    User Dashboard
-                                </h1>
-                                <div className="flex justify-center dark:text-white">
-                                    <table className="text-center">
-                                        <thead>
-                                            <tr>
-                                                <th className="">ID</th>
-                                                <th className="w-[300px] text-center">Username</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {users && users.length > 0 ?
-                                                users.map((user) => {
-                                                    return (
-                                                        <tr key={user.id} className="shadow">
-                                                            <td>{user.id}</td>
-                                                            <td>{user.username}</td>
-                                                            <td><EditDashboard user={user} /></td>
-                                                            <td>
-                                                                <button className="bg-red-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded" onClick={() => deleteUser(user.id)}>
-                                                                    Delete
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                    )
-                                                })
-                                            : 
-                                                <p className="flex text-center">No records Found!</p>
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
-                            
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        // <div>Hdshfsdhfsd</div>
+        <div className='container mx-2 h-[100vh] mt-2'>
+            <DataTable theme="dark"
+            columns={columns}
+            data={users}
+            selectableRows
+            pagination
+            fixedHeader
+            ></DataTable>
+        </div>
   )
 }
 
