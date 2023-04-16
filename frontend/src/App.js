@@ -14,7 +14,7 @@ import UserDashboard from './components/UserDashboard'
 
 import Register from './aunthentication/Register'
 
-import './customTableStyle.css';
+import './assets/customizedStyles/customTableStyle.css';
 
 function App() {
   return (

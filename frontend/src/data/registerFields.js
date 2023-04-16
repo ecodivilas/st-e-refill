@@ -7,9 +7,23 @@ export const registerFields = [
         placeholder: "Username"
     },
     {
+        id: "email",
+        name: 'email',
+        label: 'Email',
+        type: "email",
+        placeholder: "Email"
+    },
+    {
         id: "password",
         name: 'password',
         label: 'Password',
+        type: "password",
+        placeholder: "••••••••"
+    },
+    {
+        id: "confirm_password",
+        name: 'confirm_password',
+        label: 'Confirm Password',
         type: "password",
         placeholder: "••••••••"
     },
@@ -19,6 +33,13 @@ export const registerFields = [
         label: 'First Name',
         type: "text",
         placeholder: "First Name"
+    },
+    {
+        id: "middle_name",
+        name: 'middle_name',
+        label: 'Middle Name',
+        type: "text",
+        placeholder: "Middle Name"
     },
     {
         id: "last_name",
@@ -42,31 +63,10 @@ export const registerFields = [
         placeholder: "age"
     },
     {
-        id: "delivery_address",
-        name: 'delivery_address',
-        label: 'Delivery Address',
-        type: "text",
-        placeholder: "Delivery Address"
-    },
-    {
-        id: "phone",
-        name: 'phone',
+        id: "mobile_no",
+        name: 'mobile_no',
         label: 'Mobile No.',
         type: "text",
         placeholder: "Mobile No."
-    },
-    {
-        id: "email",
-        name: 'email',
-        label: 'Email',
-        type: "email",
-        placeholder: "Email"
-    },
-    {
-        id: "role",
-        name: 'role',
-        label: 'Role',
-        type: "text",
-        placeholder: "Employee/Customer"
     },
 ]
