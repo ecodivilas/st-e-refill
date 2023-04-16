@@ -8,7 +8,7 @@ function Splash() {
        <div
         className="flex justify-left items-center background"
         style={{
-        backgroundImage: `url(${require('./img/watery.jpg')})`,
+        backgroundImage: `url(${require('./img/watery.webp')})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         height: '100vh',
@@ -17,7 +17,7 @@ function Splash() {
       <div className="flex justify-center group relative py-4 px-2">
         <div className="mt-32">
           <a href="/" className="" data-tooltip-target="tooltip-hover">
-            <img className="h-4/6 ml-6 z-10" src={require("./img/robots.png")} alt="robot" />
+            <img className="h-4/6 ml-6 z-10" src={require("./img/robots.webp")} alt="robot" />
           </a>
           <span className="absolute top-10 left-1/2 transform -translate-x-4/8 scale-0 rounded bg-gray-300 p-2 text-lg text-black group-hover:scale-100">
             Need help?  Chat with us

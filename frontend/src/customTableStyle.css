@@ -3,7 +3,7 @@
 }
 
 .eixEah {
-  @apply !w-[90vw] !h-[300px] !rounded !rounded-md
+  @apply !w-[90vw] !h-[300px] !rounded !rounded-md shadow-2xl;
 } 
 
 .dqfNny {
@@ -43,7 +43,7 @@
   }
   
   .rdt_Pagination {
-    @apply py-2 px-3 text-xs font-medium text-gray-500 uppercase tracking-wider rounded rounded-md;
+    @apply py-2 px-3 text-xs font-medium text-gray-500 uppercase tracking-wider rounded rounded-md shadow-2xl;
   }
   
   .rdt_PaginationPrev,

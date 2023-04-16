@@ -13,7 +13,7 @@ function Navbar() {
       <nav className="w-full top-1 bg-white">
         <div className="flex items-center w-full bg-white h-15 top-0">
           <div className="flex justify-start items-center pt-1.5 w-3/4 pl-2">
-            <button type="button" onClick={() => navigate('/')}> <img className="h-12  mt-0.75" src={require("./img/e_refill_logo.png")} alt="logo" /> </button>
+            <button type="button" onClick={() => navigate('/')}> <img className="h-12  mt-0.75" src={require("./img/e_refill_logo.webp")} alt="logo" /> </button>
           </div>
 
           <div className="flex justify-end align-bottom w-1/4 gap-4 mr-2 my-2 h-12">
