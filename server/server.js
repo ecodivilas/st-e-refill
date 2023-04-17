@@ -17,7 +17,7 @@ app.use(cors())
 app.use(express.json())
 app.use(bodyParser.json())
 
-app.post('/api/v1/users', (req,res) => {
+app.post('/api/v1/users', (req, res) => {
     usersController.createUser(req.body.user).then((data) => res.json(data))
 })
 
@@ -25,26 +25,29 @@ app.get('/api/v1/users', (req, res) => {
     usersController.getUsers().then((data) => res.json(data))
 })
 
-app.get('/api/v1/users/:id', (req,res) => {
+app.get('/api/v1/users/:id', (req, res) => {
     usersController.getUser(req.params.id).then((data) => res.json(data))
 })
 
-app.put("/api/v1/users", (req, res) => {
-    usersController.updateUser(req.body.user).then((data) => res.json(data));
+app.put('/api/v1/users', (req, res) => {
+    usersController.updateUser(req.body.user).then((data) => res.json(data))
 })
 
-app.delete('/api/v1/users/:id', (req,res) => {
+app.delete('/api/v1/users/:id', (req, res) => {
     usersController.deleteUser(req.params.id).then((data) => res.json(data))
 })
 
+// Delivery Address
 app.get('/api/v1/delivery_addresses', (req, res) => {
     res.send('Delivery Addresses Endpoints')
 })
 
+// Order
 app.get('/api/v1/orders', (req, res) => {
     res.send('Orders Endpoints')
 })
 
+// Order Items
 app.get('/api/v1/order_items', (req, res) => {
     res.send('Order Items Endpoints')
 })
@@ -53,7 +56,6 @@ app.get('/api/v1/order_items', (req, res) => {
 app.get('/api/v1/containers', (req, res) => {
     // res.send('Containers Endpoints')
     containersController.getContainers().then((data) => res.json(data))
-    
 })
 
 app.listen(port, () => {
