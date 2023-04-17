@@ -119,7 +119,7 @@ const EditDashboard = ({ user }) => {
           <div className="flex items-center justify-center min-h-screen">
             <div className="bg-blue-50 dark:bg-slate-900 rounded-lg text-black">
               <div className="p-4">
-                <h2 className="text-lg font-bold mb-4 text-white">Edit user information</h2>
+                <h2 className="text-lg font-bold mb-4 text-white">Edit User Information</h2>
                 <form onSubmit={handleSubmit} className=''>
                   
                     {

@@ -31,7 +31,7 @@ function Navbar() {
 
           {pagesNavigations.map(({ id, link, path }) => (
               <li key={id} className="hover:text-orange-500">
-                <button onClick={() => navigate(path)}> {link}</button>
+                <button className="!tracking-wide" onClick={() => navigate(path)}> {link}</button>
               </li>
           ))}    
           

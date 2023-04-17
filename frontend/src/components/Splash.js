@@ -12,8 +12,8 @@ function Splash() {
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         height: '100vh',
-      }}
-    >
+        }}
+       >
       <div className="flex justify-center group relative py-4 px-2">
         <div className="mt-32">
           <a href="/" className="" data-tooltip-target="tooltip-hover">

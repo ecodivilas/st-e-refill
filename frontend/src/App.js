@@ -11,6 +11,7 @@ import Insights from './pages/Insights'
 import HelpCenter from './pages/HelpCenter'
 import Inquiry from './pages/Inquiry'
 import UserDashboard from './components/UserDashboard'
+import Order from './pages/Order'
 
 import Register from './aunthentication/Register'
 
@@ -27,6 +28,7 @@ function App() {
                 <Route path="/login" element={<Login /> } />
                 
                 <Route path="/user-dashboard" element={<UserDashboard />}/>
+                <Route path="/order" element={<Order />}/>
 
                 <Route path="/products-and-services" element={<ProductsnServices />} />
                 <Route path="/customer-experience" element={<CustomerExperience />} />
