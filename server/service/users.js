@@ -1,7 +1,6 @@
 const usersRepository = require('../repository/users')
 
-class usersService {
-
+class UsersService {
     async createUser(user) {
         return await usersRepository.createUser(user)
     }
@@ -14,7 +13,7 @@ class usersService {
     async getUser(id) {
         return await usersRepository.getUser(id)
     }
-    
+
     async updateUser(user) {
         return await usersRepository.updateUser(user)
     }
@@ -24,4 +23,4 @@ class usersService {
     }
 }
 
-module.exports = new usersService()
+module.exports = new UsersService()

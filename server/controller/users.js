@@ -1,7 +1,5 @@
-
 const usersService = require('../service/users')
-class usersController {
-
+class UsersController {
     async createUser(user) {
         return await usersService.createUser(user)
     }
@@ -17,10 +15,10 @@ class usersController {
     async updateUser(user) {
         return await usersService.updateUser(user)
     }
-    
+
     async deleteUser(id) {
         return await usersService.deleteUser(id)
     }
-} 
+}
 
-module.exports =  new usersController()
+module.exports = new UsersController()
