@@ -4,6 +4,8 @@ import EditDashboard from './EditDashboard';
 
 import DataTable from 'react-data-table-component';
 
+import { ImCross } from 'react-icons/im';
+
 function UserDashboard() {
     const [users, setUsers] = useState([])
     // const [data, setData] = useState([])
@@ -104,21 +106,26 @@ function UserDashboard() {
     //     setRecords(newData)
     // }
 
-                        return (
-                            
-                <div>
-                    <div className='flex flex-cols justify-center gap-0 pt-20 flex-wrap items-center h-[100vh] mt-2 bg-zinc-700'>
-                    {/* <div className="text-end"><input type="text" className="bg-white" onChange={handleFilter} /></div> */}
-                        <DataTable
-                            columns={columns}
-                            data={customData}
-                            selectableRows
-                            pagination
-                            fixedHeader
-                            fixedHeaderScrollHeight="300px"
-                        ></DataTable>
-                    </div>
-                </div>
+    return (
+        
+<div className="h-[100vh] bg-zinc-700 ">
+    <div className="flex flex-col justify-center items-center w-full h-12 pt-12">
+        <h2 className="font-bold text-xl p-2 text-white">User Dashboard</h2>
+        <div className="hidden text-xs text-left w-[90vw] bg-green-100 p-2 rounded-lg flex flex-row items-center justify-between"><span className="text-green-900 font-semibold">Edit Successful!</span><ImCross className="h-2 text-green-900"/></div>
+    </div>
+
+    <div className='flex flex-cols justify-center pt-12 gap-4 flex-wrap items-center'>
+    {/* <div className="text-end"><input type="text" className="bg-white" onChange={handleFilter} /></div> */}
+        <DataTable
+            columns={columns}
+            data={customData}
+            selectableRows
+            pagination
+            fixedHeader
+            fixedHeaderScrollHeight="300px"
+        ></DataTable>
+    </div>
+</div>
   )
 }
 
