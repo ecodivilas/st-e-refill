@@ -1,0 +1,64 @@
+.hXLGuA {
+  @apply !w-[85vw] !rounded !rounded-md bg-gray-100;
+}
+
+.eixEah {
+  @apply !w-[90vw] !h-[300px] !rounded !rounded-md shadow-2xl;
+} 
+
+.dqfNny {
+  @apply bg-slate-900
+}
+
+.fVGwTk {
+  @apply bg-slate-900
+}
+
+#cell-9-undefined {
+  @apply !basis-1;
+}
+
+.cell[data-column-id="2"] {
+  @apply !basis-1 ;
+}
+
+.rdt_Table {
+    @apply divide-y divide-gray-200;
+  }
+  
+  .rdt_TableHead {
+    @apply !text-left !bg-zinc-700 !text-xs font-bold !text-white uppercase tracking-wide !rounded !rounded-md;
+  }
+  
+  .rdt_TableRow {
+    @apply hover:!bg-slate-100 shadow;
+  }
+  
+  .rdt_TableCell {
+    @apply py-4 px-3 whitespace-nowrap !text-xs font-medium text-gray-900;
+  }
+  
+  .rdt_TableFooter {
+    @apply bg-gray-100 py-2 px-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+  }
+  
+  .rdt_Pagination {
+    @apply py-2 px-3 text-xs font-medium text-gray-500 uppercase tracking-wider rounded rounded-md shadow-2xl;
+  }
+  
+  .rdt_PaginationPrev,
+  .rdt_PaginationNext {
+    @apply inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+  }
+  
+  .rdt_PaginationDisabled,
+  .rdt_PaginationDisabled:hover,
+  .rdt_PaginationDisabled:focus {
+    @apply inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded-md text-gray-400 bg-white cursor-not-allowed;
+  }
+  
+  .rdt_PaginationActive,
+  .rdt_PaginationActive:hover,
+  .rdt_PaginationActive:focus {
+    @apply inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded-md text-gray-700 bg-gray-100;
+  }  

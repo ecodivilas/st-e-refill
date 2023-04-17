@@ -13,7 +13,7 @@ function Navbar() {
       <nav className="w-full top-1 bg-white">
         <div className="flex items-center w-full bg-white h-15 top-0">
           <div className="flex justify-start items-center pt-1.5 w-3/4 pl-2">
-            <button type="button" onClick={() => navigate('/')}> <img className="h-12  mt-0.75" src={require("./img/e_refill_logo.png")} alt="logo" /> </button>
+            <button type="button" onClick={() => navigate('/')}> <img className="h-12  mt-0.75" src={require("../assets/img/e_refill_logo.webp")} alt="logo" /> </button>
           </div>
 
           <div className="flex justify-end align-bottom w-1/4 gap-4 mr-2 my-2 h-12">
@@ -24,14 +24,14 @@ function Navbar() {
 
         <div className="p-5 flex items-center justify-center z-10 dark:bg-slate-900 h-12 w-full">
           <button onClick={() => navigate('/')}>
-            <img className="h-5 mr-10" src={require("./img/icons8-home-24-white.png")} alt="home_button" />
+            <img className="h-5 mr-10" src={require("../assets/img/icons8-home-24-white.png")} alt="home_button" />
           </button>
 
           <ul className="hidden md:flex space-x-10 text-gray-600 dark:text-gray-100 font-bold text-sm capitalize font-medium">
 
           {pagesNavigations.map(({ id, link, path }) => (
               <li key={id} className="hover:text-orange-500">
-                <button onClick={() => navigate(path)}> {link}</button>
+                <button className="!tracking-wide" onClick={() => navigate(path)}> {link}</button>
               </li>
           ))}    
           
@@ -39,7 +39,7 @@ function Navbar() {
 
           <img
             id="moon"
-            src={require("./img/moon.png")}
+            src={require("../assets/img/moon.png")}
             className="hidden md:block w-5 cursor-pointer ml-10"
             alt="Dark Mood"
           />

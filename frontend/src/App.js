@@ -10,11 +10,12 @@ import CustomerExperience from './pages/CustomerExperience'
 import Insights from './pages/Insights'
 import HelpCenter from './pages/HelpCenter'
 import Inquiry from './pages/Inquiry'
+import UserDashboard from './components/UserDashboard'
+import Order from './pages/Order'
 
-import CreateUser from './components/CreateUserDashboard'
 import Register from './aunthentication/Register'
 
-import './customTableStyle.css';
+import './assets/customizedStyles/customTableStyle.css';
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/register" element={<Register /> } />
                 <Route path="/login" element={<Login /> } />
+                
+                <Route path="/user-dashboard" element={<UserDashboard />}/>
+                <Route path="/order" element={<Order />}/>
 
                 <Route path="/products-and-services" element={<ProductsnServices />} />
                 <Route path="/customer-experience" element={<CustomerExperience />} />
