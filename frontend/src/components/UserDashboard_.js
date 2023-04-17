@@ -6,11 +6,22 @@ import { getAllUsers, deleteUser } from '../services/UserService'
 function UserDashboard() {
     const [users, setUsers] = useState([])
 
+    // useEffect(() => {
+    //     getAllUsers().then((user) => {
+    //         setUsers(user)
+    //     })
+    // }, [])
+
+    // Sir Franz Implementation
     useEffect(() => {
-        getAllUsers().then((user) => {
-            setUsers(user)
-        })
-    }, [])
+        getAllUsers()
+            .then((users) => {
+                setUsers(users)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }, [users])
 
     return (
         <section className="bg-gray-500 dark:bg-slate-900 p-10">

@@ -19,7 +19,7 @@ function UserDashboard() {
             .catch((error) => {
                 console.log(error)
             })
-    }, [users])
+    }, [])
 
     const handleDelete = (userID) => {
         deleteUser(userID)
