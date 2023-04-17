@@ -1,40 +1,58 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai"
+import { FaCartArrowDown } from "react-icons/fa"
+import { GiWaterBottle } from "react-icons/gi"
+
 
 function Order() {
+    const [isOpen, setIsOpen] = useState(false)
+    const [selectedService, setSelectedService] = useState("Services")
+
+    const handleSelect = (service) => setSelectedService(service);
+
+    const services = [
+      {
+        id: 1,
+        service: "Pick up Empty Container",
+        icon: <FaCartArrowDown />
+      },
+      {
+        id: 2,
+        service: "Buy New Filled Container",
+        icon: <GiWaterBottle />
+      }
+    ]
+
   return (
-    <div>
-        <div className="relative inline-block text-left">
-            <div>
-                <button type="button" className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
-                Services
-                <svg className="-mr-1 h-5 w-5 text-gray-400 fill-current" viewBox="0 0 20 20" aria-hidden="true">
-                    <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-                </svg>
+    // <div className="flex items-center justify-center bg-indigo-700 text-white h-[100vh] font-bold text-3xl pb-32">Insights</div>
+    <div className="p-2">
+      <h2 className="font-bold text-xl m-4">Order Page</h2>
+      <div className="relative flex flex-col item-center w-[340px] h-[250px] rounded">
+        <button onClick={() => setIsOpen((prev) => !prev)} className="bg-white drop-shadow-lg p-2 pl-5 w-full flex items-center justify-between font-bold text-lg rounded-lg tracking-wide border-1 active:border-white duration-300 active:text-white">{selectedService}
+        {isOpen ? (
+          <AiOutlineCaretDown className="h-8" />
+        ):(
+          <AiOutlineCaretUp className="h-8" />
+        )}
+        </button>
+
+        {isOpen && (
+          <div className="drop-shadow-lg bg-white absolute top-20 flex flex-col items-start rounded-lg p-2 w-full">
+            {services.map((service)=>(
+              <div className="flex w-full justify-between  p-4 hover:bg-slate-100 cursor-pointer rounded-r-lg border-l-transparent hover:border-l-orange-600 border-l-4" key={service.id}>
+                {service.icon}
+                <button type="button" className="font-bold w-full" onClick={() => handleSelect(service.service)}>
+                   {service.service}
                 </button>
-            </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
-{/*          
-                Dropdown menu, show/hide based on menu state.
-
-                Entering: "transition ease-out duration-100"
-                From: "transform opacity-0 scale-95"
-                To: "transform opacity-100 scale-100"
-                Leaving: "transition ease-in duration-75"
-                From: "transform opacity-100 scale-100"
-                To: "transform opacity-0 scale-95" */}
-          
-
-            <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-                <div className="py-1" role="none">
-                {/* Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" */}
-                <button className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Account settings</button>
-                <button className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Support</button>
-                <button className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">License</button>
-                </div>
-            </div>
-            </div>
+      <div>What is your order?</div>
     </div>
-  )
+    )
 }
 
 export default Order
