@@ -9,16 +9,21 @@ import { ImCross } from 'react-icons/im'
 
 function UserDashboard() {
     const [users, setUsers] = useState([])
-    // const [data, setData] = useState([])
+    const [alertMessage, setAlertMessage] = useState('')
 
     useEffect(() => {
-        getAllUsers().then((users) => {
-            setUsers(users)
-        })
-    }, [])
+        getAllUsers()
+            .then((users) => {
+                setUsers(users)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }, [users])
 
     const handleDelete = (userID) => {
         deleteUser(userID)
+        setAlertMessage(`Successfully deleted user id: ${userID}`)
     }
 
     const columns = [
@@ -129,6 +134,18 @@ function UserDashboard() {
                     </span>
                     <ImCross className="h-2 text-green-900" />
                 </div>
+                {alertMessage && (
+                    <div className="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 mt-3 px-4 py-3 shadow-md">
+                        <div className="flex">
+                            <div className="py-1">
+                                <svg className="fill-current h-6 w-6 text-teal-500 mr-4"></svg>
+                            </div>
+                            <div>
+                                <p className="font-bold">{alertMessage}</p>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
 
             <div className="flex flex-cols justify-center pt-12 gap-4 flex-wrap items-center">

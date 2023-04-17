@@ -38,7 +38,7 @@ class UsersRepository {
 
     async getUser(id) {
         try {
-            const user = await this.db.users.findByPk(id);
+            const user = await this.db.users.findByPk(id)
             return user
         } catch (error) {
             console.log('Error: ', error)
@@ -55,7 +55,7 @@ class UsersRepository {
     }
 
     async updateUser(user) {
-        let data = {};
+        let data = {}
 
         try {
             data = await this.db.users.update(
@@ -65,11 +65,11 @@ class UsersRepository {
                         id: user.id,
                     },
                 }
-            );
+            )
         } catch (error) {
             console.log('Error: ', error)
         }
-        return data;
+        return data
     }
 }
 

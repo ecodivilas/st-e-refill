@@ -2,23 +2,23 @@
 export async function createUser(userDetails) {
     try {
         const response = await fetch('/api/v1/users', {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ "user": userDetails }),
-        });
-        return await response.json();
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user: userDetails }),
+        })
+        return await response.json()
     } catch (error) {
-        console.log('Error: ', error);
+        console.log('Error: ', error)
     }
 }
 
 // READ/FETCH/GET User
 export async function getAllUsers() {
     try {
-        const response = await fetch('/api/v1/users');
-        return await response.json()
+        const response = await fetch('/api/v1/users')
+        return response.json()
     } catch (error) {
-        console.log('Error: ', error);
+        console.log('Error: ', error)
     }
 }
 
@@ -26,15 +26,14 @@ export async function getAllUsers() {
 export async function editUser(userDetails) {
     try {
         const response = await fetch('/api/v1/users', {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ "user": userDetails }),
-        });
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user: userDetails }),
+        })
 
         if (response.status === 200) {
             return await response.json()
         }
-
     } catch (error) {
         console.log('Error: ', error)
     }
@@ -43,13 +42,14 @@ export async function editUser(userDetails) {
 // DELETE User
 export async function deleteUser(userId) {
     try {
-        const confirmed = window.confirm('Are you sure you want to delete this user?')
+        const confirmed = window.confirm(
+            'Are you sure you want to delete this user?'
+        )
         if (confirmed) {
-            const response = await fetch(
-                `/api/v1/users/${userId}`,
-                { method: 'DELETE' }
-            )
-            return await response.json();
+            const response = await fetch(`/api/v1/users/${userId}`, {
+                method: 'DELETE',
+            })
+            return await response.json()
         }
     } catch (error) {
         console.log('Error: ', error)
