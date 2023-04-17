@@ -3,6 +3,8 @@ import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai"
 import { FaCartArrowDown } from "react-icons/fa"
 import { GiWaterBottle } from "react-icons/gi"
 
+import ContainerSelection from "./ContainerSelection"
+
 
 function Order() {
     const [isOpen, setIsOpen] = useState(false)
@@ -49,8 +51,7 @@ function Order() {
           </div>
         )}
       </div>
-
-      <div>What is your order?</div>
+      <ContainerSelection />
     </div>
     )
 }
