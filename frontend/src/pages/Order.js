@@ -4,6 +4,7 @@ import { FaCartArrowDown } from "react-icons/fa"
 import { GiWaterBottle } from "react-icons/gi"
 
 import ContainerSelection from "./ContainerSelection"
+import { DatePicker } from '@julienvanbeveren/react-datetime-picker'
 
 
 function Order() {
@@ -52,6 +53,8 @@ function Order() {
         )}
       </div>
       <ContainerSelection />
+      <DatePicker />
+    
     </div>
     )
 }
