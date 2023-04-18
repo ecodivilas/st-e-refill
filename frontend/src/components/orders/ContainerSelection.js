@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 
+import { useLocation } from 'react-router-dom';
+
 let updatedSlimQuantity = 0;
 let updatedRoundQuantity = 0;
 let updatedHalfSlimQuantity = 0;
@@ -20,6 +22,11 @@ function ContainerSelection() {
         setTotalPriceAmount(slimPriceAmount + roundPriceAmount + halfSlimPriceAmount)
     },[slimPriceAmount, roundPriceAmount, halfSlimPriceAmount])
 
+    // useLocationPassingData
+    const { state } = useLocation();
+    const { data } = state || {};
+
+    console.log("Ang pinasa na data galing sa order type: ", data)
 
     const handleDecrementQuantity = (id) => {
         if (id === 1) {

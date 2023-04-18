@@ -11,7 +11,9 @@ import Insights from './pages/Insights'
 import HelpCenter from './pages/HelpCenter'
 import Inquiry from './pages/Inquiry'
 import UserDashboard from './components/UserDashboard'
-import Order from './components/orders/Order'
+
+import OrderTypeSelection from './components/orders/OrderTypeSelection'
+import ContainerSelection from './components/orders/ContainerSelection'
 
 import Register from './aunthentication/Register'
 
@@ -28,7 +30,9 @@ function App() {
                 <Route path="/login" element={<Login /> } />
                 
                 <Route path="/user-dashboard" element={<UserDashboard />}/>
-                <Route path="/order" element={<Order />}/>
+                
+                <Route path="/order" element={<OrderTypeSelection />}/>
+                <Route path="/order-container-selection" element={<ContainerSelection />}/>
 
                 <Route path="/products-and-services" element={<ProductsnServices />} />
                 <Route path="/customer-experience" element={<CustomerExperience />} />

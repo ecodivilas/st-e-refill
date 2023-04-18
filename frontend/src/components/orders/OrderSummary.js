@@ -34,13 +34,13 @@ function OrderSummary() {
     ]
   return (
     <div className="w-[100vw] flex justify-center p-10">
-        <div className="container w-[60vw] bg-gray-600 text-white rounded-lg p-2 pb-4">
+        <div className="container w-[60vw] bg-gray-600 text-white rounded-lg p-2 pb-4 text-normal tracking-wide">
             <h2 className="font-bold text-2xl py-5 text-center">Order Summary</h2>
             <div className="flex justify-center">
                 {
                     orderDetails.map((orderDetail) => {
                         return (
-                            <div className="flex-col" key={orderDetail.id}>
+                            <div className="flex-col" key={orderDetail.customerId}>
                                 <div className="py-2"><span className="font-bold">Customer Name: </span>{orderDetail.customerName}</div>
                                 <div className="py-2"><span className="font-bold">Customer Address: </span>{orderDetail.customerAddress}</div>
                                 <div className="py-2"><span className="font-bold">Address Description: </span>{orderDetail.addressDescription}</div>
@@ -51,15 +51,14 @@ function OrderSummary() {
                                 <div className="py-2">
                                     <span className="font-bold">Order Description: </span>
                                     <div className="pl-5">
-                                        <div className="py-2 flex gap-2">
-                                            <span className="font-bold">{orderDetail.orderDescription.name}</span><span>x2</span><span>₱50</span>
-                                        </div>
-                                        <div className="py-2 flex gap-2">
-                                            <span className="font-bold">Round 5 gallons standard size</span><span>x2</span><span>₱50</span>
-                                        </div>
-                                        <div className="py-2 flex gap-2">
-                                            <span className="font-bold">Half Slim 2.5 gallons standard size</span><span>x2</span><span>₱30</span>
-                                        </div>
+                                        {orderDetail.orderDescription.map((order) => {
+                                            return (
+                                                
+                                            <div className="py-2 flex gap-2" key={order.id}>
+                                                <span className="font-bold">{order.name}</span><span>x{order.quantity}</span><span>₱{order.priceAmount}</span>
+                                            </div>
+                                            )
+                                        })}
                                     </div>
                                 </div>
                                 <div className="py-2"><span className="font-bold">Mode of Payment: </span>Cash on Delivery</div>

@@ -18,7 +18,7 @@ function Order() {
 
   return (
     // <div className="flex items-center justify-center bg-indigo-700 text-white h-[100vh] font-bold text-3xl pb-32">Insights</div>
-    <div className="">
+    <div className="pt-10">
       <div className="flex justify-center">
         <h2 className="font-bold text-xl m-4">Order Page</h2>
         <OrderTypeSelection />
@@ -27,7 +27,7 @@ function Order() {
       <div className="flex justify-center">
       <Schedule />
       <DatePicker />
-         <TimePicker onChange={onTimeChange} value={timeValue} />
+      <TimePicker onChange={onTimeChange} value={timeValue} />
       </div>
       <OrderSummary />
     </div>
