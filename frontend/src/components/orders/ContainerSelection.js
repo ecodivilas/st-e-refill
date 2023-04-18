@@ -80,7 +80,7 @@ function ContainerSelection() {
     const containers = [
         {
             id: 1,
-            containerPicture: <img className="h-15 mr-10" src={require("../assets/img/slim.webp")} alt="home_button" />,
+            containerPicture: <img className="h-15 mr-10" src={require("./img/slim.webp")} alt="home_button" />,
             containerName: "Slim 5 gallons standard size",
             pricePerContainer: 25,
             quantity: slimQuantity,
@@ -88,7 +88,7 @@ function ContainerSelection() {
         },
         {
             id: 2,
-            containerPicture: <img className="h-15 mr-10" src={require("../assets/img/round.webp")} alt="home_button" />,
+            containerPicture: <img className="h-15 mr-10" src={require("./img/round.webp")} alt="home_button" />,
             containerName: "Round 5 gallons standard size",
             pricePerContainer: 25,
             quantity: roundQuantity,
@@ -96,7 +96,7 @@ function ContainerSelection() {
         },
         {
             id: 3,
-            containerPicture: <img className="h-15 mr-10" src={require("../assets/img/half_slim.webp")} alt="home_button" />,
+            containerPicture: <img className="h-15 mr-10" src={require("./img/half_slim.webp")} alt="home_button" />,
             containerName: "Half slim 2.5 gallons",
             pricePerContainer: 15,
             quantity: halfSlimQuantity,

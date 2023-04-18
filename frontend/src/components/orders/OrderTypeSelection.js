@@ -3,34 +3,30 @@ import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai"
 import { FaCartArrowDown } from "react-icons/fa"
 import { GiWaterBottle } from "react-icons/gi"
 
-import ContainerSelection from "./ContainerSelection"
-import { DatePicker } from '@julienvanbeveren/react-datetime-picker'
+function WaterService() {
 
-
-function Order() {
     const [isOpen, setIsOpen] = useState(false)
     const [selectedService, setSelectedService] = useState("Services")
 
     const handleSelect = (service) => setSelectedService(service);
-
+    
     const services = [
-      {
-        id: 1,
-        service: "Pick up Empty Container",
-        icon: <FaCartArrowDown />
-      },
-      {
-        id: 2,
-        service: "Buy New Filled Container",
-        icon: <GiWaterBottle />
-      }
-    ]
+        {
+          id: 1,
+          service: "Pick up Empty Container",
+          icon: <FaCartArrowDown />
+        },
+        {
+          id: 2,
+          service: "Buy New Filled Container",
+          icon: <GiWaterBottle />
+        }
+      ]
+
 
   return (
-    // <div className="flex items-center justify-center bg-indigo-700 text-white h-[100vh] font-bold text-3xl pb-32">Insights</div>
-    <div className="p-2">
-      <h2 className="font-bold text-xl m-4">Order Page</h2>
-      <div className="relative flex flex-col item-center w-[340px] h-[250px] rounded">
+    <div>
+        <div className="relative flex flex-col item-center w-[340px] h-[250px] rounded">
         <button onClick={() => setIsOpen((prev) => !prev)} className="bg-white drop-shadow-lg p-2 pl-5 w-full flex items-center justify-between font-bold text-lg rounded-lg tracking-wide border-1 active:border-white duration-300 active:text-white">{selectedService}
         {isOpen ? (
           <AiOutlineCaretDown className="h-8" />
@@ -52,11 +48,8 @@ function Order() {
           </div>
         )}
       </div>
-      <ContainerSelection />
-      <DatePicker />
-    
     </div>
-    )
+  )
 }
 
-export default Order
+export default WaterService

@@ -11,7 +11,7 @@ import Insights from './pages/Insights'
 import HelpCenter from './pages/HelpCenter'
 import Inquiry from './pages/Inquiry'
 import UserDashboard from './components/UserDashboard'
-import Order from './pages/Order'
+import Order from './components/orders/Order'
 
 import Register from './aunthentication/Register'
 
