@@ -9,27 +9,27 @@ import { Navigate } from "react-router-dom";
 
 function OrderTypeSelection() {
 
+  const services = [
+      {
+        id: 1,
+        service: "Pick up Empty Container",
+        icon: <FaCartArrowDown />
+      },
+      {
+        id: 2,
+        service: "Buy New Filled Container",
+        icon: <GiWaterBottle className="text-gray-400" />
+      }
+    ]
+
     const [isOpen, setIsOpen] = useState(false)
     const [isProceed, setIsProceed] = useState(false)
-    const [selectedService, setSelectedService] = useState("Services")
+    const [selectedService, setSelectedService] = useState(services[0].service)
 
     const handleSelect = (service) => {
       setSelectedService(service);
       setIsOpen((prev) => !prev)
     }
-
-    const services = [
-        {
-          id: 1,
-          service: "Pick up Empty Container",
-          icon: <FaCartArrowDown />
-        },
-        {
-          id: 2,
-          service: "Buy New Filled Container",
-          icon: <GiWaterBottle />
-        }
-      ]
       
   return (
     <div className="w-[100vw] h-[100vh] flex bg-slate-100 justify-center items-start pt-20">
@@ -45,13 +45,20 @@ function OrderTypeSelection() {
             </button>
 
             {isOpen && (
-              <div className="drop-shadow-lg bg-white absolute top-20 flex flex-col items-start rounded-lg p-2 w-full">
+              <div className="drop-shadow-lg bg-white absolute top-10 flex flex-col items-start rounded-lg p-2 w-full">
                 {services.map((service)=>(
                   <div className="flex w-full justify-between  p-4 hover:bg-slate-100 cursor-pointer rounded-r-lg border-l-transparent hover:border-l-orange-600 border-l-4" key={service.id}>
                     {service.icon}
-                    <button type="button" className="font-bold w-full" onClick={() => handleSelect(service.service)}>
+                    {service.id === 1 ? (
+                      <button type="button" className="font-bold w-full" onClick={() => handleSelect(service.service)}>
                       {service.service}
                     </button>
+                    ) : (
+                      <button type="button" className="font-bold text-gray-400 w-full" onClick={() => handleSelect(service.service)} disabled>
+                        {service.service}
+                      </button> 
+                    )
+                  }
                   </div>
                 ))}
               </div>
@@ -60,7 +67,7 @@ function OrderTypeSelection() {
             <button className="py-2 bg-slate-600 text-white font-semibold text-xl px-5 mt-44" onClick={() => setIsProceed((prev) => !prev)}>Proceed</button>
           
           { isProceed && (
-            <Navigate to="/order-container-selection" state={{ data: selectedService }} />
+            <Navigate to="/order-container-selection" state={{ orderData: [{orderType: selectedService}] }} />
           ) }
         </div>
 

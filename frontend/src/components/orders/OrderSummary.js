@@ -2,6 +2,20 @@ import React from 'react'
 
 function OrderSummary() {
 
+    // Gets the date now
+    function join(t, a, s) {
+        function format(m) {
+           let f = new Intl.DateTimeFormat('en', m);
+           return f.format(t);
+        }
+        return a.map(format).join(s);
+     }
+
+    let format = [{day: 'numeric'}, {month: 'short'}, {year: 'numeric'}];
+    let dateNow = join(new Date(), format, '-');
+    // console.log(date);
+
+    // This will be fired to database
     const orderDetails = [
         {
             customerId: 1,
@@ -9,7 +23,7 @@ function OrderSummary() {
             customerAddress: "234 100flr Mapagmahal St., Cupid Subd., Brgy 145, Caloocan City",
             addressDescription: "Near Red Door harap tindahan ni aleng marites",
             orderType: "Pick-up Container",
-            expectedTime: "Anytime",
+            expectedTime: "Today",
             orderDescription: [
                 {
                     id: 1,
@@ -32,6 +46,38 @@ function OrderSummary() {
             ]
         }
     ]
+
+    // This will be fired to database
+    const finalOrder = {
+                "customer_id": 1,
+                "order_date": dateNow,
+                "delivery_date": dateNow,
+                "mode_of_payment": "Cash on Delivery",
+                "status": "queue",
+                "is_paid": false,
+                "order_items": [
+                    {
+                        "order_id": 1,
+                        "container_id": 1,
+                        "unit_price": 25,
+                        "quantity": 2,
+                    },
+                    {
+                        "order_id": 1,
+                        "container_id": 2,
+                        "unit_price": 25,
+                        "quantity": 1,
+                    },
+                    {
+                        "order_id": 1,
+                        "container_id": 3,
+                        "unit_price": 15,
+                        "quantity": 1,
+                    },
+                ]
+            }
+
+
   return (
     <div className="w-[100vw] flex justify-center p-10">
         <div className="container w-[60vw] bg-gray-600 text-white rounded-lg p-2 pb-4 text-normal tracking-wide">

@@ -14,6 +14,7 @@ import UserDashboard from './components/UserDashboard'
 
 import OrderTypeSelection from './components/orders/OrderTypeSelection'
 import ContainerSelection from './components/orders/ContainerSelection'
+import OrderSchedule from './components/orders/OrderSchedule'
 
 import Register from './aunthentication/Register'
 
@@ -33,6 +34,7 @@ function App() {
                 
                 <Route path="/order" element={<OrderTypeSelection />}/>
                 <Route path="/order-container-selection" element={<ContainerSelection />}/>
+                <Route path="/order-schedule" element={<OrderSchedule />}/>
 
                 <Route path="/products-and-services" element={<ProductsnServices />} />
                 <Route path="/customer-experience" element={<CustomerExperience />} />
