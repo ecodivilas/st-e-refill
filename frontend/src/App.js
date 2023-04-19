@@ -15,6 +15,8 @@ import UserDashboard from './components/UserDashboard'
 import OrderTypeSelection from './components/orders/OrderTypeSelection'
 import ContainerSelection from './components/orders/ContainerSelection'
 import OrderSchedule from './components/orders/OrderSchedule'
+import OrderMOP from './components/orders/OrderMOP'
+import OrderSummary from './components/orders/OrderSummary'
 
 import Register from './aunthentication/Register'
 
@@ -35,6 +37,8 @@ function App() {
                 <Route path="/order" element={<OrderTypeSelection />}/>
                 <Route path="/order-container-selection" element={<ContainerSelection />}/>
                 <Route path="/order-schedule" element={<OrderSchedule />}/>
+                <Route path="/order-mode-of-payment" element={<OrderMOP />}/>
+                <Route path="/order-summary" element={<OrderSummary />}/>
 
                 <Route path="/products-and-services" element={<ProductsnServices />} />
                 <Route path="/customer-experience" element={<CustomerExperience />} />
