@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes, Model) => {
-    class Orders extends Model {}
+    class OrderItems extends Model {}
 
-    Orders.init(
+    OrderItems.init(
         {   id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
@@ -27,9 +27,9 @@ module.exports = (sequelize, DataTypes, Model) => {
         {
             sequelize,
             modelName: 'order_items',
-            // tableName: 'orders'
+            // tableName: 'order_items'
         }
     )
 
-    return Orders
+    return OrderItems
 }

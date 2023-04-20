@@ -8,6 +8,7 @@ const path = require('path')
 const usersController = require('./controller/users')
 const containersController = require('./controller/containers')
 const ordersController = require('./controller/orders')
+const orderItemsController = require('./controller/orderItems')
 
 const app = express()
 
@@ -49,7 +50,7 @@ app.get('/api/v1/containers', (req, res) => {
     containersController.getContainers().then((data) => res.json(data))
 })
 
-// Orders ===================================================================================>
+// Orders
 app.post('/api/v1/orders', (req, res) => {
     ordersController.createOrder(req.body.order).then((data) => res.json(data))
     // res.send(req.body.order)
@@ -67,9 +68,22 @@ app.delete('/api/v1/orders/:id', (req, res) => {
     ordersController.deleteOrder(req.params.id).then((data) => res.json(data))
 })
 
-// Order_Items
+// Order_Items  ===================================================================================>
+app.post('/api/v1/order_items', (req, res) => {
+    orderItemsController.createOrderItem(req.body.order_item).then((data) => res.json(data))
+    // res.send(req.body.order)
+})
+
 app.get('/api/v1/order_items', (req, res) => {
-    res.send('Order Items Endpoints')
+    orderItemsController.getOrderItems().then((data) => res.json(data))
+})
+
+app.delete('/api/v1/order_items/:id', (req, res) => {
+    orderItemsController.deleteOrderItem(req.params.id).then((data) => res.json(data))
+})
+
+app.put('/api/v1/order_items', (req, res) => {
+    orderItemsController.updateOrderItem(req.body.order_item).then((data) => res.json(data))
 })
 
 

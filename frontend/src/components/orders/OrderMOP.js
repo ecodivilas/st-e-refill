@@ -22,6 +22,7 @@ const options = [
     {value: "gcash", label: "Gcash"}
 ];
 
+// MOP value
 const [MOP, setMOP] = useState(null);
 
 const handleChange = (value) => {
@@ -29,6 +30,12 @@ const handleChange = (value) => {
     modeOfPayment = value.value
     console.log("value:", modeOfPayment);
 };
+
+const handleApply = () => {
+    console.log("MOP: ", MOP)
+    orderData[0].mode_of_payment = MOP
+    console.log("Updated Data: ", orderData)
+}
 
 console.log("Dito na ako sa MOP blee: ", orderData)
   return (
@@ -55,7 +62,10 @@ console.log("Dito na ako sa MOP blee: ", orderData)
             ) : (
                 <div></div>
             )}
-            <button className="py-2 bg-slate-600 text-white font-semibold text-xl px-5 mt-20 mb-60" onClick={() => setIsProceed((prev) => !prev)}>Proceed</button>
+            <div className="flex justify-around">
+                <button className="py-2 bg-green-600 text-white font-semibold text-xl px-5 mt-20 mb-60" onClick={handleApply}>Apply</button>
+                <button className="py-2 bg-slate-600 text-white font-semibold text-xl px-5 mt-20 mb-60" onClick={() => setIsProceed((prev) => !prev)}>Proceed</button>
+            </div>
         </div>
 
         { isProceed && (

@@ -23,7 +23,7 @@ const [dateValue, onChange] = useState(new Date());
 const { state } = useLocation();
 const { orderData } = state || {};
 
-console.log("Nand2 na ako sa order Schedule Bleeeeeeeh", orderData)
+console.log("Schedule data", orderData)
  
 const options = [
     {value: "scheduled", label: "Scheduled"},
@@ -38,10 +38,13 @@ const [schedType, setSchedType] = useState(null);
         console.log("value:", scheduleType);
     };
 
-// const handleProceed = () => {
-//     console.log("ito ang value nang date: ", dateValue)
-//     // console.log("ito ang value nang ")
-// }
+const handleApply = () => {
+    console.log("ito ang value nang date: ", dateValue)
+    orderData[0].delivery_date = dateValue
+    orderData[0].order_date = new Date()
+    console.log("Updated na data: ", orderData)
+    // console.log("ito ang value nang ")
+}
 
   return (
     <div className="w-[100vw] h-[100vh] flex bg-slate-100 justify-center items-start pt-20">
@@ -64,7 +67,10 @@ const [schedType, setSchedType] = useState(null);
             </div>
             )}
 
-            <button className="py-2 bg-slate-600 text-white font-semibold text-xl px-5 mb-60" onClick={() => setIsProceed((prev) => !prev)}>Proceed</button>
+            <div className="flex justify-around">
+                <button className="py-2 bg-green-600 text-white font-semibold text-xl px-5 mb-60" onClick={handleApply}>Apply</button>
+                <button className="py-2 bg-slate-600 text-white font-semibold text-xl px-5 mb-60" onClick={() => setIsProceed((prev) => !prev)}>Proceed</button>
+            </div>
 
             { isProceed && (
                     <Navigate to="/order-mode-of-payment" state={{ orderData }} />

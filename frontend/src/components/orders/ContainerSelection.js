@@ -12,9 +12,10 @@ let updatedHalfSlimQuantity = 0;
 
 function ContainerSelection() {
 
+    // From the database
     const [dbContainers, setContainers] = useState(0)
 
-    // navigation and passing of data
+    // Navigation and passing of data
     const [isProceed, setIsProceed] = useState(false)
 
     const [slimQuantity, setSlimQuantity] = useState(0);
@@ -41,16 +42,36 @@ function ContainerSelection() {
     },[slimPriceAmount, roundPriceAmount, halfSlimPriceAmount])
     
     
-    console.log(dbContainers)
+    // console.log(dbContainers)
         
     // useLocationPassingData
     const { state } = useLocation();
     const { orderData } = state || {};
 
-    orderData[0].totalPriceAmount = totalPriceAmount
-    orderData[0].container_items = [{ container_id: 1, unit_price: 25, quantity: slimQuantity }]
-    orderData[0].container_items[1] = { container_id: 2, unit_price: 25, quantity: roundQuantity}
-    orderData[0].container_items[2] = { container_id: 3, unit_price: 25, quantity: halfSlimQuantity}
+    const quantities = [
+        updatedSlimQuantity,
+        updatedRoundQuantity,
+        updatedHalfSlimQuantity
+    ]
+
+    
+
+    const handleSave = () => {
+        if (dbContainers){
+            orderData[0].totalPriceAmount = totalPriceAmount
+            orderData[0].container_items = [];
+            for (let i = 0; i <= dbContainers.length - 1; i++) {
+                orderData[0].container_items[i] = { 
+                    container_id: dbContainers[i].id,
+                    name: dbContainers[i].name,
+                    unit_price: dbContainers[i].refill_price,
+                    quantity: quantities[i]
+                }
+              }
+            // console.log(orderData)
+            console.log(orderData)
+        }
+    }
 
     const handleDecrementQuantity = (id) => {
         if (id === 1) {
@@ -206,7 +227,10 @@ function ContainerSelection() {
                         </tbody>
                     </table>
                 </div>
-                <button className="py-2 bg-slate-600 text-white font-semibold text-xl px-5 mb-60" onClick={() => setIsProceed((prev) => !prev)}>Proceed</button>
+                <div className="flex justify-around gap-2">
+                    <button className="py-2 bg-green-600 text-white font-semibold text-xl px-5 mb-60" onClick={handleSave}>Save</button>
+                    <button className="py-2 bg-slate-600 text-white font-semibold text-xl px-5 mb-60" onClick={() => setIsProceed((prev) => !prev)}>Proceed</button>
+                </div>
 
                 { isProceed && (
                     <Navigate to="/order-schedule" state={{ orderData }} />
