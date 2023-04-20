@@ -9,9 +9,8 @@ class ContainersRepository {
 
 
     async createContainer(container) {
-        let containerData = {}
         try {
-            const createdContainer = await this.db.containers.create(containerData)
+            const createdContainer = await this.db.containers.create(container)
             return createdContainer
         } catch (error) {
             console.log('Error: ', error)

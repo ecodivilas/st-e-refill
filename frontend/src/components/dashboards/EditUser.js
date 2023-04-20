@@ -12,7 +12,7 @@ const EditUser = ({ user }) => {
         gender: user.gender ?? '',
         age: user.age ?? '',
         delivery_address: user.delivery_address ?? '',
-        phone: user.phone ?? '',
+        phone_number: user.phone ?? '',
         email: user.email ?? '',
         role: user.role ?? '',
     }
@@ -64,8 +64,8 @@ const EditUser = ({ user }) => {
             label: 'Mobile No.',
             type: 'text',
             placeholder: 'Mobile No.',
-            name: 'mobile_no',
-            defaultValue: user.mobile_no,
+            name: 'mobile_number',
+            defaultValue: user.mobile_number,
         },
         {
             label: 'Role',
@@ -103,6 +103,8 @@ const EditUser = ({ user }) => {
         setShowModal(!showModal)
     }
 
+    const handleEditedMessage = () => alert("Edit Successful Lodi!!!")
+
     return (
         <div>
             <span className="!hover:text-red-600">
@@ -139,7 +141,7 @@ const EditUser = ({ user }) => {
                                                         {field.label}
                                                     </label>
                                                 </div>
-                                                <input
+                                                <input key={field.id}
                                                     className="grow rounded-md h-5"
                                                     type={field.type}
                                                     placeholder={
@@ -157,7 +159,7 @@ const EditUser = ({ user }) => {
                                     })}
 
                                     <div className="flex justify-between">
-                                        <button className="bg-gray-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
+                                        <button onClick={handleEditedMessage} className="bg-gray-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
                                             Save
                                         </button>
                                         <button

@@ -16,7 +16,7 @@ function Register() {
         last_name: '',
         age: '',
         gender: '',
-        mobile_no: '',
+        mobile_number: '',
         role: 'customer',
     })
 
@@ -28,11 +28,24 @@ function Register() {
         console.log(name, value)
     }
 
+    const checkPassword = () => {
+        if (user_details.confirm_password === user_details.password) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        createUser(user_details).then(console.log(user_details))
-        navigate('/')
+        if (checkPassword()) {
+            createUser(user_details).then(console.log(user_details))
+            navigate('/')
+        } else {
+            alert('Password Mismatched!')
+        }
     }
+
 
     return (
         <div>
@@ -56,12 +69,20 @@ function Register() {
                                 <form className="" onSubmit={handleSubmit}>
                                     <div className="grid grid-cols-2 gap-4">
                                         {registerFields.map((item) => (
-                                            <div className="h-16">
+                                            <div key={item.id} className="h-16">
                                                 <label className="text-xs font-medium text-gray-900 dark:text-white w-32">
                                                     {item.label}
                                                 </label>
+                                                {item.id === 'gender' ? (
+                                                    <select name="gender" className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-sm block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white w-72">
+                                                        <option value=""></option>
+                                                        <option value="M">Male</option>
+                                                        <option value="F">Female</option>
+                                                        <option value="U">Rahul</option>
+                                                    </select>
+                                                ) : (
+
                                                 <input
-                                                    key={item.id}
                                                     type={item.type}
                                                     name={item.name}
                                                     placeholder={
@@ -71,6 +92,8 @@ function Register() {
                                                     className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-sm block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white w-72"
                                                     required
                                                 />
+                                                
+                                                )}
                                             </div>
                                         ))}
                                     </div>

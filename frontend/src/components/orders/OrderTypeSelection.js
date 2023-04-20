@@ -24,6 +24,8 @@ function OrderTypeSelection() {
 
     const [isOpen, setIsOpen] = useState(false)
     const [isProceed, setIsProceed] = useState(false)
+
+    // This will be pass into ContainerSelection
     const [selectedService, setSelectedService] = useState(services[0].service)
 
     const handleSelect = (service) => {

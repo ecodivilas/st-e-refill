@@ -7,7 +7,6 @@ class containersController {
     }
 
     async getContainers() {
-        console.log("I'm here")
         return await containersService.getContainers()
     }
 

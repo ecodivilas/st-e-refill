@@ -10,7 +10,7 @@ import CustomerExperience from './pages/CustomerExperience'
 import Insights from './pages/Insights'
 import HelpCenter from './pages/HelpCenter'
 import Inquiry from './pages/Inquiry'
-import UserDashboard from './components/UserDashboard'
+import UserDashboard from './components/dashboards/UserDashboard'
 
 import OrderTypeSelection from './components/orders/OrderTypeSelection'
 import ContainerSelection from './components/orders/ContainerSelection'
@@ -32,7 +32,7 @@ function App() {
                 <Route path="/register" element={<Register /> } />
                 <Route path="/login" element={<Login /> } />
                 
-                <Route path="/user-dashboard" element={<UserDashboard />}/>
+                <Route path="/users-dashboard" element={<UserDashboard />}/>
                 
                 <Route path="/order" element={<OrderTypeSelection />}/>
                 <Route path="/order-container-selection" element={<ContainerSelection />}/>

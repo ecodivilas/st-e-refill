@@ -11,16 +11,10 @@ module.exports = (sequelize, DataTypes, Model) => {
             name: {
                 type: DataTypes.STRING,
             },
-            is_new: {
-                type: DataTypes.BOOLEAN,
-            },
-            price: {
+            refill_price: {
                 type: DataTypes.DOUBLE,
             },
             capacity: {
-                type: DataTypes.STRING,
-            },
-            description: {
                 type: DataTypes.STRING,
             },
             picture: {
@@ -29,7 +23,7 @@ module.exports = (sequelize, DataTypes, Model) => {
         },
         {
             sequelize,
-            modelName: 'Containers',
+            modelName: 'containers',
             // tableName: 'containers'
         }
     )

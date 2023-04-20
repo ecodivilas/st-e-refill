@@ -7,6 +7,7 @@ const path = require('path')
 
 const usersController = require('./controller/users')
 const containersController = require('./controller/containers')
+const ordersController = require('./controller/orders')
 
 const app = express()
 
@@ -17,6 +18,7 @@ app.use(cors())
 app.use(express.json())
 app.use(bodyParser.json())
 
+// Users
 app.post('/api/v1/users', (req, res) => {
     usersController.createUser(req.body.user).then((data) => res.json(data))
 })
@@ -37,26 +39,39 @@ app.delete('/api/v1/users/:id', (req, res) => {
     usersController.deleteUser(req.params.id).then((data) => res.json(data))
 })
 
-// Delivery Address
+// Delivery Addresses
 app.get('/api/v1/delivery_addresses', (req, res) => {
     res.send('Delivery Addresses Endpoints')
 })
 
-// Order
-app.get('/api/v1/orders', (req, res) => {
-    res.send('Orders Endpoints')
+// Containers
+app.get('/api/v1/containers', (req, res) => {
+    containersController.getContainers().then((data) => res.json(data))
 })
 
-// Order Items
+// Orders ===================================================================================>
+app.post('/api/v1/orders', (req, res) => {
+    ordersController.createOrder(req.body.order).then((data) => res.json(data))
+    // res.send(req.body.order)
+})
+
+app.get('/api/v1/orders', (req, res) => {
+    ordersController.getOrders().then((data) => res.json(data))
+})
+
+app.put('/api/v1/orders', (req, res) => {
+    ordersController.updateOrder(req.body.order).then((data) => res.json(data))
+})
+
+app.delete('/api/v1/orders/:id', (req, res) => {
+    ordersController.deleteOrder(req.params.id).then((data) => res.json(data))
+})
+
+// Order_Items
 app.get('/api/v1/order_items', (req, res) => {
     res.send('Order Items Endpoints')
 })
 
-// Containers
-app.get('/api/v1/containers', (req, res) => {
-    // res.send('Containers Endpoints')
-    containersController.getContainers().then((data) => res.json(data))
-})
 
 app.listen(port, () => {
     console.log(`Server listening on the port: ${port}`)

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
-import EditUser from './dashboards/EditUser'
-import { deleteUser, getAllUsers } from '../services/UserService'
+import EditUser from './EditUser'
+import { deleteUser, getAllUsers } from '../../services/UserService'
 
 import DataTable from 'react-data-table-component'
 
@@ -9,7 +9,8 @@ import { ImCross } from 'react-icons/im'
 
 function UserDashboard() {
     const [users, setUsers] = useState([])
-    const [alertMessage, setAlertMessage] = useState('')
+    const [alertDeleteMessage, setAlertDeleteMessage] = useState('')
+    const [alertEditedMessage, setAlertEditedMessage] = useState('')
 
     useEffect(() => {
         getAllUsers()
@@ -21,9 +22,13 @@ function UserDashboard() {
             })
     }, [])
 
-    const handleDelete = (userID) => {
+    const handleDelete = (userID, userName) => {
         deleteUser(userID)
-        setAlertMessage(`Successfully deleted user id: ${userID}`)
+        setAlertDeleteMessage(`Successfully deleted user: ${userName}`)
+    }
+
+    const handleDelAlertClose = () => {
+        setAlertDeleteMessage()
     }
 
     const columns = [
@@ -59,7 +64,7 @@ function UserDashboard() {
         },
         {
             name: 'Mobile No.',
-            selector: (row) => row.mobile_no,
+            selector: (row) => row.mobile_number,
             sortable: true,
         },
         {
@@ -86,13 +91,13 @@ function UserDashboard() {
                       middle_name: user.middle_name,
                       last_name: user.last_name,
                       gender: user.gender,
-                      mobile_no: user.mobile_no,
+                      mobile_number: user.mobile_number,
                       role: user.role,
                       edit: <EditUser user={user} />,
                       delete: (
                           <button
                               className="m-0 p-0"
-                              onClick={() => handleDelete(user.id)}
+                              onClick={() => handleDelete(user.id, user.username)}
                           >
                               <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -110,6 +115,8 @@ function UserDashboard() {
                   }
               })
             : []
+    
+    // I'm working on this code for filter (Pending)
 
     // setData(customData)
     // const [records, setRecords] = useState(data);
@@ -134,16 +141,12 @@ function UserDashboard() {
                     </span>
                     <ImCross className="h-2 text-green-900" />
                 </div>
-                {alertMessage && (
-                    <div className="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 mt-3 px-4 py-3 shadow-md">
-                        <div className="flex">
-                            <div className="py-1">
-                                <svg className="fill-current h-6 w-6 text-teal-500 mr-4"></svg>
-                            </div>
-                            <div>
-                                <p className="font-bold">{alertMessage}</p>
-                            </div>
-                        </div>
+                {alertDeleteMessage && (
+                    <div className="text-xs text-left w-[90vw] bg-red-100 p-2 rounded-lg flex flex-row items-center justify-between">
+                        <span className="text-red-900 font-semibold">
+                            {alertDeleteMessage}
+                        </span>
+                        <button type="button" onClick={handleDelAlertClose}><ImCross className="h-2 text-red-900" /></button>
                     </div>
                 )}
             </div>

@@ -11,7 +11,7 @@ function CreateUser() {
         gender: '',
         age: '',
         delivery_address: '',
-        phone: '',
+        phone_number: '',
         email: '',
         role: '',
     })

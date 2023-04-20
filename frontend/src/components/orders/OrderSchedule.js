@@ -23,7 +23,7 @@ const [dateValue, onChange] = useState(new Date());
 const { state } = useLocation();
 const { orderData } = state || {};
 
-// console.log("Nand2 na ako sa order Schedule Bleeeeeeeh", orderData)
+console.log("Nand2 na ako sa order Schedule Bleeeeeeeh", orderData)
  
 const options = [
     {value: "scheduled", label: "Scheduled"},
@@ -63,7 +63,7 @@ const [schedType, setSchedType] = useState(null);
                 <DateTimePicker onChange={onChange} value={dateValue} />
             </div>
             )}
-            
+
             <button className="py-2 bg-slate-600 text-white font-semibold text-xl px-5 mb-60" onClick={() => setIsProceed((prev) => !prev)}>Proceed</button>
 
             { isProceed && (

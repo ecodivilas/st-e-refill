@@ -62,17 +62,17 @@ orderDetails[0].orderDescription[4] = {
 console.log(orderDetails[0]["orderDescription"])
 
 
-function join(t, a, s) {
-    function format(m) {
-       let f = new Intl.DateTimeFormat('en', m);
-       return f.format(t);
-    }
-    return a.map(format).join(s);
- }
+// function join(t, a, s) {
+//     function format(m) {
+//        let f = new Intl.DateTimeFormat('en', m);
+//        return f.format(t);
+//     }
+//     return a.map(format).join(s);
+//  }
  
- let format = [{day: 'numeric'}, {month: 'short'}, {year: 'numeric'}];
- let date = join(new Date(), format, '-');
- console.log(date);
+//  let format = [{day: 'numeric'}, {month: 'short'}, {year: 'numeric'}];
+//  let date = join(new Date(), format, '-');
+//  console.log(date);
 
 
 // const date = new Date("2015-03-25");
