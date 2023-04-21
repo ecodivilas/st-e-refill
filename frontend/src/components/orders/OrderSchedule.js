@@ -10,7 +10,7 @@ import 'react-clock/dist/Clock.css';
 import { useLocation } from 'react-router-dom';
 import { Navigate } from "react-router-dom";
 
-let scheduleType = "";
+let scheduleType = "anytime";
 
 function OrderSchedule() {
 
@@ -30,7 +30,7 @@ const options = [
     {value: "anytime", label: "Any Time of the Day"}
 ];
 
-const [schedType, setSchedType] = useState(null);
+const [schedType, setSchedType] = useState({value: "anytime", label: "Any Time of the Day"});
     
     const handleChange = (value) => {
         setSchedType(value);
@@ -38,12 +38,14 @@ const [schedType, setSchedType] = useState(null);
         console.log("value:", scheduleType);
     };
 
-const handleApply = () => {
+const handleNext = () => {
     console.log("ito ang value nang date: ", dateValue)
     orderData[0].delivery_date = dateValue
     orderData[0].order_date = new Date()
     console.log("Updated na data: ", orderData)
     // console.log("ito ang value nang ")
+
+    setIsProceed((prev) => !prev)
 }
 
   return (
@@ -68,8 +70,7 @@ const handleApply = () => {
             )}
 
             <div className="flex justify-around">
-                <button className="py-2 bg-green-600 text-white font-semibold text-xl px-5 mb-60" onClick={handleApply}>Apply</button>
-                <button className="py-2 bg-slate-600 text-white font-semibold text-xl px-5 mb-60" onClick={() => setIsProceed((prev) => !prev)}>Proceed</button>
+                <button className="py-2 bg-slate-600 text-white font-semibold text-xl px-5 mb-60" onClick={handleNext}>Proceed</button>
             </div>
 
             { isProceed && (

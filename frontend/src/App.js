@@ -17,6 +17,7 @@ import ContainerSelection from './components/orders/ContainerSelection'
 import OrderSchedule from './components/orders/OrderSchedule'
 import OrderMOP from './components/orders/OrderMOP'
 import OrderSummary from './components/orders/OrderSummary'
+import OrderSendToDB from './components/orders/OrderSendToDB'
 
 import Register from './aunthentication/Register'
 
@@ -39,12 +40,14 @@ function App() {
                 <Route path="/order-schedule" element={<OrderSchedule />}/>
                 <Route path="/order-mode-of-payment" element={<OrderMOP />}/>
                 <Route path="/order-summary" element={<OrderSummary />}/>
+                <Route path="/order-processing" element={<OrderSendToDB />}/>
 
                 <Route path="/products-and-services" element={<ProductsnServices />} />
                 <Route path="/customer-experience" element={<CustomerExperience />} />
                 <Route path="/insights" element={<Insights />} />
                 <Route path="/help-center" element={<HelpCenter />} />
                 <Route path="/inquiry" element={<Inquiry />} />
+                
             </Routes>
         </BrowserRouter>
     </div>

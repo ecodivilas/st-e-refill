@@ -4,6 +4,11 @@ class OrdersService {
     async createOrder(order) {
         return await ordersRepository.createOrder(order)
     }
+    
+    // Customize create orders
+    async createPendingOrder(order) {
+        return await ordersRepository.createPendingOrder(order)
+    }
 
     async getOrders() {
         console.log('GETTING ORDERS IN THE REPOSITORY')

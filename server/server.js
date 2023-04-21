@@ -78,14 +78,20 @@ app.get('/api/v1/order_items', (req, res) => {
     orderItemsController.getOrderItems().then((data) => res.json(data))
 })
 
-app.delete('/api/v1/order_items/:id', (req, res) => {
-    orderItemsController.deleteOrderItem(req.params.id).then((data) => res.json(data))
-})
-
 app.put('/api/v1/order_items', (req, res) => {
     orderItemsController.updateOrderItem(req.body.order_item).then((data) => res.json(data))
 })
 
+app.delete('/api/v1/order_items/:id', (req, res) => {
+    orderItemsController.deleteOrderItem(req.params.id).then((data) => res.json(data))
+})
+
+
+// Customize Endpoint for posting order and order items at the same time
+app.post('/api/v2/order', (req, res) => {
+        ordersController.createPendingOrder(req.body.order).then((data) => res.json(data))
+    // res.send(req.body.order)
+})
 
 app.listen(port, () => {
     console.log(`Server listening on the port: ${port}`)

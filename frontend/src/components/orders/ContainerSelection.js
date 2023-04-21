@@ -56,7 +56,7 @@ function ContainerSelection() {
 
     
 
-    const handleSave = () => {
+    const handleNext = () => {
         if (dbContainers){
             orderData[0].totalPriceAmount = totalPriceAmount
             orderData[0].container_items = [];
@@ -70,6 +70,7 @@ function ContainerSelection() {
               }
             // console.log(orderData)
             console.log(orderData)
+            setIsProceed((prev) => !prev)
         }
     }
 
@@ -228,8 +229,7 @@ function ContainerSelection() {
                     </table>
                 </div>
                 <div className="flex justify-around gap-2">
-                    <button className="py-2 bg-green-600 text-white font-semibold text-xl px-5 mb-60" onClick={handleSave}>Save</button>
-                    <button className="py-2 bg-slate-600 text-white font-semibold text-xl px-5 mb-60" onClick={() => setIsProceed((prev) => !prev)}>Proceed</button>
+                    <button className="py-2 bg-slate-600 text-white font-semibold text-xl px-5 mb-60" onClick={handleNext}>Next</button>
                 </div>
 
                 { isProceed && (

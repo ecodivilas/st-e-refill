@@ -4,6 +4,11 @@ class OrdersController {
         return await ordersService.createOrder(order)
     }
 
+    // Customize Create
+    async createPendingOrder(order) {
+        return await ordersService.createPendingOrder(order)
+    }
+
     async getOrders() {
         return await ordersService.getOrders()
     }
