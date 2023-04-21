@@ -1,14 +1,13 @@
 import React, {useState} from 'react';
-import Select from 'react-tailwindcss-select';
+import { Navigate, useLocation } from 'react-router-dom';
 
+import Select from 'react-tailwindcss-select';
 
 import DateTimePicker from 'react-datetime-picker';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
 
-import { useLocation } from 'react-router-dom';
-import { Navigate } from "react-router-dom";
 
 let scheduleType = "anytime";
 

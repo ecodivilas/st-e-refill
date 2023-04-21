@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
+import { Navigate, useLocation } from 'react-router-dom';
 
 import Select from 'react-tailwindcss-select';
 
-import { useLocation } from 'react-router-dom';
-import { Navigate } from "react-router-dom";
 
 let modeOfPayment = ""
 

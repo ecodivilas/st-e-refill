@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { Navigate, useLocation } from 'react-router-dom';
+
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
-
-import { useLocation } from 'react-router-dom';
-import { Navigate } from "react-router-dom";
-
 import { getAllContainers } from '../../services/ContainerService';
 
 let updatedSlimQuantity = 0;
@@ -40,9 +38,7 @@ function ContainerSelection() {
         .catch((error) => {
             console.log(error)
         })
-        
         setTotalPriceAmount(slimPriceAmount + roundPriceAmount + halfSlimPriceAmount)
-        
     },[slimPriceAmount, roundPriceAmount, halfSlimPriceAmount])
         
     // useLocationPassingData
@@ -54,14 +50,12 @@ function ContainerSelection() {
             if (updatedSlimQuantity > 0) {
                 setSlimQuantity(slimQuantity - 1);
                 updatedSlimQuantity = updatedSlimQuantity - 1
-
             }
         }
         else if (id === 2) {
             if (updatedRoundQuantity > 0) {
                 setRoundQuantity(roundQuantity - 1);
                 updatedRoundQuantity = updatedRoundQuantity - 1
-
             }
         }
 
@@ -123,8 +117,6 @@ function ContainerSelection() {
                     quantity: additionalData[i].quantity
                 }
               }
-
-            console.log(orderData)
             setIsProceed((prev) => !prev)
         }
     }
@@ -159,12 +151,10 @@ function ContainerSelection() {
                     <tbody>
                         {
                             dbContainers[0].refill_price !== 0 ? (
-                                // console.log("May laman na", dbContainers)
                                 dbContainers.map((container)=>{
                                     return  (
                                     <tr key={container.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
                                         <td className="px-6 py-4 flex justify-center">
-                                            {/* {container.picture} */}
                                             {additionalData[container.id - 1].containerPicture}
                                         </td>
                                         <td className="text-lg px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
