@@ -13,21 +13,25 @@ let updatedHalfSlimQuantity = 0;
 function ContainerSelection() {
 
     // From the database
-    const [dbContainers, setContainers] = useState(0)
+    const [dbContainers, setContainers] = useState([
+        { refill_price: 0 },
+        { refill_price: 0 },
+        { refill_price: 0 }
+    ])
 
     // Navigation and passing of data
     const [isProceed, setIsProceed] = useState(false)
 
-    const [slimQuantity, setSlimQuantity] = useState(0);
-    const [roundQuantity, setRoundQuantity] = useState(0);
-    const [halfSlimQuantity, setHalfSlimQuantity] = useState(0);
-
-    const [slimPriceAmount, setSlimPriceAmount] = useState(0);
-    const [roundPriceAmount, setRoundPriceAmount] = useState(0);
-    const [halfSlimPriceAmount, setHalfSlimPriceAmount] = useState(0);
+    const [slimQuantity, setSlimQuantity] = useState(updatedSlimQuantity);
+    const [roundQuantity, setRoundQuantity] = useState(updatedRoundQuantity);
+    const [halfSlimQuantity, setHalfSlimQuantity] = useState(updatedHalfSlimQuantity);
 
     const [totalPriceAmount, setTotalPriceAmount] = useState(0);
-
+    
+    const slimPriceAmount = updatedSlimQuantity * dbContainers[0].refill_price
+    const roundPriceAmount = updatedRoundQuantity * dbContainers[1].refill_price
+    const halfSlimPriceAmount = updatedHalfSlimQuantity * dbContainers[2].refill_price
+    
     useEffect(() => {
         getAllContainers()
         .then((dbContainers) => {
@@ -36,57 +40,28 @@ function ContainerSelection() {
         .catch((error) => {
             console.log(error)
         })
-
+        
         setTotalPriceAmount(slimPriceAmount + roundPriceAmount + halfSlimPriceAmount)
-
+        
     },[slimPriceAmount, roundPriceAmount, halfSlimPriceAmount])
-    
-    
-    // console.log(dbContainers)
         
     // useLocationPassingData
     const { state } = useLocation();
     const { orderData } = state || {};
-
-    const quantities = [
-        updatedSlimQuantity,
-        updatedRoundQuantity,
-        updatedHalfSlimQuantity
-    ]
-
-    
-
-    const handleNext = () => {
-        if (dbContainers){
-            orderData[0].totalPriceAmount = totalPriceAmount
-            orderData[0].container_items = [];
-            for (let i = 0; i <= dbContainers.length - 1; i++) {
-                orderData[0].container_items[i] = { 
-                    container_id: dbContainers[i].id,
-                    name: dbContainers[i].name,
-                    unit_price: dbContainers[i].refill_price,
-                    quantity: quantities[i]
-                }
-              }
-            // console.log(orderData)
-            console.log(orderData)
-            setIsProceed((prev) => !prev)
-        }
-    }
 
     const handleDecrementQuantity = (id) => {
         if (id === 1) {
             if (updatedSlimQuantity > 0) {
                 setSlimQuantity(slimQuantity - 1);
                 updatedSlimQuantity = updatedSlimQuantity - 1
-                setSlimPriceAmount(updatedSlimQuantity * dbContainers[0].refill_price)
+
             }
         }
         else if (id === 2) {
             if (updatedRoundQuantity > 0) {
                 setRoundQuantity(roundQuantity - 1);
                 updatedRoundQuantity = updatedRoundQuantity - 1
-                setRoundPriceAmount(updatedRoundQuantity * 25)
+
             }
         }
 
@@ -94,29 +69,24 @@ function ContainerSelection() {
             if (updatedHalfSlimQuantity > 0) {
                 setHalfSlimQuantity(halfSlimQuantity - 1);
                 updatedHalfSlimQuantity = updatedHalfSlimQuantity - 1
-                setHalfSlimPriceAmount(updatedHalfSlimQuantity * 15)
             }
         }
     }
 
     const handleIncrementQuantity = (id) => {
         if (id === 1) {
-            setSlimQuantity(slimQuantity + 1);
-            updatedSlimQuantity = updatedSlimQuantity + 1
-            setSlimPriceAmount(updatedSlimQuantity * dbContainers[0].refill_price)
-            console.log("Nasa Container Selection tayo: ", orderData)
+            setSlimQuantity((previousState) => {
+                return previousState + 1;
+              });
+              updatedSlimQuantity = updatedSlimQuantity + 1
         }
         else if (id === 2) {
             setRoundQuantity(roundQuantity + 1);
             updatedRoundQuantity = updatedRoundQuantity + 1
-            setRoundPriceAmount(updatedRoundQuantity * 25)
-            console.log("Nasa Container Selection tayo: ", orderData)
         }
         else if (id === 3) {
             setHalfSlimQuantity(halfSlimQuantity + 1);
             updatedHalfSlimQuantity = updatedHalfSlimQuantity + 1
-            setHalfSlimPriceAmount(updatedHalfSlimQuantity * 15)
-            console.log("Nasa Container Selection tayo: ", orderData)
         }
     }
 
@@ -140,6 +110,24 @@ function ContainerSelection() {
             priceAmount: halfSlimPriceAmount
         }
     ]
+
+    const handleNext = () => {
+        if (dbContainers){
+            orderData[0].totalPriceAmount = totalPriceAmount
+            orderData[0].container_items = [];
+            for (let i = 0; i <= dbContainers.length - 1; i++) {
+                orderData[0].container_items[i] = { 
+                    container_id: dbContainers[i].id,
+                    name: dbContainers[i].name,
+                    unit_price: dbContainers[i].refill_price,
+                    quantity: additionalData[i].quantity
+                }
+              }
+
+            console.log(orderData)
+            setIsProceed((prev) => !prev)
+        }
+    }
 
     return (
         <div className="flex flex-col gap-2 items-center">
@@ -170,7 +158,7 @@ function ContainerSelection() {
                         </thead>
                     <tbody>
                         {
-                            dbContainers !== 0 ? (
+                            dbContainers[0].refill_price !== 0 ? (
                                 // console.log("May laman na", dbContainers)
                                 dbContainers.map((container)=>{
                                     return  (
