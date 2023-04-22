@@ -21,6 +21,11 @@ class UsersService {
     async deleteUser(id) {
         return await usersRepository.deleteUser(id)
     }
+
+    // Login
+    async loginUser(loginCredentials) {
+        return await usersRepository.loginUser(loginCredentials)
+    }
 }
 
 module.exports = new UsersService()

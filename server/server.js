@@ -42,7 +42,8 @@ app.delete('/api/v1/users/:id', (req, res) => {
 
 // Delivery Addresses
 app.get('/api/v1/delivery_addresses', (req, res) => {
-    res.send('Delivery Addresses Endpoints')
+    usersController.getUsers().then((data) => res.json(data))
+    // res.send('Delivery Addresses Endpoints')
 })
 
 // Containers
@@ -68,7 +69,7 @@ app.delete('/api/v1/orders/:id', (req, res) => {
     ordersController.deleteOrder(req.params.id).then((data) => res.json(data))
 })
 
-// Order_Items  ===================================================================================>
+// Order_Items
 app.post('/api/v1/order_items', (req, res) => {
     orderItemsController.createOrderItem(req.body.order_item).then((data) => res.json(data))
     // res.send(req.body.order)
@@ -91,6 +92,18 @@ app.delete('/api/v1/order_items/:id', (req, res) => {
 app.post('/api/v2/order', (req, res) => {
         ordersController.createPendingOrder(req.body.order).then((data) => res.json(data))
     // res.send(req.body.order)
+})
+
+
+// API Login
+app.post('/api/v1/login', (req, res) => {
+    usersController
+        .loginUser(req.body)
+        .then((jwt) => res.json({ jwt }))
+        .catch((error) => {
+            console.log('Error:', error)
+            res.status(500).send('Server error!')
+        })
 })
 
 app.listen(port, () => {

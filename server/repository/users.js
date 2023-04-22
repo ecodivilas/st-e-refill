@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs')
 const { connect } = require('../config/db')
+const { generateAccessToken } = require('../config/jwt')
 
 class UsersRepository {
     db = {}
@@ -70,6 +71,49 @@ class UsersRepository {
             console.log('Error: ', error)
         }
         return data
+    }
+
+    // Login
+    async loginUser(loginCredentials) {
+            console.log("Login Credentials", loginCredentials.username)
+
+        try {
+            const password = loginCredentials.password
+            console.log("Password", password)
+
+            const user = await this.db.users.findOne({
+                where: {
+                    username: loginCredentials.username,
+                }
+            })
+
+            if(!user){
+                // throw "No record fetched"
+                throw new Error('database failed to connect');
+                //  return console.log("No record fetched")
+            } else {
+                
+                console.log("userPassword: ", user.password)
+                console.log(password)
+                try {
+                    const passwordMatch = await bcrypt.compare(password, user.password)
+                    console.log('Match Result', passwordMatch)
+                    if (passwordMatch) {
+                        return generateAccessToken({ username: loginCredentials.username })
+                    } else {
+                        // throw 'Credentials is invalid!'
+                        throw passwordMatch
+                        // return error
+                    }
+                } catch (error) {
+                    // console.log('Error: ', error)
+                    // return error
+                }
+            }
+        
+        } catch (error) {
+                console.log('Error: ', error)
+        }
     }
 }
 

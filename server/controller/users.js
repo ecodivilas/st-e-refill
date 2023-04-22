@@ -19,6 +19,10 @@ class UsersController {
     async deleteUser(id) {
         return await usersService.deleteUser(id)
     }
+
+    async loginUser(loginCredentials) {
+        return await usersService.loginUser(loginCredentials)
+    }
 }
 
 module.exports = new UsersController()
