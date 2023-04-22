@@ -73,7 +73,7 @@ class UsersRepository {
         return data
     }
 
-    // Login
+    // Login w/ JWT
     async loginUser(loginCredentials) {
             console.log("Login Credentials", loginCredentials.username)
 
@@ -88,31 +88,61 @@ class UsersRepository {
             })
 
             if(!user){
-                // throw "No record fetched"
                 throw new Error('database failed to connect');
-                //  return console.log("No record fetched")
             } else {
-                
-                console.log("userPassword: ", user.password)
-                console.log(password)
                 try {
                     const passwordMatch = await bcrypt.compare(password, user.password)
                     console.log('Match Result', passwordMatch)
                     if (passwordMatch) {
                         return generateAccessToken({ username: loginCredentials.username })
                     } else {
-                        // throw 'Credentials is invalid!'
                         throw passwordMatch
-                        // return error
                     }
                 } catch (error) {
-                    // console.log('Error: ', error)
-                    // return error
+                   console.log('Error: ', error)
                 }
             }
         
         } catch (error) {
                 console.log('Error: ', error)
+        }
+    }
+
+
+    // Register User
+    async registerUser(user) {
+        console.log("User Details: ", user)
+        let userData = {}
+
+        try {
+            const password = user.user.password
+            const salt = bcrypt.genSaltSync(10)
+            const hashedPassword = bcrypt.hashSync(password, salt)
+
+            userData = { ...user.user, password: hashedPassword }
+
+            const createdUser = await this.db.users.create(userData)
+            if (createdUser) {
+                user.address.user_id = createdUser.id
+                console.log("Appending the user_id: ", user.address)
+                try {
+                    const createAddress = await this.db.addresses.create(user.address)
+                    if(createAddress) {
+                        console.log("User and Address Successfully Created")
+                        return "Successful"
+                    } else {
+                        return "Address was not created"
+                    }
+                } catch (error) {
+                    console.log("Error: ", error)
+                }
+                
+            } else {
+                return true
+            }
+
+        } catch (error) {
+            console.log('Error: ', error)
         }
     }
 }

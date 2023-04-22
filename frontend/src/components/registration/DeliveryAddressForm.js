@@ -33,10 +33,10 @@ function DeliveryAddressForm({ defaultAddressValues, handleAddressChange }) {
                                     {item.label}
                                 </label>
                                 <div>
-                                    <textarea id={item.id} name={item.name} rows={item.rows} maxlength="200"
+                                    <textarea id={item.id} name={item.name} rows={item.rows} maxLength="200"
                                     defaultValue={defaultAddressValues[item.id]} onChange={handleAddressChange}
                                     cols={item.cols} placeholder={item.placeholder}
-                                    className="resize-none px-2 mt-2 h-28 bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-sm block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white w-72"
+                                    className="resize-none p-2 mt-2 h-28 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-sm block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white w-72"
                                     >
                                     </textarea>
                                     </div>
@@ -53,17 +53,16 @@ function DeliveryAddressForm({ defaultAddressValues, handleAddressChange }) {
                     {deliveryAddressFields.map((item) => {
                         return (
                                 item.id !== 'address' && item.id !== 'description' && item.id !== 'tin' ? ( 
-                                    <div className='w-full'>
+                                    <div className='w-full' key={item.id} >
                                             <label className="text-xs font-medium text-gray-900 dark:text-white w-32">
                                                 {item.label}
                                             </label>
 
-                                            <select name={item.name} defaultValue={defaultAddressValues[item.name]} onChange={handleAddressChange} className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-sm block !w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white w-72">
+                                            <select name={item.name} defaultValue={defaultAddressValues[item.name]} onChange={handleAddressChange} className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-sm block !w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white text-sm w-72">
+                                            <option value=""></option>
                                             {item.values.map((value) => {
                                                 return (
-                                                    <div>
-                                                        <option value={value.value}>{value.value}</option>
-                                                    </div>
+                                                        <option value={value.value} className="text-sm">{value.value}</option>
                                                 )
                                             })}
                                             </select>           
@@ -85,7 +84,7 @@ function DeliveryAddressForm({ defaultAddressValues, handleAddressChange }) {
                                                     item.placeholder
                                                 }
                                                 onChange={handleAddressChange}
-                                                className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-sm block !w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white w-72"
+                                                className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-sm block !w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white w-72"
                                                 required
                                             />
                                         </div>

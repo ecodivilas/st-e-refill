@@ -25,10 +25,12 @@ function Login() {
                 if (JSON.stringify(res) !== '{}') {
                     console.log(res)
                     sessionStorage.setItem("jwt", res.jwt);
+                    alert('Login Successfully! Noice Hahahah')
                     navigate('/', { state: res })
                 }
                 else {
-                    console.log("User does not exist!")
+                    console.log("User/Password does not exist!")
+                    alert('User does not exist!')
                 }
             })
             

@@ -23,6 +23,10 @@ class UsersController {
     async loginUser(loginCredentials) {
         return await usersService.loginUser(loginCredentials)
     }
+
+    async registerUser(user) {
+        return await usersService.registerUser(user)
+    }
 }
 
 module.exports = new UsersController()

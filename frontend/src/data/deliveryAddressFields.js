@@ -1,3 +1,4 @@
+
 export const deliveryAddressFields = [
     {
         id: 'address',
@@ -5,7 +6,7 @@ export const deliveryAddressFields = [
         label: 'Address',
         rows: "4",
         cols: "20",
-        placeholder: '4321 Seasame Street Suite 900',
+        placeholder: '4321 Seasame Street Suite 900... flr... Building... Subdivision... Unit...',
     },
     {
         id: 'baranggay',
@@ -14,6 +15,7 @@ export const deliveryAddressFields = [
         type: 'text',
         placeholder: 'Baranggay',
         values: [{
+            "id": 1,
             "value": "Holy Spirit",
             "zip": 1127
         }]
@@ -24,7 +26,11 @@ export const deliveryAddressFields = [
         label: 'City',
         type: 'text',
         placeholder: 'City',
-        values: ["Quezon City"]
+        values: 
+        [{
+            "id": 1,
+            "value": "Quezon City"
+        }]
     },
     {
         id: 'country',
@@ -32,7 +38,12 @@ export const deliveryAddressFields = [
         label: 'Country',
         type: 'text',
         placeholder: 'Country',
-        values: ["Philippines"]
+        values: [
+            {
+                "id": 1,
+                "value": "Philippines"
+            }
+        ]
     },
     {
         id: 'tin',
@@ -47,6 +58,6 @@ export const deliveryAddressFields = [
         label: 'Description',
         rows: "4",
         cols: "20",
-        placeholder: 'Near the parking area',
+        placeholder: 'Near the parking area xd',
     }
 ]

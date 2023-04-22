@@ -123,6 +123,17 @@ app.post('/api/v1/login', (req, res) => {
         })
 })
 
+// API Register
+app.post('/api/v1/register', (req, res) => {
+    usersController
+        .registerUser(req.body)
+        .then((data) => res.json(data))
+        .catch((error) => {
+            console.log('Error:', error)
+            res.status(500).send('Server error!')
+        })
+})
+
 app.listen(port, () => {
     console.log(`Server listening on the port: ${port}`)
 })

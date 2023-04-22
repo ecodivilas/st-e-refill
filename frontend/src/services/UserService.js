@@ -73,4 +73,18 @@ export async function loginUser(userDetails) {
 }
 
 
+// Register User
+export async function registerUser(defaultUserValues, defaultAddressValues) {
+    try {
+        const response = await fetch('/api/v1/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user: defaultUserValues, address: defaultAddressValues }),
+        })
+        return await response.json()
+    } catch (error) {
+        console.log('Error: ', error)
+    }
+}
+
 // console.log(JSON.stringify({ "user": userDetails }))

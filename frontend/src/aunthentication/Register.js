@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import PersonalDataForm from '../components/registration/PersonalDataForm'
 import DeliveryAddressForm from '../components/registration/DeliveryAddressForm'
+import { registerUser } from '../services/UserService'
 
 let defaultUserValues = {
     username: '',
@@ -10,7 +11,7 @@ let defaultUserValues = {
     first_name: '',
     middle_name: '',
     last_name: '',
-    age: '',
+    age: 0,
     gender: '',
     mobile_number: '',
     role: 'customer',
@@ -22,7 +23,7 @@ let defaultAddressValues = {
     baranggay: '',
     city: '',
     country: '',
-    tin: '',
+    tin: 0,
     description: ''
 }
 
@@ -53,8 +54,8 @@ function Register() {
         console.log(name, value)
     }
 
-    const checkPassword = () => {
-        if (user_details.confirm_password === user_details.password) {
+    const isPassed = () => {
+        if (user_details.confirm_password === user_details.password && user_details.password !== "") {
             return true
         } else {
             return false
@@ -63,9 +64,22 @@ function Register() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (checkPassword()) {
+        if (isPassed()) {
+            try {
+               const registered =  registerUser(defaultUserValues, defaultAddressValues)
+                if(registered) {
+                    alert('Registered Successfully')
+                } else {
+                    alert('Registration Failed~!')
+                }
+            } catch (error) {
+                console.log("Don't Went Through")
+            }
             navigate('/', { state: user_details })
         } else {
+            setToggle(prev =>!prev)
+            console.log("User Data: ", defaultUserValues)
+            console.log("Address Data: ", defaultAddressValues)
             alert('Password Mismatched!')
         }
     }
@@ -121,7 +135,6 @@ function Register() {
                                             }
                                         </button>
                                     </div>
-
                                 </div>
                             </form>
                         </div>

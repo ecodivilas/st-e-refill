@@ -26,6 +26,11 @@ class UsersService {
     async loginUser(loginCredentials) {
         return await usersRepository.loginUser(loginCredentials)
     }
+
+    // Register
+    async registerUser(user) {
+        return await usersRepository.registerUser(user)
+    }
 }
 
 module.exports = new UsersService()
