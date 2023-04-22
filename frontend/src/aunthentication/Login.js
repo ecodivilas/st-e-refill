@@ -30,7 +30,7 @@ function Login() {
                 }
                 else {
                     console.log("User/Password does not exist!")
-                    alert('User does not exist!')
+                    alert('User/Password doesn\'t exist!')
                 }
             })
             

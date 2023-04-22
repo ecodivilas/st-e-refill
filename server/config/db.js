@@ -39,6 +39,9 @@ const connect = () => {
     db.orders = require('../model/orders')(sequelize, DataTypes, Model)
     db.order_items = require('../model/orderItems')(sequelize, DataTypes, Model)
 
+    db.users.hasOne(db.addresses,{foreignKey : 'user_id'});
+    db.addresses.belongsTo(db.users,{foreignKey : 'user_id'});
+
     return db
 }
 

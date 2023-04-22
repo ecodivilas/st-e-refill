@@ -84,8 +84,11 @@ class UsersRepository {
             const user = await this.db.users.findOne({
                 where: {
                     username: loginCredentials.username,
+                    // include: [this.db.addresses]
                 }
             })
+
+            // console.log("Fetch User Data: ", user)
 
             if(!user){
                 throw new Error('database failed to connect');
@@ -94,7 +97,21 @@ class UsersRepository {
                     const passwordMatch = await bcrypt.compare(password, user.password)
                     console.log('Match Result', passwordMatch)
                     if (passwordMatch) {
-                        return generateAccessToken({ username: loginCredentials.username })
+                        const generatedToken = generateAccessToken({ username: loginCredentials.username })
+                        if (generatedToken){
+                            const verifiedUserData = await this.db.users.findOne({
+                                where: { "id": user.id },
+                                include: [this.db.addresses]
+                            })
+
+                        // const { order_items, ...newOrder } = idealData;
+
+                        //     console.log("queried: ", verifiedUserData)
+                        //     console.log("username", verifiedUserData.dataValues.username)
+                        //     console.log("baranggay", verifiedUserData.dataValues.delivery_address.dataValues.baranggay)
+                            // generatedToken["userData"] = verifiedUserData
+                        }
+                        return generatedToken
                     } else {
                         throw passwordMatch
                     }
