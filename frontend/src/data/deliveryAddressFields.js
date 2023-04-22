@@ -13,6 +13,10 @@ export const deliveryAddressFields = [
         label: 'Baranggay',
         type: 'text',
         placeholder: 'Baranggay',
+        values: [{
+            "value": "Holy Spirit",
+            "zip": 1127
+        }]
     },
     {
         id: 'city',
@@ -20,6 +24,7 @@ export const deliveryAddressFields = [
         label: 'City',
         type: 'text',
         placeholder: 'City',
+        values: ["Quezon City"]
     },
     {
         id: 'country',
@@ -27,13 +32,14 @@ export const deliveryAddressFields = [
         label: 'Country',
         type: 'text',
         placeholder: 'Country',
+        values: ["Philippines"]
     },
     {
         id: 'tin',
         name: 'tin',
         label: 'TIN',
         type: 'text',
-        placeholder: 'TIN',
+        placeholder: 'TIN'
     },
     {
         id: 'description',
@@ -41,6 +47,6 @@ export const deliveryAddressFields = [
         label: 'Description',
         rows: "4",
         cols: "20",
-        placeholder: 'Description',
+        placeholder: 'Near the parking area',
     }
 ]

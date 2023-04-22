@@ -4,7 +4,7 @@ import { registerFields } from '../../data/registerFields'
 
 function PersonalDataForm({ defaultUserValues, handleUserChange }) {
     return (
-        <div>
+        <div className="mb-10">
             <div className="grid grid-cols-2 gap-4">
                 {registerFields.map((item) => (
                     <div key={item.id} className="h-16">
@@ -27,7 +27,7 @@ function PersonalDataForm({ defaultUserValues, handleUserChange }) {
                                 item.placeholder
                             }
                             onChange={handleUserChange}
-                            className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-sm block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white w-72"
+                            className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 sm:text-xs rounded-sm block !w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white w-72"
                             required
                         />
                         )}
