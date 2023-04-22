@@ -6,9 +6,11 @@ const express = require('express')
 const path = require('path')
 
 const usersController = require('./controller/users')
+const addressesController = require('./controller/addresses')
 const containersController = require('./controller/containers')
 const ordersController = require('./controller/orders')
 const orderItemsController = require('./controller/orderItems')
+
 
 const app = express()
 
@@ -41,9 +43,24 @@ app.delete('/api/v1/users/:id', (req, res) => {
 })
 
 // Delivery Addresses
-app.get('/api/v1/delivery_addresses', (req, res) => {
-    usersController.getUsers().then((data) => res.json(data))
-    // res.send('Delivery Addresses Endpoints')
+app.post('/api/v1/addresses', (req, res) => {
+    addressesController.createAddress(req.body.address).then((data) => res.json(data))
+})
+
+app.get('/api/v1/addresses', (req, res) => {
+    addressesController.getAddresses().then((data) => res.json(data))
+})
+
+app.get('/api/v1/addresses/:id', (req, res) => {
+    addressesController.getAddress(req.params.id).then((data) => res.json(data))
+})
+
+app.put('/api/v1/addresses', (req, res) => {
+    addressesController.updateAddress(req.body.address).then((data) => res.json(data))
+})
+
+app.delete('/api/v1/addresses/:id', (req, res) => {
+    addressesController.deleteAddress(req.params.id).then((data) => res.json(data))
 })
 
 // Containers

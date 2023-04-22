@@ -56,4 +56,21 @@ export async function deleteUser(userId) {
     }
 }
 
+// Login User
+export async function loginUser(userDetails) {
+    try {
+        const response = await fetch('/api/v1/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userDetails)
+        })
+
+        return await response.json();
+
+    } catch (error) {
+        console.log('Error: ', error)
+    }
+}
+
+
 // console.log(JSON.stringify({ "user": userDetails }))

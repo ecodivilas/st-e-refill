@@ -20,6 +20,7 @@ import OrderSummary from './components/orders/OrderSummary'
 import OrderSendToDB from './components/orders/OrderSendToDB'
 
 import Register from './aunthentication/Register'
+import DeliveryAddressForm from './components/registration/DeliveryAddressForm'
 
 import './assets/customizedStyles/customTableStyle.css';
 
@@ -31,6 +32,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/register" element={<Register /> } />
+                <Route path="/delivery-address-form" element={<DeliveryAddressForm /> } />
                 <Route path="/login" element={<Login /> } />
                 
                 <Route path="/users-dashboard" element={<UserDashboard />}/>
