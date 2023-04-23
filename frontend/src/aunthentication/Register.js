@@ -113,7 +113,7 @@ function Register() {
                                 
                                 {isToggle ? ( 
                                      <>
-                                        <div className="pt-6 flex items-end text-white text-xs text-gray-700 font-small">Address will be your delivery address for your orders.</div>
+                                        <div className="pt-6 flex items-end text-white text-xs font-small">Address will be your delivery address for your orders.</div>
                                         <div className="flex items-end h-16 grow mt-2">
                                             <button type="submit" className="grow rounded-sm text-white bg-primary-600 hover:bg-primary-700 font-medium text-sm px-2 text-center dark:bg-green-600 dark:hover:bg-green-700 h-10"
                                     >

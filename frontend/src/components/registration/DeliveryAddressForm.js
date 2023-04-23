@@ -36,7 +36,7 @@ function DeliveryAddressForm({ defaultAddressValues, handleAddressChange }) {
                                     <textarea id={item.id} name={item.name} rows={item.rows} maxLength="200"
                                     defaultValue={defaultAddressValues[item.id]} onChange={handleAddressChange}
                                     cols={item.cols} placeholder={item.placeholder}
-                                    className="resize-none p-2 mt-2 h-28 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-sm block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white w-72"
+                                    className="resize-none p-2 mt-2 h-28 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-sm block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                                     >
                                     </textarea>
                                     </div>
@@ -58,7 +58,7 @@ function DeliveryAddressForm({ defaultAddressValues, handleAddressChange }) {
                                                 {item.label}
                                             </label>
 
-                                            <select name={item.name} defaultValue={defaultAddressValues[item.name]} onChange={handleAddressChange} className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-sm block !w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white text-sm w-72">
+                                            <select name={item.name} defaultValue={defaultAddressValues[item.name]} onChange={handleAddressChange} className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-sm block !w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
                                             <option value=""></option>
                                             {item.values.map((value) => {
                                                 return (
@@ -84,7 +84,7 @@ function DeliveryAddressForm({ defaultAddressValues, handleAddressChange }) {
                                                     item.placeholder
                                                 }
                                                 onChange={handleAddressChange}
-                                                className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-sm block !w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white w-72"
+                                                className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-sm block !w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                                                 required
                                             />
                                         </div>
