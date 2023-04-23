@@ -101,17 +101,25 @@ class UsersRepository {
                         if (generatedToken){
                             const verifiedUserData = await this.db.users.findOne({
                                 where: { "id": user.id },
+                                // attributes: ["email", "username"],
                                 include: [this.db.addresses]
                             })
 
-                        // const { order_items, ...newOrder } = idealData;
-
+                        // const { delivery_address, email, ...excessData } = verifiedUserData;
+                        // console.log(delivery_address, email)
+                        console.log(verifiedUserData)
+                        console.log(generatedToken)
+                        const generatedTokenObject = {"jwt": generatedToken}
+                        const updatedData = [generatedTokenObject, verifiedUserData] 
+                        console.log(updatedData)
+                        
                         //     console.log("queried: ", verifiedUserData)
                         //     console.log("username", verifiedUserData.dataValues.username)
                         //     console.log("baranggay", verifiedUserData.dataValues.delivery_address.dataValues.baranggay)
                             // generatedToken["userData"] = verifiedUserData
+                        return updatedData
                         }
-                        return generatedToken
+                        // return generatedToken
                     } else {
                         throw passwordMatch
                     }

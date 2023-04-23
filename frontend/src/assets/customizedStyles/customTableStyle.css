@@ -1,9 +1,9 @@
 .hXLGuA {
-  @apply !w-[85vw] !rounded !rounded-md bg-gray-100;
+  @apply !w-full !rounded-md bg-gray-100;
 }
 
 .eixEah {
-  @apply !w-[90vw] !h-[300px] !rounded !rounded-md shadow-2xl;
+  @apply !max-w-full box-border overflow-scroll !h-[300px] !rounded-md shadow-2xl !overflow-y-visible scroll-smooth !caret-slate-900 cursor-pointer touch-manipulation;
 } 
 
 .dqfNny {
@@ -18,16 +18,22 @@
   @apply !basis-1;
 }
 
+
 .cell[data-column-id="2"] {
   @apply !basis-1 ;
 }
 
 .rdt_Table {
-    @apply divide-y divide-gray-200;
-  }
+  @apply divide-y divide-gray-200;
+}
+
+
+.gUHoGv {
+  @apply flex justify-center items-center !h-full w-full;
+}
   
   .rdt_TableHead {
-    @apply !text-left !bg-zinc-700 !text-xs font-bold !text-white uppercase tracking-wide !rounded !rounded-md;
+    @apply !text-left !bg-zinc-700 !text-xs font-bold !text-white uppercase tracking-wide !rounded-md;
   }
   
   .rdt_TableRow {
@@ -43,7 +49,7 @@
   }
   
   .rdt_Pagination {
-    @apply py-2 px-3 text-xs font-medium text-gray-500 uppercase tracking-wider rounded rounded-md shadow-2xl;
+    @apply py-2 px-3 text-xs font-medium text-gray-500 uppercase tracking-wider rounded-md shadow-2xl;
   }
   
   .rdt_PaginationPrev,

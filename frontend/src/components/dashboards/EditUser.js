@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { editUser } from '../../services/UserService'
 
-const EditUser = ({ user }) => {
+const EditUser = ({ user, handleSetAlertEdited }) => {
     const INITIAL_USER_DATA = {
         id: user.id ?? '',
         username: user.username ?? '',
@@ -103,7 +103,7 @@ const EditUser = ({ user }) => {
         setShowModal(!showModal)
     }
 
-    const handleEditedMessage = () => alert("Edit Successful Lodi!!!")
+    const handleEditedMessage = () => handleSetAlertEdited(user.username)
 
     return (
         <div>

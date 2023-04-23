@@ -23,8 +23,13 @@ function Login() {
             loginUser(userData).then((res)=>{
                 console.log(res)
                 if (JSON.stringify(res) !== '{}') {
-                    console.log(res)
-                    sessionStorage.setItem("jwt", res.jwt);
+                    sessionStorage.setItem("jwt", res[0].jwt);
+                    localStorage.setItem("data", JSON.stringify(res[1]));
+
+                    const data = localStorage.getItem("data")
+                    if (data){
+                        console.log("Fetch Data: ", JSON.parse(data))
+                    }
                     alert('Login Successfully! Noice Hahahah')
                     navigate('/', { state: res })
                 }

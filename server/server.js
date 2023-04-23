@@ -116,7 +116,8 @@ app.post('/api/v2/order', (req, res) => {
 app.post('/api/v1/login', (req, res) => {
     usersController
         .loginUser(req.body)
-        .then((jwt) => res.json({ jwt }))
+        // .then((jwt) => res.json({ jwt }))
+        .then((data) => res.json(data))
         .catch((error) => {
             console.log('Error:', error)
             res.status(500).send('Server error!')

@@ -17,7 +17,7 @@ function Splash() {
       <div className="flex justify-center group relative py-4 px-2">
         <div className="mt-32">
           <a href="/" className="" data-tooltip-target="tooltip-hover">
-            <img className="h-4/6 ml-6 z-10" src={require("../assets/img/robots.webp")} alt="robot" />
+            <img className="h-4/6 ml-6 z-10 translate-x-6 hover:translate-x-full duration-150" src={require("../assets/img/dropy.png")} alt="robot" />
           </a>
           <span className="absolute top-10 left-1/2 transform -translate-x-4/8 scale-0 rounded bg-gray-300 p-2 text-lg text-black group-hover:scale-100">
             Need help?  Chat with us

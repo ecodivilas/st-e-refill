@@ -17,8 +17,8 @@ function Navbar() {
           </div>
 
           <div className="flex justify-end align-bottom w-1/4 gap-4 mr-2 my-2 h-12">
-            <button type="button" onClick={() => navigate('/register')} className="text-white bg-orange-600 hover:bg-slate-900 font-medium text-base px-5 dark:bg-orange-500 dark:hover:bg-orange-900 w-1/2">Register</button>
-            <button type="button" onClick={() => navigate('/login')} className="text-white bg-orange-600 hover:bg-orange-600 font-medium text-base px-5 dark:bg-slate-900 dark:hover:bg-slate-800 w-1/2">Login</button>
+            <button type="button" onClick={() => navigate('/register')} className="text-white bg-orange-600 hover:bg-slate-900 font-medium text-base dark:bg-orange-500 dark:hover:bg-orange-900 w-1/2">Register</button>
+            <button type="button" onClick={() => navigate('/login')} className="text-white bg-orange-600 hover:bg-orange-600 font-medium text-base dark:bg-slate-900 dark:hover:bg-slate-800 w-1/2">Login</button>
           </div>
         </div>
 
@@ -28,7 +28,7 @@ function Navbar() {
             <FaHome className="text-white hover:!text-orange-600 mr-10 !h-[50px]"/>
           </button>
 
-          <ul className="hidden md:flex space-x-10 text-gray-600 dark:text-gray-100 font-bold text-sm capitalize font-medium">
+          <ul className="hidden md:flex space-x-10 text-gray-600 dark:text-gray-100 text-sm capitalize font-medium">
 
           {pagesNavigations.map(({ id, link, path }) => (
               <li key={id} className="hover:text-orange-500">
@@ -44,10 +44,10 @@ function Navbar() {
             className="hidden md:block w-5 cursor-pointer ml-10"
             alt="Dark Mood"
           />
-          <div id="hamburger" className="space-y-1 md:hidden cursor-pointer z-20">
-            <div className="w-6 h-0.5 bg-black"></div>
-            <div className="w-6 h-0.5 bg-black"></div>
-            <div className="w-6 h-0.5 bg-black"></div>
+          <div id="hamburger" className="space-y-1 md:hidden cursor-pointer z-20 text-white">
+            <div className="w-6 h-0.5 bg-white"></div>
+            <div className="w-6 h-0.5 bg-white"></div>
+            <div className="w-6 h-0.5 bg-white"></div>
           </div>
         </div>
       </nav>  

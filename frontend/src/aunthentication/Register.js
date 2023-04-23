@@ -11,7 +11,7 @@ let defaultUserValues = {
     first_name: '',
     middle_name: '',
     last_name: '',
-    age: 0,
+    age: '',
     gender: '',
     mobile_number: '',
     role: 'customer',
@@ -23,7 +23,7 @@ let defaultAddressValues = {
     baranggay: '',
     city: '',
     country: '',
-    tin: 0,
+    tin: '',
     description: ''
 }
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 import Splash from './Splash'
 
-function Dashboard() {
+function Home() {
   return (
     <div>
         <Splash />
@@ -10,4 +10,4 @@ function Dashboard() {
   )
 }
 
-export default Dashboard
+export default Home
