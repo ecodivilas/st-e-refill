@@ -15,19 +15,23 @@ function UserDashboard() {
     const [alertDeleteMessage, setAlertDeleteMessage] = useState('')
     const [alertEditedMessage, setAlertEditedMessage] = useState('')
     
-    useEffect(() => {
-        getAllUsers()
-        .then((users) => {
-            setUsers(users)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+useEffect(() => {
+    getAllUsers()
+    .then((users) => {
+        setUsers(users)
+    })
+    .catch((error) => {
+        console.log(error)
+    })
     }, [alertDeleteMessage, alertEditedMessage])
 
     const [records, setRecords] = useState([]);
 
-    useMemo(()=> setRecords(users),[users])
+    try {
+        useMemo(()=> setRecords(users),[users])
+    } catch (error) {
+        console.log("Error: ", error)
+    }
 
     const handleDelete = (userID, userName) => {
         deleteUser(userID)

@@ -19,6 +19,7 @@ class OrdersRepository {
 
     // Customize Create Order
     async createPendingOrder(order) {
+        console.log(order)
       
         const { order_items, ...newOrder } = order;
 

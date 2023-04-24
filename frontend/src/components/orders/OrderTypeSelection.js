@@ -1,11 +1,6 @@
 import React, { useState } from 'react'
-import { AiOutlineCaretUp, AiOutlineCaretDown } from "react-icons/ai"
-import { FaCartArrowDown } from "react-icons/fa"
-import { GiWaterBottle } from "react-icons/gi"
-
 import { Navigate } from "react-router-dom";
-
-// import ContainerSelection from './ContainerSelection'
+import { AiOutlineCaretDown, AiOutlineCaretUp, FaCartArrowDown, GiWaterBottle } from '../../assets/icons/icons'
 
 function OrderTypeSelection() {
 
@@ -26,7 +21,7 @@ function OrderTypeSelection() {
     const [isProceed, setIsProceed] = useState(false)
 
     // This will be pass into containers
-    const [selectedService, setSelectedService] = useState(services[0].service)
+    const [selectedService, setSelectedService] = useState(localStorage.getItem("selectedService"))
 
     const handleSelect = (service) => {
       setSelectedService(service);
@@ -67,9 +62,12 @@ function OrderTypeSelection() {
             )}
           </div>
             <button className="py-2 bg-slate-600 text-white font-semibold text-xl px-5 mt-44" onClick={() => setIsProceed((prev) => !prev)}>Proceed</button>
-          
+            
           { isProceed && (
-            <Navigate to="/order-container-selection" state={{ orderData: [{orderType: selectedService}] }} />
+            <div>
+              {localStorage.setItem("selectedService", selectedService)}
+              <Navigate to="/order-container-selection" state={{ orderData: [{orderType: selectedService}] }} />
+            </div>
           ) }
         </div>
 

@@ -23,8 +23,10 @@ function Login() {
             loginUser(userData).then((res)=>{
                 console.log(res)
                 if (JSON.stringify(res) !== '{}') {
-                    sessionStorage.setItem("jwt", res[0].jwt);
-                    localStorage.setItem("data", JSON.stringify(res[1]));
+
+                    // Assigning Default Values Upon Login
+                    sessionStorage.setItem("jwt", res[0].jwt)
+                    localStorage.setItem("data", JSON.stringify(res[1]))
 
                     const data = localStorage.getItem("data")
                     if (data){

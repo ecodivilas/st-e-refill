@@ -1,38 +1,128 @@
-import React, { useState } from 'react'
-import { Navigate, useLocation } from 'react-router-dom';
+import React, { useState, useMemo } from 'react'
+import { Navigate} from 'react-router-dom';
 
-import OrderSendToDB from './OrderSendToDB';
+import { createPendingOrder } from '../../services/OrderService'
+import { getAllContainers } from '../../services/ContainerService'
+
+let containerDetails
 
 function OrderSummary() {
 
     // navigation and passing of data
     const [isProceed, setIsProceed] = useState(false)
+    const [containers, setContainers] = useState([])
     
-    // acquire data from the previous page
-    const { state } = useLocation();
-    const { orderData } = state || {};
-
     const data = JSON.parse(localStorage.getItem('data'))
-    // console.log("Ito ang data: ", data)
-
     const userAddress = data.delivery_address;
+    
+    useMemo(() => {
+        getAllContainers()
+        .then((res) => {
+            containerDetails = res
+            containerDetails[0].quantity = Number(localStorage.getItem('updatedSlimQuantity'))
+            containerDetails[1].quantity = Number(localStorage.getItem('updatedRoundQuantity'))
+            containerDetails[2].quantity = Number(localStorage.getItem('updatedHalfSlimQuantity'))
+            setContainers(res)
+        })
+        .catch((error) => {
+            console.log(error)
+        })}, [])
 
-    // console.log(userAddress)
     const { address, baranggay, city, tin, description} = userAddress
     const { first_name, last_name } = data
 
-    // Will be replace with user and address table database
     const orderDetails = 
         {
             customerId: 1,
             customerName: `${first_name} ${last_name}`,
-            // customerAddress: "234 100flr Mapagmahal St., Cupid Subd., Brgy 145, Caloocan City",
             customerAddress: `${address}, ${baranggay}, ${city}, ${tin}`,
             addressDescription: description
         }
     
     const handleOrderProceed = () => {
-        <OrderSendToDB orderData={ orderData } />
+
+        // const x = {
+        //     "customer_id": data.id,
+        //     "order_date": localStorage.getItem("dateValue"),
+        //     "delivery_date": localStorage.getItem("dateValue"),
+        //     "delivery_time": localStorage.getItem("timeValue"),
+        //     "mode_of_payment": localStorage.getItem("orderMOP"),
+        //     "status": "queue",
+        //     "is_paid": false,
+        //    }
+
+        // {
+        //     "order": {
+        //         "customer_id": 1,
+        //         "order_date": "2023-04-20",
+        //         "delivery_date": "2023-04-20",
+        //         "delivery_time": "01:02",
+        //         "mode_of_payment": "cash_on_delivery",
+        //         "status": "queue",
+        //         "is_paid": false,
+        //         "order_items": [
+        //             {
+        //                 "container_id": 1,
+        //                 "unit_price": 25,
+        //                 "quantity": 2
+        //             },
+        //             {
+        //                 "container_id": 2,
+        //                 "unit_price": 25,
+        //                 "quantity": 1
+        //             },
+        //             {
+        //                 "container_id": 3,
+        //                 "unit_price": 15,
+        //                 "quantity": 1
+        //             }
+        //                 ]
+        //     }
+        // }
+
+        //    console.log(x)
+
+        ///////////////
+
+        
+        createPendingOrder(
+            {
+                "customer_id": data.id,
+                "order_date": localStorage.getItem("dateValue"),
+                "delivery_date": localStorage.getItem("dateValue"),
+                "delivery_time": localStorage.getItem("timeValue"),
+                "mode_of_payment": localStorage.getItem("orderMOP"),
+                "status": "queue",
+                "is_paid": false,
+                "order_items": [
+                    {
+                        "container_id": containers[0].id,
+                        "unit_price": containers[0].refill_price,
+                        "quantity": Number(localStorage.getItem('updatedSlimQuantity'))
+                    },
+                    {
+                        "container_id": containers[1].id,
+                        "unit_price": containers[1].refill_price,
+                        "quantity": Number(localStorage.getItem('updatedRoundQuantity'))
+                    },
+                    {
+                        "container_id": containers[2].id,
+                        "unit_price": containers[2].refill_price,
+                        "quantity": Number(localStorage.getItem('updatedHalfSlimQuantity'))
+                    }
+                        ]
+               }
+        ).then((res)=>{
+            alert("Order Successfully Appended!")
+            return res
+        }).catch((error) => console.log(error))
+
+        // alert("Order Failed!")
+        localStorage.removeItem('updatedSlimQuantity')
+        localStorage.removeItem('updatedRoundQuantity')
+        localStorage.removeItem('updatedHalfSlimQuantity')
+        localStorage.removeItem('scheduleType')
+
         setIsProceed((prev) => !prev)
     }
 
@@ -43,39 +133,33 @@ function OrderSummary() {
             <h2 className="font-bold text-2xl py-5 text-center">Order Summary</h2>
             <div className="flex justify-center">
                 <div className="flex-col">
-                {
-                    orderData === undefined ? (
-                        <div className="text-center py-6 rounded bg-slate-700 text-white my-6">No Data Fetched</div>
-                    ) : (
-
-                        <div>
+                    <div>
                         <div className="py-2"><span className="font-bold">Customer Name: </span>{orderDetails.customerName}</div>
                         <div className="py-2"><span className="font-bold">Customer Address: </span>{orderDetails.customerAddress}</div>
                         <div className="py-2"><span className="font-bold">Address Description: </span>{orderDetails.addressDescription}</div>
                         <div className="flex py-2 gap-2">
-                            <span className="font-bold">Order Type: </span>{orderData[0].orderType}
-                            <span className="font-bold">Expected Date: </span>{orderData[0].delivery_date.toString()}
-                            <span className="font-bold">Expected Time: {orderData[0].delivery_time}</span>
+                            <span className="font-bold">Order Type: </span>{localStorage.getItem("selectedService")}
+                            <span className="font-bold">Expected Date: </span>{localStorage.getItem("dateValue")}
+                            <span className="font-bold">Expected Time: {localStorage.getItem("timeValue")}</span>
                         </div>
                             <div className="py-2">
                                 <span className="font-bold">Order Description: </span>
                                 <div className="pl-5">
                                         {
-                                            orderData[0].container_items.map((order) => {
+                                            containers.map((container) => {
                                                 return (
                                                     
-                                                <div className="py-2 flex gap-2" key={order.container_id}>
-                                                    <span className="font-bold">{order.name}</span><span>x{order.quantity}</span><span>₱{order.unit_price * order.quantity}</span>
+                                                <div className="py-2 flex gap-2" key={container.id}>
+                                                    <span className="font-bold">{container.name}</span><span>x{container.quantity}</span><span>₱{container.refill_price * Number(container.quantity)}</span>
                                                 </div>
                                                     )
                                                 })
                                         }
                                 </div>
                             </div>
-                            <div className="py-2"><span className="font-bold">Mode of Payment: </span>{orderData[0].mode_of_payment.label}</div>
-                            <div className="py-2"><span className="font-bold">Total Amount: </span>₱{orderData[0].totalPriceAmount}</div>
+                            <div className="py-2"><span className="font-bold">Mode of Payment: </span>{localStorage.getItem("orderMOP")}</div>
+                            <div className="py-2"><span className="font-bold">Total Amount: </span>₱{localStorage.getItem("totalPriceAmount")}</div>
                             </div>
-                        ) }
         
                         <div className="flex gap-2">
                             <button className="py-5 grow px-10 bg-green-600 text-white font-semibold text-sm">Update Order</button>

@@ -4,7 +4,7 @@ export async function createPendingOrder( orderDetails ) {
         const response = await fetch('/api/v2/order', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ order: orderDetails }),
+            body: JSON.stringify({ order: orderDetails })
         })
         return await response.json()
     } catch (error) {

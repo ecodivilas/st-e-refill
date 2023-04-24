@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
-import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
+import { AiOutlinePlus, AiOutlineMinus } from '../../assets/icons/icons'
 import { getAllContainers } from '../../services/ContainerService';
 
-let updatedSlimQuantity = 0;
-let updatedRoundQuantity = 0;
-let updatedHalfSlimQuantity = 0;
+
+let updatedSlimQuantity
+let updatedRoundQuantity
+let updatedHalfSlimQuantity
+
+try {
+    updatedSlimQuantity = Number(localStorage.getItem('updatedSlimQuantity'))
+    updatedRoundQuantity = Number(localStorage.getItem('updatedRoundQuantity'))
+    updatedHalfSlimQuantity = Number(localStorage.getItem('updatedHalfSlimQuantity'))
+} catch (error) {
+    updatedSlimQuantity = 0
+    updatedRoundQuantity = 0
+    updatedHalfSlimQuantity = 0
+    console.log("Error: ", error)
+}
 
 function ContainerSelection() {
 
@@ -38,13 +50,10 @@ function ContainerSelection() {
         .catch((error) => {
             console.log(error)
         })
-        setTotalPriceAmount(slimPriceAmount + roundPriceAmount + halfSlimPriceAmount)
-    },[slimPriceAmount, roundPriceAmount, halfSlimPriceAmount])
-        
-    // useLocationPassingData
-    const { state } = useLocation();
-    const { orderData } = state || {};
 
+        setTotalPriceAmount(slimPriceAmount + roundPriceAmount + halfSlimPriceAmount)
+    },[slimPriceAmount, roundPriceAmount, halfSlimPriceAmount, roundQuantity, roundQuantity, halfSlimQuantity])
+        
     const handleDecrementQuantity = (id) => {
         if (id === 1) {
             if (updatedSlimQuantity > 0) {
@@ -84,6 +93,32 @@ function ContainerSelection() {
         }
     }
 
+
+    const handleNext = () => {
+        // if (dbContainers){
+        //     orderData[0].totalPriceAmount = totalPriceAmount
+        //     orderData[0].container_items = [];
+        //     for (let i = 0; i <= dbContainers.length - 1; i++) {
+        //         orderData[0].container_items[i] = { 
+        //             container_id: dbContainers[i].id,
+        //             name: dbContainers[i].name,
+        //             unit_price: dbContainers[i].refill_price,
+        //             quantity: additionalData[i].quantity
+        //         }
+        //       }
+        //     }
+            localStorage.setItem("totalPriceAmount", totalPriceAmount.toFixed(2).toString())
+            
+            localStorage.setItem("updatedSlimQuantity", updatedSlimQuantity.toString())
+            localStorage.setItem("updatedRoundQuantity", updatedRoundQuantity.toString())
+            localStorage.setItem("updatedHalfSlimQuantity", updatedHalfSlimQuantity.toString())
+            
+            setSlimQuantity(0)
+            setSlimQuantity(0)
+            setSlimQuantity(0)
+            setIsProceed((prev) => !prev)
+    }
+
     const additionalData = [
         {
             id: 1,
@@ -104,22 +139,6 @@ function ContainerSelection() {
             priceAmount: halfSlimPriceAmount
         }
     ]
-
-    const handleNext = () => {
-        if (dbContainers){
-            orderData[0].totalPriceAmount = totalPriceAmount
-            orderData[0].container_items = [];
-            for (let i = 0; i <= dbContainers.length - 1; i++) {
-                orderData[0].container_items[i] = { 
-                    container_id: dbContainers[i].id,
-                    name: dbContainers[i].name,
-                    unit_price: dbContainers[i].refill_price,
-                    quantity: additionalData[i].quantity
-                }
-              }
-            setIsProceed((prev) => !prev)
-        }
-    }
 
     return (
         <div className="flex flex-col gap-2 items-center">
@@ -211,7 +230,9 @@ function ContainerSelection() {
                 </div>
 
                 { isProceed && (
-                    <Navigate to="/order-schedule" state={{ orderData }} />
+                    <div>
+                    <Navigate to="/order-schedule"  />
+                    </div>
                 ) }
         </div>
     )

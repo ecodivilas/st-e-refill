@@ -24,9 +24,12 @@ import AdminDashboard from './pages/AdminDashboard'
 import Register from './aunthentication/Register'
 import DeliveryAddressForm from './components/registration/DeliveryAddressForm'
 
+// import AssignLocalData from './data/AssignLocalData'
+
 import './assets/customizedStyles/customTableStyle.css';
 
 function App() {
+  
   return (
     <div>
       <BrowserRouter>

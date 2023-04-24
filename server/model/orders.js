@@ -10,31 +10,36 @@ module.exports = (sequelize, DataTypes, Model) => {
             },
             customer_id: {
                 type: DataTypes.INTEGER,
+                underscored: true
             },
             order_date: {
                 type: DataTypes.DATE,
+                underscored: true
             },
             delivery_date: {
                 type: DataTypes.DATE,
+                underscored: true
             },
             delivery_time: {
                 type: DataTypes.TIME,
-                allowNull: false
+                underscored: true
             },
             mode_of_payment: {
                 type: DataTypes.STRING,
+                underscored: true
             },
             status: {
                 type: DataTypes.STRING,
             },
             is_paid: {
                 type: DataTypes.BOOLEAN,
+                underscored: true
             }
         },
         {
             sequelize,
             modelName: 'orders',
-            // tableName: 'orders'
+            tableName: 'orders'
         }
     )
 
