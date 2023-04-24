@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes, Model) => {
             delivery_date: {
                 type: DataTypes.DATE,
             },
+            delivery_time: {
+                type: DataTypes.TIME,
+                allowNull: false
+            },
             mode_of_payment: {
                 type: DataTypes.STRING,
             },

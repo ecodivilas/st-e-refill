@@ -12,13 +12,23 @@ function OrderSummary() {
     const { state } = useLocation();
     const { orderData } = state || {};
 
+    const data = JSON.parse(localStorage.getItem('data'))
+    // console.log("Ito ang data: ", data)
+
+    const userAddress = data.delivery_address;
+
+    // console.log(userAddress)
+    const { address, baranggay, city, tin, description} = userAddress
+    const { first_name, last_name } = data
+
     // Will be replace with user and address table database
     const orderDetails = 
         {
             customerId: 1,
-            customerName: "Ely Odivilas",
-            customerAddress: "234 100flr Mapagmahal St., Cupid Subd., Brgy 145, Caloocan City",
-            addressDescription: "Near Red Door harap tindahan ni aleng marites"
+            customerName: `${first_name} ${last_name}`,
+            // customerAddress: "234 100flr Mapagmahal St., Cupid Subd., Brgy 145, Caloocan City",
+            customerAddress: `${address}, ${baranggay}, ${city}, ${tin}`,
+            addressDescription: description
         }
     
     const handleOrderProceed = () => {
@@ -44,7 +54,8 @@ function OrderSummary() {
                         <div className="py-2"><span className="font-bold">Address Description: </span>{orderDetails.addressDescription}</div>
                         <div className="flex py-2 gap-2">
                             <span className="font-bold">Order Type: </span>{orderData[0].orderType}
-                            <span className="font-bold">Expected Time: </span>{orderData[0].delivery_date.toString()}
+                            <span className="font-bold">Expected Date: </span>{orderData[0].delivery_date.toString()}
+                            <span className="font-bold">Expected Time: {orderData[0].delivery_time}</span>
                         </div>
                             <div className="py-2">
                                 <span className="font-bold">Order Description: </span>

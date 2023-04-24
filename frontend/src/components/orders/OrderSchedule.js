@@ -3,11 +3,10 @@ import { Navigate, useLocation } from 'react-router-dom';
 
 import Select from 'react-tailwindcss-select';
 
-import DateTimePicker from 'react-datetime-picker';
-import 'react-datetime-picker/dist/DateTimePicker.css';
+// import DateTimePicker from 'react-datetime-picker';
+// import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
-
 
 let scheduleType = "anytime";
 
@@ -16,7 +15,8 @@ function OrderSchedule() {
 // navigation and passing of data
 const [isProceed, setIsProceed] = useState(false)
 
-const [dateValue, onChange] = useState(new Date());
+const [dateValue, setDateValue] = useState(new Date());
+const [timeValue, setTimeValue] = useState("");
 
 // useLocationPassingData
 const { state } = useLocation();
@@ -41,6 +41,7 @@ const handleNext = () => {
     console.log("ito ang value nang date: ", dateValue)
     orderData[0].delivery_date = dateValue
     orderData[0].order_date = new Date()
+    orderData[0].delivery_time = timeValue
     console.log("Updated na data: ", orderData)
     // console.log("ito ang value nang ")
 
@@ -64,7 +65,29 @@ const handleNext = () => {
                 <div className="py-5">Any Time of the Day</div>    
             ) : (
             <div className="p-5">
-                <DateTimePicker onChange={onChange} value={dateValue} />
+                {/* <DateTimePicker onChange={onChange} value={dateValue} /> */}
+                <div className="flex flex-col mb-4">
+                    <input
+                        type="date"
+                        id="date"
+                        name="delivery_date"
+                        placeholder="Date"
+                        defaultValue={dateValue}
+                        onChange={setDateValue}
+                        className="border border-gray-400 p-2 rounded-md outline-none bg-gray-100 text-gray-700 mb-2"
+                    />
+                </div>
+                <div className="flex flex-col mb-4">
+                <input
+                    type="time"
+                    id="time"
+                    name="delivery_time"
+                    placeholder="Time"
+                    value={timeValue}
+                    onChange={setTimeValue}
+                    className="border border-gray-400 p-2 rounded-md outline-none bg-gray-100 text-gray-700 mb-2"
+                />
+            </div>
             </div>
             )}
 
