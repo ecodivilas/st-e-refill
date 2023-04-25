@@ -55,7 +55,7 @@ const handleNext = () => {
                 <div className="flex justify-center mt-5">
                     <div className="flex-col">
                         <div className="py-2 text-sm">Please scan the QR code to pay</div>
-                        <img className="h-[400px]" src={require("./img/gcash.webp")} alt="gcash payment qr code" />
+                        {/* <img className="h-[400px]" src={require("./img/gcash.webp")} alt="gcash payment qr code" /> */}
                     </div>
                 </div>
             ) : (

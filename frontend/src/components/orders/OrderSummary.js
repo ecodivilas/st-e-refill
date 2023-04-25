@@ -3,7 +3,6 @@ import { Navigate} from 'react-router-dom';
 
 import { createPendingOrder } from '../../services/OrderService'
 import { getAllContainers } from '../../services/ContainerService'
-
 let containerDetails
 
 function OrderSummary() {
@@ -41,54 +40,10 @@ function OrderSummary() {
     
     const handleOrderProceed = () => {
 
-        // const x = {
-        //     "customer_id": data.id,
-        //     "order_date": localStorage.getItem("dateValue"),
-        //     "delivery_date": localStorage.getItem("dateValue"),
-        //     "delivery_time": localStorage.getItem("timeValue"),
-        //     "mode_of_payment": localStorage.getItem("orderMOP"),
-        //     "status": "queue",
-        //     "is_paid": false,
-        //    }
-
-        // {
-        //     "order": {
-        //         "customer_id": 1,
-        //         "order_date": "2023-04-20",
-        //         "delivery_date": "2023-04-20",
-        //         "delivery_time": "01:02",
-        //         "mode_of_payment": "cash_on_delivery",
-        //         "status": "queue",
-        //         "is_paid": false,
-        //         "order_items": [
-        //             {
-        //                 "container_id": 1,
-        //                 "unit_price": 25,
-        //                 "quantity": 2
-        //             },
-        //             {
-        //                 "container_id": 2,
-        //                 "unit_price": 25,
-        //                 "quantity": 1
-        //             },
-        //             {
-        //                 "container_id": 3,
-        //                 "unit_price": 15,
-        //                 "quantity": 1
-        //             }
-        //                 ]
-        //     }
-        // }
-
-        //    console.log(x)
-
-        ///////////////
-
-        
         createPendingOrder(
             {
                 "customer_id": data.id,
-                "order_date": localStorage.getItem("dateValue"),
+                "order_date": localStorage.getItem("today"),
                 "delivery_date": localStorage.getItem("dateValue"),
                 "delivery_time": localStorage.getItem("timeValue"),
                 "mode_of_payment": localStorage.getItem("orderMOP"),

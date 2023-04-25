@@ -5,6 +5,7 @@ import { FaHome } from 'react-icons/fa'
 import { pagesNavigations } from '../data/pagesLinks'
 import { useNavigate } from 'react-router-dom'
 
+
 function Navbar() {
   // const [nav, setNav] = useState(false) // DarkMode
   const navigate = useNavigate()

@@ -1,19 +1,28 @@
 import React, {useState} from 'react';
 import { Navigate } from 'react-router-dom';
 
-let scheduleType = localStorage.getItem("scheduleType");
-let deliveryDate = localStorage.getItem("dateValue");
-let deliveryTime = localStorage.getItem("timeValue");
+let scheduleType
+let deliveryDate
+let deliveryTime
 
+
+try {
+    scheduleType = localStorage.getItem("scheduleType");
+    deliveryDate = localStorage.getItem("dateValue");
+    deliveryTime = localStorage.getItem("timeValue");
+    
+} catch (error) {
+    console.log(error)
+}
+
+function OrderSchedule() {
+    
 const updatedSchedule = {
     "schedType": scheduleType,
     "deliveryDate": deliveryDate,
     "deliveryTime": deliveryTime
-   }
-
-function OrderSchedule() {
-
-// navigation and passing of data
+    }
+    // navigation and passing of data
 const [isProceed, setIsProceed] = useState(false)
 const [schedule, setSchedule] = useState(updatedSchedule);
 
@@ -30,11 +39,10 @@ const handleChange = (e) => {
     })}
 
     const handleNext = () => {
-
     localStorage.setItem("scheduleType", updatedSchedule.schedType)
     localStorage.setItem("dateValue", updatedSchedule.deliveryDate.toString())
     localStorage.setItem("timeValue", updatedSchedule.deliveryTime.toString())
-
+    // console.log(updatedSchedule.deliveryDate.toString())
     setIsProceed((prev) => !prev)
 }
 
@@ -43,7 +51,6 @@ const handleChange = (e) => {
         <div className="flex-col gap-2">
             <div className="py-7 font-semibold text-center text-2xl">When do you want to deliver your order?</div>
 
-            <form>
             <div className="flex flex-col mb-4">
             <select
                 id="scheduleType"
@@ -90,7 +97,6 @@ const handleChange = (e) => {
             <div className="flex justify-around">
                 <button className="py-2 bg-slate-600 text-white font-semibold text-xl px-5 mb-60" onClick={handleNext}>Proceed</button>
             </div>
-            </form>
 
             { isProceed && (
                     <Navigate to="/order-mode-of-payment" />

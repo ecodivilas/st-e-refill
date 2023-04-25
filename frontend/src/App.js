@@ -17,14 +17,12 @@ import ContainerSelection from './components/orders/ContainerSelection'
 import OrderSchedule from './components/orders/OrderSchedule'
 import OrderMOP from './components/orders/OrderMOP'
 import OrderSummary from './components/orders/OrderSummary'
-import OrderSendToDB from './components/orders/OrderSendToDB'
+import ContainerCards from './components/orders/ContainerCards'
 
 import AdminDashboard from './pages/AdminDashboard'
 
 import Register from './aunthentication/Register'
 import DeliveryAddressForm from './components/registration/DeliveryAddressForm'
-
-// import AssignLocalData from './data/AssignLocalData'
 
 import './assets/customizedStyles/customTableStyle.css';
 
@@ -47,7 +45,7 @@ function App() {
                 <Route path="/order-schedule" element={<OrderSchedule />}/>
                 <Route path="/order-mode-of-payment" element={<OrderMOP />}/>
                 <Route path="/order-summary" element={<OrderSummary />}/>
-                <Route path="/order-processing" element={<OrderSendToDB />}/>
+                <Route path="/cards" element={<ContainerCards />}/>
 
                 <Route path="/admin" element={<AdminDashboard />}/>
 

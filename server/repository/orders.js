@@ -19,7 +19,6 @@ class OrdersRepository {
 
     // Customize Create Order
     async createPendingOrder(order) {
-        console.log(order)
       
         const { order_items, ...newOrder } = order;
 
@@ -33,7 +32,6 @@ class OrdersRepository {
 
                 for (let i = 0; i <= order_items.length - 1; i++) {
                     order_items[i].order_id = createdOrder.dataValues.id
-                    // console.log(order_items[i])
                     createdOrderItem[0] = await this.db.order_items.create(order_items[i])
                 }
 

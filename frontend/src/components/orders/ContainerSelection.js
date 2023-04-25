@@ -52,7 +52,7 @@ function ContainerSelection() {
         })
 
         setTotalPriceAmount(slimPriceAmount + roundPriceAmount + halfSlimPriceAmount)
-    },[slimPriceAmount, roundPriceAmount, halfSlimPriceAmount, roundQuantity, roundQuantity, halfSlimQuantity])
+    },[slimPriceAmount, roundPriceAmount, halfSlimPriceAmount])
         
     const handleDecrementQuantity = (id) => {
         if (id === 1) {
@@ -95,46 +95,34 @@ function ContainerSelection() {
 
 
     const handleNext = () => {
-        // if (dbContainers){
-        //     orderData[0].totalPriceAmount = totalPriceAmount
-        //     orderData[0].container_items = [];
-        //     for (let i = 0; i <= dbContainers.length - 1; i++) {
-        //         orderData[0].container_items[i] = { 
-        //             container_id: dbContainers[i].id,
-        //             name: dbContainers[i].name,
-        //             unit_price: dbContainers[i].refill_price,
-        //             quantity: additionalData[i].quantity
-        //         }
-        //       }
-        //     }
             localStorage.setItem("totalPriceAmount", totalPriceAmount.toFixed(2).toString())
-            
             localStorage.setItem("updatedSlimQuantity", updatedSlimQuantity.toString())
             localStorage.setItem("updatedRoundQuantity", updatedRoundQuantity.toString())
             localStorage.setItem("updatedHalfSlimQuantity", updatedHalfSlimQuantity.toString())
             
             setSlimQuantity(0)
-            setSlimQuantity(0)
-            setSlimQuantity(0)
+            setRoundQuantity(0)
+            setHalfSlimQuantity(0)
+
             setIsProceed((prev) => !prev)
     }
 
     const additionalData = [
         {
             id: 1,
-            containerPicture: <img className="h-15 mr-10" src={require("./img/slim.webp")} alt="home_button" />,
+            containerPicture: <img className="h-20 mx-10" src={require("./img/slim.webp")} alt="home_button" />,
             quantity: slimQuantity,
             priceAmount: slimPriceAmount
         },
         {
             id: 2,
-            containerPicture: <img className="h-15 mr-10" src={require("./img/round.webp")} alt="home_button" />,
+            containerPicture: <img className="h-20 mx-10" src={require("./img/round.webp")} alt="home_button" />,
             quantity: roundQuantity,
             priceAmount: roundPriceAmount
         },
         {
             id: 3,
-            containerPicture: <img className="h-15 mr-10" src={require("./img/half_slim.webp")} alt="home_button" />,
+            containerPicture: <img className="h-14 mx-10 my-3" src={require("./img/half_slim.webp")} alt="home_button" />,
             quantity: halfSlimQuantity,
             priceAmount: halfSlimPriceAmount
         }
@@ -151,7 +139,7 @@ function ContainerSelection() {
                                     
                                 </th>
                                 <th scope="col" className="px-6 py-3">
-                                    Container Name
+                                    Description
                                 </th>
                                 <th scope="col" className="px-6 py-3">
                                     Capacity (Gal.)
@@ -172,7 +160,7 @@ function ContainerSelection() {
                             dbContainers[0].refill_price !== 0 ? (
                                 dbContainers.map((container)=>{
                                     return  (
-                                    <tr key={container.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
+                                    <tr key={container.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <td className="px-6 py-4 flex justify-center">
                                             {additionalData[container.id - 1].containerPicture}
                                         </td>
