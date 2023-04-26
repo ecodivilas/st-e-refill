@@ -6,7 +6,6 @@ class AddressesService {
     }
 
     async getAddresses() {
-        console.log('GETTING ADDRESSES IN THE REPOSITORY')
         return await addressesRepository.getAddresses()
     }
 

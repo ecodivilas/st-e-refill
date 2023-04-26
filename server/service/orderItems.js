@@ -6,7 +6,6 @@ class OrderItemsService {
     }
 
     async getOrderItems() {
-        console.log('GETTING ORDER ITEMS IN THE REPOSITORY')
         return await orderItemsRepository.getOrderItems()
     }
 

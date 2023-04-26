@@ -6,7 +6,6 @@ class UsersService {
     }
 
     async getUsers() {
-        console.log('GETTING USERS IN THE REPOSITORY')
         return await usersRepository.getUsers()
     }
 

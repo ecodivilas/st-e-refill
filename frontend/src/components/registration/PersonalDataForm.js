@@ -16,7 +16,6 @@ function PersonalDataForm({ defaultUserValues, handleUserChange }) {
                                 <option value=""></option>
                                 <option value="M">Male</option>
                                 <option value="F">Female</option>
-                                <option value="U">Rahul</option>
                             </select>
                         ) : (
                         <input

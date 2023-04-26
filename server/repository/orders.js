@@ -26,7 +26,6 @@ class OrdersRepository {
             const createdOrder = await this.db.orders.create(newOrder)
             
             if (createdOrder) {
-                console.log(order_items[0])
 
                 const createdOrderItem = []
 

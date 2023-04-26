@@ -47,7 +47,9 @@ class UsersRepository {
     }
 
     async deleteUser(id) {
+        console.log(id)
         try {
+            const isAddressDestroyed = await this.db.addresses.destroy({ where:{"user_id": id}})
             const user = await this.db.users.destroy({ where: { id } })
             return user
         } catch (error) {
@@ -83,40 +85,27 @@ class UsersRepository {
 
             const user = await this.db.users.findOne({
                 where: {
-                    username: loginCredentials.username,
-                    // include: [this.db.addresses]
+                    username: loginCredentials.username
                 }
             })
-
-            // console.log("Fetch User Data: ", user)
 
             if(!user){
                 throw new Error('database failed to connect');
             } else {
                 try {
                     const passwordMatch = await bcrypt.compare(password, user.password)
-                    console.log('Match Result', passwordMatch)
+                    
                     if (passwordMatch) {
                         const generatedToken = generateAccessToken({ username: loginCredentials.username })
                         if (generatedToken){
                             const verifiedUserData = await this.db.users.findOne({
                                 where: { "id": user.id },
-                                // attributes: ["email", "username"],
                                 include: [this.db.addresses]
-                            })
+                        })
 
-                        // const { delivery_address, email, ...excessData } = verifiedUserData;
-                        // console.log(delivery_address, email)
-                        console.log(verifiedUserData)
-                        console.log(generatedToken)
                         const generatedTokenObject = {"jwt": generatedToken}
                         const updatedData = [generatedTokenObject, verifiedUserData] 
-                        console.log(updatedData)
-                        
-                        //     console.log("queried: ", verifiedUserData)
-                        //     console.log("username", verifiedUserData.dataValues.username)
-                        //     console.log("baranggay", verifiedUserData.dataValues.delivery_address.dataValues.baranggay)
-                            // generatedToken["userData"] = verifiedUserData
+                     
                         return updatedData
                         }
                         // return generatedToken
@@ -136,7 +125,6 @@ class UsersRepository {
 
     // Register User
     async registerUser(user) {
-        console.log("User Details: ", user)
         let userData = {}
 
         try {
@@ -149,7 +137,6 @@ class UsersRepository {
             const createdUser = await this.db.users.create(userData)
             if (createdUser) {
                 user.address.user_id = createdUser.id
-                console.log("Appending the user_id: ", user.address)
                 try {
                     const createAddress = await this.db.addresses.create(user.address)
                     if(createAddress) {
@@ -160,6 +147,7 @@ class UsersRepository {
                     }
                 } catch (error) {
                     console.log("Error: ", error)
+                    return error
                 }
                 
             } else {

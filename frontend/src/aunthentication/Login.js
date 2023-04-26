@@ -34,6 +34,7 @@ function Login() {
                     }
                     alert('Login Successfully! Noice Hahahah')
                     navigate('/', { state: res })
+                    window.location.reload(false)
                 }
                 else {
                     console.log("User/Password does not exist!")

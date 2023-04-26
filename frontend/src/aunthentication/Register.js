@@ -66,12 +66,12 @@ function Register() {
         e.preventDefault()
         if (isPassed()) {
             try {
-               const registered =  registerUser(defaultUserValues, defaultAddressValues)
-                if(registered) {
-                    alert('Registered Successfully')
-                } else {
-                    alert('Registration Failed~!')
-                }
+               registerUser(defaultUserValues, defaultAddressValues)
+               .then((res)=>{
+                        alert('Registered Successfully', res)
+                    })
+                .catch((error) => alert(error))
+                
             } catch (error) {
                 console.log("Don't Went Through")
             }

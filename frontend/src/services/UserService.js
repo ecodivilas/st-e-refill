@@ -84,6 +84,7 @@ export async function registerUser(defaultUserValues, defaultAddressValues) {
         return await response.json()
     } catch (error) {
         console.log('Error: ', error)
+        return error
     }
 }
 

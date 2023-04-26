@@ -11,7 +11,6 @@ class OrdersService {
     }
 
     async getOrders() {
-        console.log('GETTING ORDERS IN THE REPOSITORY')
         return await ordersRepository.getOrders()
     }
 
