@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes, Model) => {
     class Orders extends Model {}
 
     Orders.init(
-        {   id: {
+        {   order_id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 allowNull: false,
@@ -34,12 +34,28 @@ module.exports = (sequelize, DataTypes, Model) => {
             is_paid: {
                 type: DataTypes.BOOLEAN,
                 underscored: true
+            },
+            created_at: {
+                type: DataTypes.DATE,
+                defaultValue: sequelize.literal('NOW()'),
+                allowNull: false
+            },
+            updated_at: {
+                type: DataTypes.DATE,
+                defaultValue: sequelize.literal('NOW()'),
+                allowNull: false
+            },
+            deleted_at: {
+                type: DataTypes.DATE,
+                defaultValue: null,
+                allowNull: true
             }
         },
         {
             sequelize,
             modelName: 'orders',
-            tableName: 'orders'
+            tableName: 'orders',
+            timestamps: false
         }
     )
 

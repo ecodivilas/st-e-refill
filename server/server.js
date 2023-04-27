@@ -6,11 +6,8 @@ const express = require('express')
 const path = require('path')
 
 const usersController = require('./controller/users')
-const addressesController = require('./controller/addresses')
 const containersController = require('./controller/containers')
 const ordersController = require('./controller/orders')
-const orderItemsController = require('./controller/orderItems')
-
 
 const app = express()
 
@@ -42,66 +39,10 @@ app.delete('/api/v1/users/:id', (req, res) => {
     usersController.deleteUser(req.params.id).then((data) => res.json(data))
 })
 
-// Delivery Addresses
-app.post('/api/v1/addresses', (req, res) => {
-    addressesController.createAddress(req.body.address).then((data) => res.json(data))
-})
-
-app.get('/api/v1/addresses', (req, res) => {
-    addressesController.getAddresses().then((data) => res.json(data))
-})
-
-app.get('/api/v1/addresses/:id', (req, res) => {
-    addressesController.getAddress(req.params.id).then((data) => res.json(data))
-})
-
-app.put('/api/v1/addresses', (req, res) => {
-    addressesController.updateAddress(req.body.address).then((data) => res.json(data))
-})
-
-app.delete('/api/v1/addresses/:id', (req, res) => {
-    addressesController.deleteAddress(req.params.id).then((data) => res.json(data))
-})
 
 // Containers
 app.get('/api/v1/containers', (req, res) => {
     containersController.getContainers().then((data) => res.json(data))
-})
-
-// Orders
-app.post('/api/v1/orders', (req, res) => {
-    ordersController.createOrder(req.body.order).then((data) => res.json(data))
-    // res.send(req.body.order)
-})
-
-app.get('/api/v1/orders', (req, res) => {
-    ordersController.getOrders().then((data) => res.json(data))
-})
-
-app.put('/api/v1/orders', (req, res) => {
-    ordersController.updateOrder(req.body.order).then((data) => res.json(data))
-})
-
-app.delete('/api/v1/orders/:id', (req, res) => {
-    ordersController.deleteOrder(req.params.id).then((data) => res.json(data))
-})
-
-// Order_Items
-app.post('/api/v1/order_items', (req, res) => {
-    orderItemsController.createOrderItem(req.body.order_item).then((data) => res.json(data))
-    // res.send(req.body.order)
-})
-
-app.get('/api/v1/order_items', (req, res) => {
-    orderItemsController.getOrderItems().then((data) => res.json(data))
-})
-
-app.put('/api/v1/order_items', (req, res) => {
-    orderItemsController.updateOrderItem(req.body.order_item).then((data) => res.json(data))
-})
-
-app.delete('/api/v1/order_items/:id', (req, res) => {
-    orderItemsController.deleteOrderItem(req.params.id).then((data) => res.json(data))
 })
 
 
@@ -115,13 +56,13 @@ app.post('/api/v2/order', (req, res) => {
 // API Login
 app.post('/api/v1/login', (req, res) => {
     usersController
-        .loginUser(req.body)
-        // .then((jwt) => res.json({ jwt }))
-        .then((data) => res.json(data))
-        .catch((error) => {
-            console.log('Error:', error)
-            res.status(500).send('Server error!')
-        })
+    .loginUser(req.body)
+    // .then((jwt) => res.json({ jwt }))
+    .then((data) => res.json(data))
+    .catch((error) => {
+        console.log('Error:', error)
+        res.status(500).send('Server error!')
+    })
 })
 
 // API Register

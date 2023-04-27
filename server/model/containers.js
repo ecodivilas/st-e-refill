@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes, Model) => {
     class Containers extends Model {}
 
     Containers.init(
-        {   id: {
+        {   container_id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 allowNull: false,
@@ -20,10 +20,26 @@ module.exports = (sequelize, DataTypes, Model) => {
             picture: {
                 type: DataTypes.BLOB("long"),
             },
+            created_at: {
+                type: DataTypes.DATE,
+                defaultValue: sequelize.literal('NOW()'),
+                allowNull: false
+            },
+            updated_at: {
+                type: DataTypes.DATE,
+                defaultValue: sequelize.literal('NOW()'),
+                allowNull: false
+            },
+            deleted_at: {
+                type: DataTypes.DATE,
+                defaultValue: null,
+                allowNull: true
+            }
         },
         {
             sequelize,
-            modelName: 'containers'
+            modelName: 'containers',
+            timestamps: false
         }
     )
 

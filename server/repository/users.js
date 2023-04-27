@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs')
 const { connect } = require('../config/db')
 const { generateAccessToken } = require('../config/jwt')
-// import { ValidateEmail } from '../utilities/utilities'
 const { ValidateEmail } = require('../utilities/utilities')
 
 class UsersRepository {
@@ -36,7 +35,7 @@ class UsersRepository {
     async getUsers() {
         try {
             const users = await this.db.users.findAll({
-                order: [['id', 'ASC']],
+                order: [['user_id', 'ASC']], where: {deleted_at: null}
             })
             return users
         } catch (error) {
@@ -57,8 +56,8 @@ class UsersRepository {
     async deleteUser(id) {
         console.log(id)
         try {
-            const isAddressDestroyed = await this.db.addresses.destroy({ where:{"user_id": id}})
-            const user = await this.db.users.destroy({ where: { id } })
+            const isAddressDestroyed = await this.db.addresses.update({ deleted_at: new Date }, { where:{"user_id": id}})
+            const user = await this.db.users.update({ deleted_at: new Date }, { where:{"user_id": id}})
             return user
         } catch (error) {
             console.log('Error: ', error)
@@ -144,7 +143,7 @@ class UsersRepository {
 
             const createdUser = await this.db.users.create(userData)
             if (createdUser) {
-                user.address.user_id = createdUser.id
+                user.address.user_id = createdUser.user_id
                 try {
                     const createAddress = await this.db.addresses.create(user.address)
                     if(createAddress) {

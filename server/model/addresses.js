@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes, Model) => {
 
     Addresses.init(
         {
-            id: {
+            delivery_address_id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
@@ -35,11 +35,27 @@ module.exports = (sequelize, DataTypes, Model) => {
             },
             description: {
                 type: DataTypes.STRING
+            },
+            created_at: {
+                type: DataTypes.DATE,
+                defaultValue: sequelize.literal('NOW()'),
+                allowNull: false
+            },
+            updated_at: {
+                type: DataTypes.DATE,
+                defaultValue: sequelize.literal('NOW()'),
+                allowNull: false
+            },
+            deleted_at: {
+                type: DataTypes.DATE,
+                defaultValue: null,
+                allowNull: true
             }
         },
         {
             sequelize,
             modelName: 'delivery_addresses',
+            timestamps: false
         }
     )
 

@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes, Model) => {
     class OrderItems extends Model {}
 
     OrderItems.init(
-        {   id: {
+        {   order_item_id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 allowNull: false,
@@ -22,11 +22,27 @@ module.exports = (sequelize, DataTypes, Model) => {
             quantity: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
+            },
+            created_at: {
+                type: DataTypes.DATE,
+                defaultValue: sequelize.literal('NOW()'),
+                allowNull: false
+            },
+            updated_at: {
+                type: DataTypes.DATE,
+                defaultValue: sequelize.literal('NOW()'),
+                allowNull: false
+            },
+            deleted_at: {
+                type: DataTypes.DATE,
+                defaultValue: null,
+                allowNull: true
             }
         },
         {
             sequelize,
-            modelName: 'order_items'
+            modelName: 'order_items',
+            timestamps: false
         }
     )
 
