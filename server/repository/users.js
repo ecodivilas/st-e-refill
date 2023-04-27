@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs')
 const { connect } = require('../config/db')
 const { generateAccessToken } = require('../config/jwt')
+// import { ValidateEmail } from '../utilities/utilities'
+const { ValidateEmail } = require('../utilities/utilities')
 
 class UsersRepository {
     db = {}
@@ -10,19 +12,25 @@ class UsersRepository {
     }
 
     async createUser(user) {
-        let userData = {}
 
-        try {
-            const password = user.password
-            const salt = bcrypt.genSaltSync(10)
-            const hashedPassword = bcrypt.hashSync(password, salt)
+        if(ValidateEmail(user.email)){
+            let userData = {}
 
-            userData = { ...user, password: hashedPassword }
-            const createdUser = await this.db.users.create(userData)
-            return createdUser
-        } catch (error) {
-            console.log('Error: ', error)
+            try {
+                const password = user.password
+                const salt = bcrypt.genSaltSync(10)
+                const hashedPassword = bcrypt.hashSync(password, salt)
+    
+                userData = { ...user, password: hashedPassword }
+                const createdUser = await this.db.users.create(userData)
+                return createdUser
+            } catch (error) {
+                console.log('Error: ', error)
+            }
+        } else {
+            return "Email is not Valid"
         }
+        
     }
 
     async getUsers() {
