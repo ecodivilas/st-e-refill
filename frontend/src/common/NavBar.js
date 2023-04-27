@@ -1,23 +1,33 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { FaHome } from 'react-icons/fa'
 
 // import React, { useState } from 'react'
 import { pagesNavigations } from '../data/pagesLinks'
 import { useNavigate } from 'react-router-dom'
 
-function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    sessionStorage.getItem("jwt") ? true : false
-  )
+import { isAuthorize } from '../App'
 
+function Navbar({ setIsAuthorized }) {
+  // console.log(isAuthorize)
   // const [nav, setNav] = useState(false) // DarkMode
+  // call your hook here
   const navigate = useNavigate()
-  
+
+  // const forceUpdate = useForceUpdate();
+
+  // function useForceUpdate(){
+  //   const [value, setValue] = useState(0);
+  //   return () => setValue(value => value + 1);
+  // }
+
   const handleLogout = () => {
     sessionStorage.removeItem("jwt")
     localStorage.removeItem("data")
-    console.log(isLoggedIn)
-    return setIsLoggedIn( prev => !prev )
+    setIsAuthorized(false)
+    navigate('/login')
+    // useForceUpdate.bind()
+    
+    // return setIsLoggedIn( prev => !prev )
   }
 
   return (
@@ -27,16 +37,16 @@ function Navbar() {
           <div className="flex justify-start items-center pt-1.5 w-3/4 pl-2">
             <button type="button" onClick={() => navigate('/')}> <img className="h-12  mt-0.75" src={require("../assets/img/e_refill_logo.webp")} alt="logo" /> </button>
           </div>
-            {isLoggedIn ? (
+            {isAuthorize ? (
               <div className="flex justify-end align-bottom w-1/4 gap-4 mr-2 my-2 h-12">
               <button type="button" onClick={handleLogout} className="text-white bg-orange-600 hover:bg-orange-600 font-medium text-base dark:bg-slate-900 dark:hover:bg-slate-800 w-1/2">Logout</button>
             </div>
-            ) : (
+             ) : (
               <div className="flex justify-end align-bottom w-1/4 gap-4 mr-2 my-2 h-12">
                 <button type="button" onClick={() => navigate('/register')} className="text-white bg-orange-600 hover:bg-slate-900 font-medium text-base dark:bg-orange-500 dark:hover:bg-orange-900 w-1/2">Register</button>
                 <button type="button" onClick={() => navigate('/login')} className="text-white bg-orange-600 hover:bg-orange-600 font-medium text-base dark:bg-slate-900 dark:hover:bg-slate-800 w-1/2">Login</button>
               </div>
-            )}
+             )} 
          
         </div>
 

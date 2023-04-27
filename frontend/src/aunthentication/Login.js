@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { loginUser } from '../services/UserService'
 
-function Login() {
+function Login({ setIsAuthorized }) {
   const navigate = useNavigate()
 
   const INITIAL_USER_DATA = {username: "", password: ""}
@@ -33,8 +33,9 @@ function Login() {
                         console.log("Fetch Data: ", JSON.parse(data))
                     }
                     alert('Login Successfully! Noice Hahahah')
+                    setIsAuthorized(true)
                     navigate('/', { state: res })
-                    window.location.reload(false)
+                    // window.location.reload(false)
                 }
                 else {
                     console.log("User/Password does not exist!")

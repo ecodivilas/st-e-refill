@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Navbar from './common/NavBar'
@@ -26,17 +26,26 @@ import DeliveryAddressForm from './components/registration/DeliveryAddressForm'
 
 import './assets/customizedStyles/customTableStyle.css';
 
+export let isAuthorize
 function App() {
   
+
+const [isAuthorized, setIsAuthorized] = useState(
+    sessionStorage.getItem("jwt") ? true : false
+  )
+
+isAuthorize = isAuthorized
+
   return (
     <div>
       <BrowserRouter>
-            <Navbar />
-            <Routes>
+            <Navbar setIsAuthorized={setIsAuthorized} />
+              <Routes>
+            {isAuthorized ? (
+              <>
                 <Route path="/" element={<Home />} />
                 <Route path="/register" element={<Register /> } />
                 <Route path="/delivery-address-form" element={<DeliveryAddressForm /> } />
-                <Route path="/login" element={<Login /> } />
                 
                 <Route path="/users-dashboard" element={<UserDashboard />}/>
                 
@@ -54,11 +63,14 @@ function App() {
                 <Route path="/insights" element={<Insights />} />
                 <Route path="/help-center" element={<HelpCenter />} />
                 <Route path="/inquiry" element={<Inquiry />} />
-                
-            </Routes>
+              </>
+              
+              ) : <><Route path="/login" element={<Login setIsAuthorized={setIsAuthorized} /> } /></>}
+              </Routes>
         </BrowserRouter>
     </div>
   )
 }
+
 
 export default App
