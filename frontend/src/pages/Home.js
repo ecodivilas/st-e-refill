@@ -3,7 +3,7 @@ import React from 'react'
 import Splash from './Splash'
 import { getCurrentDate } from '../services/DateSetter'
 
-function Home() {
+function Home({ isAuthorized }) {
 
   localStorage.setItem("totalPriceAmount", "0")
   localStorage.setItem("selectedService", " ")
@@ -18,7 +18,7 @@ function Home() {
 
   return (
     <div>
-        <Splash />
+        <Splash isAuthorized={ isAuthorized } />
     </div>
   )
 }

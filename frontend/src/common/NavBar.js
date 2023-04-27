@@ -8,26 +8,15 @@ import { useNavigate } from 'react-router-dom'
 import { isAuthorize } from '../App'
 
 function Navbar({ setIsAuthorized }) {
-  // console.log(isAuthorize)
-  // const [nav, setNav] = useState(false) // DarkMode
-  // call your hook here
+ 
   const navigate = useNavigate()
-
-  // const forceUpdate = useForceUpdate();
-
-  // function useForceUpdate(){
-  //   const [value, setValue] = useState(0);
-  //   return () => setValue(value => value + 1);
-  // }
 
   const handleLogout = () => {
     sessionStorage.removeItem("jwt")
     localStorage.removeItem("data")
     setIsAuthorized(false)
     navigate('/login')
-    // useForceUpdate.bind()
-    
-    // return setIsLoggedIn( prev => !prev )
+
   }
 
   return (

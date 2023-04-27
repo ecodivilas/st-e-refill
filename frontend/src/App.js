@@ -43,12 +43,8 @@ isAuthorize = isAuthorized
               <Routes>
             {isAuthorized ? (
               <>
-                <Route path="/" element={<Home />} />
-                <Route path="/register" element={<Register /> } />
                 <Route path="/delivery-address-form" element={<DeliveryAddressForm /> } />
-                
                 <Route path="/users-dashboard" element={<UserDashboard />}/>
-                
                 <Route path="/order" element={<OrderTypeSelection />}/>
                 <Route path="/order-container-selection" element={<ContainerSelection />}/>
                 <Route path="/order-schedule" element={<OrderSchedule />}/>
@@ -57,15 +53,20 @@ isAuthorize = isAuthorized
                 <Route path="/cards" element={<ContainerCards />}/>
 
                 <Route path="/admin" element={<AdminDashboard />}/>
-
-                <Route path="/products-and-services" element={<ProductsnServices />} />
-                <Route path="/customer-experience" element={<CustomerExperience />} />
-                <Route path="/insights" element={<Insights />} />
-                <Route path="/help-center" element={<HelpCenter />} />
-                <Route path="/inquiry" element={<Inquiry />} />
               </>
               
-              ) : <><Route path="/login" element={<Login setIsAuthorized={setIsAuthorized} /> } /></>}
+              ) : <>
+              <Route path="/login" element={<Login setIsAuthorized={setIsAuthorized} /> } />
+              <Route path="/register" element={<Register /> } />
+              </>}
+              
+              <Route path="/" element={<Home isAuthorized={isAuthorized} />} />
+              <Route path="/products-and-services" element={<ProductsnServices />} />
+              <Route path="/customer-experience" element={<CustomerExperience />} />
+              <Route path="/insights" element={<Insights />} />
+              <Route path="/help-center" element={<HelpCenter />} />
+              <Route path="/inquiry" element={<Inquiry />} />
+
               </Routes>
         </BrowserRouter>
     </div>
