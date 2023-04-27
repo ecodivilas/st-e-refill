@@ -4,7 +4,7 @@ import { editUser } from '../../services/UserService'
 
 const EditUser = ({ user, handleSetAlertEdited }) => {
     const INITIAL_USER_DATA = {
-        id: user.id ?? '',
+        user_id: user.user_id ?? '',
         username: user.username ?? '',
         password: user.password ?? '',
         first_name: user.first_name ?? '',

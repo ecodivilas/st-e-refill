@@ -21,9 +21,9 @@ function Login({ setIsAuthorized }) {
         e.preventDefault()
         try {
             loginUser(userData).then((res)=>{
-                console.log(res)
-                if (JSON.stringify(res) !== '{}') {
-
+                if (JSON.stringify(res) !== '{}' && res !== undefined) {
+                    console.log(res)
+                    
                     // Assigning Default Values Upon Login
                     sessionStorage.setItem("jwt", res[0].jwt)
                     localStorage.setItem("data", JSON.stringify(res[1]))

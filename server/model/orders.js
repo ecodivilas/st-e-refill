@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes, Model) => {
                 allowNull: false,
                 autoIncrement: true
             },
-            customer_id: {
+            user_id: {
                 type: DataTypes.INTEGER,
                 underscored: true
             },

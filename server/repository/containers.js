@@ -20,7 +20,7 @@ class ContainersRepository {
     async getContainers() {
         try {
             const containers = await this.db.containers.findAll({
-                order: [['id', 'ASC']],
+                order: [['container_id', 'ASC']],
             })
             return containers
         } catch (error) {
@@ -40,7 +40,7 @@ class ContainersRepository {
 
     async deleteContainer(id) {
         try {
-            const container = await this.db.containers.destroy({ where: { id } })
+            const container = await this.db.containers.update({ deleted_at: new Date }, { where:{"container_id": id}})
             return container
         } catch (error) {
             console.log('Error: ', error)
@@ -55,7 +55,7 @@ class ContainersRepository {
                 { ...container },
                 {
                     where: {
-                        id: container.id,
+                        user_id: container.user_id,
                     },
                 }
             );

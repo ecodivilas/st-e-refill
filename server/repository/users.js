@@ -72,7 +72,7 @@ class UsersRepository {
                 { ...user },
                 {
                     where: {
-                        id: user.id,
+                        user_id: user.user_id,
                     },
                 }
             )
@@ -106,7 +106,7 @@ class UsersRepository {
                         const generatedToken = generateAccessToken({ username: loginCredentials.username })
                         if (generatedToken){
                             const verifiedUserData = await this.db.users.findOne({
-                                where: { "id": user.id },
+                                where: { "user_id": user.user_id },
                                 include: [this.db.addresses]
                         })
 
@@ -115,7 +115,7 @@ class UsersRepository {
                      
                         return updatedData
                         }
-                        // return generatedToken
+                        
                     } else {
                         throw passwordMatch
                     }

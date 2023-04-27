@@ -160,9 +160,9 @@ function ContainerSelection() {
                             dbContainers[0].refill_price !== 0 ? (
                                 dbContainers.map((container)=>{
                                     return  (
-                                    <tr key={container.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <tr key={container.container_id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <td className="px-6 py-4 flex justify-center">
-                                            {additionalData[container.id - 1].containerPicture}
+                                            {additionalData[container.container_id - 1].containerPicture}
                                         </td>
                                         <td className="text-lg px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {container.name}
@@ -177,23 +177,23 @@ function ContainerSelection() {
                                             <div className="flex flex-row items-center text-right">
                                                 <button
                                                 className="bg-gray-600 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-l"
-                                                onClick={() => handleDecrementQuantity(container.id)}
+                                                onClick={() => handleDecrementQuantity(container.container_id)}
                                                 >
                                                     <AiOutlineMinus className="h-6 text-white"/>
                                                 </button>
                                                 <div className="px-4 bg-white py-1">
-                                                    <span className='text-lg text-black'>{additionalData[container.id - 1].quantity}</span>
+                                                    <span className='text-lg text-black'>{additionalData[container.container_id - 1].quantity}</span>
                                                 </div>
                                                 <button
                                                 className="bg-gray-600 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-r"
-                                                onClick={() => handleIncrementQuantity(container.id)}
+                                                onClick={() => handleIncrementQuantity(container.container_id)}
                                                 >
                                                     <AiOutlinePlus className="h-6 text-white"/>
                                                 </button>
                                             </div>
                                         </td>
                                         <td className="text-lg px-6 py-4 dark:text-white text-center">
-                                            {parseInt(additionalData[container.id - 1].priceAmount).toFixed(2)}
+                                            {parseInt(additionalData[container.container_id - 1].priceAmount).toFixed(2)}
                                         </td>
                                     </tr>
                                     )

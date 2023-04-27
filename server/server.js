@@ -39,19 +39,16 @@ app.delete('/api/v1/users/:id', (req, res) => {
     usersController.deleteUser(req.params.id).then((data) => res.json(data))
 })
 
-
 // Containers
 app.get('/api/v1/containers', (req, res) => {
     containersController.getContainers().then((data) => res.json(data))
 })
-
 
 // Customize Endpoint for posting order and order items at the same time
 app.post('/api/v2/order', (req, res) => {
         ordersController.createPendingOrder(req.body.order).then((data) => res.json(data))
     // res.send(req.body.order)
 })
-
 
 // API Login
 app.post('/api/v1/login', (req, res) => {

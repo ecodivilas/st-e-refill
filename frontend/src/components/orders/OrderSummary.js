@@ -32,7 +32,6 @@ function OrderSummary() {
 
     const orderDetails = 
         {
-            customerId: 1,
             customerName: `${first_name} ${last_name}`,
             customerAddress: `${address}, ${baranggay}, ${city}, ${tin}`,
             addressDescription: description
@@ -42,7 +41,7 @@ function OrderSummary() {
 
         createPendingOrder(
             {
-                "customer_id": data.id,
+                "user_id": data.user_id,
                 "order_date": localStorage.getItem("today"),
                 "delivery_date": localStorage.getItem("dateValue"),
                 "delivery_time": localStorage.getItem("timeValue"),
@@ -51,17 +50,17 @@ function OrderSummary() {
                 "is_paid": false,
                 "order_items": [
                     {
-                        "container_id": containers[0].id,
+                        "container_id": containers[0].container_id,
                         "unit_price": containers[0].refill_price,
                         "quantity": Number(localStorage.getItem('updatedSlimQuantity'))
                     },
                     {
-                        "container_id": containers[1].id,
+                        "container_id": containers[1].container_id,
                         "unit_price": containers[1].refill_price,
                         "quantity": Number(localStorage.getItem('updatedRoundQuantity'))
                     },
                     {
-                        "container_id": containers[2].id,
+                        "container_id": containers[2].container_id,
                         "unit_price": containers[2].refill_price,
                         "quantity": Number(localStorage.getItem('updatedHalfSlimQuantity'))
                     }
@@ -104,7 +103,7 @@ function OrderSummary() {
                                             containers.map((container) => {
                                                 return (
                                                     
-                                                <div className="py-2 flex gap-2" key={container.id}>
+                                                <div className="py-2 flex gap-2" key={container.container_id}>
                                                     <span className="font-bold">{container.name}</span><span>x{container.quantity}</span><span>₱{container.refill_price * Number(container.quantity)}</span>
                                                 </div>
                                                     )

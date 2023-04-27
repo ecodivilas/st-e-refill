@@ -42,8 +42,8 @@ const connect = () => {
     db.users.hasOne(db.addresses, {foreignKey : 'user_id'});
     db.addresses.belongsTo(db.users, {foreignKey : 'user_id'});
 
-    db.users.hasMany(db.orders, {foreignKey : 'customer_id'})
-    db.orders.belongsTo(db.users,{foreignKey : 'customer_id'})
+    db.users.hasMany(db.orders, {foreignKey : 'user_id'})
+    db.orders.belongsTo(db.users,{foreignKey : 'user_id'})
     
 
     return db

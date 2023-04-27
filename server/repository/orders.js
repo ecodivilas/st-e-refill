@@ -8,14 +8,14 @@ class OrdersRepository {
     }
 
 
-    async createOrder(order) {
-        try {
-            const createdOrder = await this.db.orders.create(order)
-            return createdOrder
-        } catch (error) {
-            console.log('Error: ', error)
-        }
-    }
+    // async createOrder(order) {
+    //     try {
+    //         const createdOrder = await this.db.orders.create(order)
+    //         return createdOrder
+    //     } catch (error) {
+    //         console.log('Error: ', error)
+    //     }
+    // }
 
     // Customize Create Order
     async createPendingOrder(order) {
@@ -30,7 +30,7 @@ class OrdersRepository {
                 const createdOrderItem = []
 
                 for (let i = 0; i <= order_items.length - 1; i++) {
-                    order_items[i].order_id = createdOrder.dataValues.id
+                    order_items[i].order_id = createdOrder.dataValues.order_id
                     createdOrderItem[0] = await this.db.order_items.create(order_items[i])
                 }
 
@@ -50,7 +50,7 @@ class OrdersRepository {
     async getOrders() {
         try {
             const orders = await this.db.orders.findAll({
-                order: [['id', 'ASC']],
+                order: [['order_id', 'ASC']],
             })
             return orders
         } catch (error) {
@@ -76,7 +76,7 @@ class OrdersRepository {
                 { ...order },
                 {
                     where: {
-                        id: order.id,
+                        user_id: order.user_id,
                     },
                 }
             );
@@ -88,7 +88,7 @@ class OrdersRepository {
     
     async deleteOrder(id) {
         try {
-            const order = await this.db.orders.destroy({ where: { id } })
+            const order = await this.db.orders.update({ deleted_at: new Date }, { where:{"order_id": id}})
             return order
         } catch (error) {
             console.log('Error: ', error)
