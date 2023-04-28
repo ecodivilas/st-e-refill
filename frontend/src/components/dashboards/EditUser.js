@@ -14,7 +14,7 @@ const EditUser = ({ user, handleSetAlertEdited }) => {
         delivery_address: user.delivery_address ?? '',
         phone_number: user.phone ?? '',
         email: user.email ?? '',
-        role: user.role ?? '',
+        role: user.role_id ?? '',
     }
 
     const editFormParams = [
@@ -66,14 +66,7 @@ const EditUser = ({ user, handleSetAlertEdited }) => {
             placeholder: 'Mobile No.',
             name: 'mobile_number',
             defaultValue: user.mobile_number,
-        },
-        {
-            label: 'Role',
-            type: 'text',
-            placeholder: 'Role',
-            name: 'role',
-            defaultValue: user.role,
-        },
+        }
     ]
 
     const [userData, setUserData] = useState(INITIAL_USER_DATA)

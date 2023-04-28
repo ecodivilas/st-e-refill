@@ -14,7 +14,7 @@ let defaultUserValues = {
     age: '',
     gender: '',
     mobile_number: '',
-    role: 'customer',
+    role_id: 1,
 }
 
 

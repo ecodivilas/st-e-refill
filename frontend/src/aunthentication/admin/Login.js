@@ -1,64 +1,73 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { loginUser } from '../services/UserService'
+import { loginUser } from '../../services/UserService'
 
 function Login( { setIsAuthorized } ) {
-    const [userData, setUserData] = useState( {username: "", password: ""} )
-    const navigate = useNavigate()
 
-  const handleChange = e => {
+const [adminData, setAdminData] = useState( {username: "", password: ""} )
+const navigate = useNavigate()
+
+const handleChange = e => {
     const { name, value } = e.target
-    setUserData( prev => {
-        return { ...prev, [name]: value }
+    setAdminData( prev => {
+        return { ...prev, [name]: value}
     })
     console.log(name, value)
-    }
+} 
 
-    const handleSubmit = e => {
-        e.preventDefault()
-        try {
-            loginUser(userData).then((res)=>{
-                if (JSON.stringify(res) !== '{}' && res !== undefined) {
-                    console.log(res)
-                    
+const handleSubmit = e => {
+    e.preventDefault()
+    try {
+        loginUser(adminData).then((res)=>{
+            if (JSON.stringify(res) !== '{}' && res !== undefined) {
+                console.log(res)
+
+                if (res[1].role_id !== 2) {
+                    alert("Not an admin account")
+                    console.log(res[1].role_id)
+                    navigate('/admin')    
+                } else {
                     // Assigning Default Values Upon Login
                     sessionStorage.setItem("jwt", res[0].jwt)
                     localStorage.setItem("data", JSON.stringify(res[1]))
-
+    
                     const data = localStorage.getItem("data")
                     if (data) {
                         console.log("Fetch Data: ", JSON.parse(data))
                     }
                     alert('Login Successfully! Noice Hahahah')
                     setIsAuthorized(true)
-                    navigate('/', { state: res })
+                    navigate('/admin-dashboard', { state: res })
                     // window.location.reload(false)
                 }
-                else {
-                    console.log("User/Password does not exist!")
-                    alert('User/Password doesn\'t exist!')
-                }
-            })
-            
-        } catch (error) {
-            console.log("Error: ", error)
-        }
+                
+            }
+            else {
+                console.log("User/Password does not exist!")
+                alert('User/Password doesn\'t exist!')
+            }
+        })
+        
+    } catch (error) {
+        console.log("Error: ", error)
     }
+}
 
   return (
-    <div>
-        <div
-        className="flex justify-left items-center background"
+        <>
+         <div
+        className="fixed top-0 flex justify-end items-center background w-screen -z-10"
         style={{
-        backgroundImage: `url(${require('../assets/img/watery.webp')})`,
+        filter: 'brightness(50%)',
+        backgroundImage: `url(${require('../../assets/img/drinking_girl.webp')})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         height: '100vh',
       }}
-    >
-        <section className="w-[60vw] flex justify-start z-10 ml-6">
-            <div className="w-[35vw] flex flex-cols items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-                <div className="w-[35vw] bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        ></div>
+        <section className="w-[98vw] flex justify-end z-10">
+            <div className="w-[98vw] flex flex-cols items-center justify-end px-6 py-8 mx-auto md:h-screen lg:py-0 mr-20">
+                <div className="w-[380px] z-10 bg-white h-[380px] mb-27 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                             Login
@@ -81,29 +90,13 @@ function Login( { setIsAuthorized } ) {
                                 </div>
                                     <input type="password" name="password" id="password" placeholder="••••••••" onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-r-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required />
                                 </div>
-
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-start">
-                                    <div className="flex items-center h-5">
-                                    <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required />
-                                    </div>
-                                    <div className="ml-3 text-sm">
-                                    <label className="text-gray-500 dark:text-gray-300">Remember me</label>
-                                    </div>
-                                </div>
-                                <a href="/" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500 text-orange-500">Forgot password?</a>
-                            </div>
                             <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">Login</button>
-                            <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                Don’t have an account yet? <button onClick={() => navigate('/register')} className="font-medium text-primary-600 hover:underline dark:text-primary-500 text-orange-500">Register</button>
-                            </p>
                         </form>
                     </div>
                 </div>
             </div>
         </section>
-    </div>
-  </div>
+        </>
   )
 }
 
