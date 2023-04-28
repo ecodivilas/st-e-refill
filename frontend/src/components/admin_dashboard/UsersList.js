@@ -10,7 +10,7 @@ import { ImCross } from 'react-icons/im'
 // '../../data/tableColumnHeaders'
 import { columns } from '../../data/tableColumnHeaders'
 
-function UserDashboard() {
+function UsersList() {
     const [users, setUsers] = useState([])
     const [alertDeleteMessage, setAlertDeleteMessage] = useState('')
     const [alertEditedMessage, setAlertEditedMessage] = useState('')
@@ -142,4 +142,4 @@ useEffect(() => {
     )
 }
 
-export default UserDashboard
+export default UsersList

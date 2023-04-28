@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import PersonalDataForm from '../components/registration/PersonalDataForm'
-import DeliveryAddressForm from '../components/registration/DeliveryAddressForm'
-import { registerUser } from '../services/UserService'
+import PersonalDataForm from '../../components/registration/PersonalDataForm'
+import DeliveryAddressForm from '../../components/registration/DeliveryAddressForm'
+import { registerUser } from '../../services/UserService'
 
 let defaultUserValues = {
     username: '',
@@ -89,7 +89,7 @@ function Register() {
         <div
         className="flex justify-left items-center background"
         style={{
-            backgroundImage: `url(${require('../assets/img/watery.webp')})`,
+            backgroundImage: `url(${require('../../assets/img/watery.webp')})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             height: '100vh',

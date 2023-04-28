@@ -58,7 +58,7 @@ const handleSubmit = e => {
          <div
         className="fixed top-0 flex justify-end items-center background w-screen -z-10"
         style={{
-        filter: 'brightness(50%)',
+        filter: 'brightness(40%)',
         backgroundImage: `url(${require('../../assets/img/drinking_girl.webp')})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',

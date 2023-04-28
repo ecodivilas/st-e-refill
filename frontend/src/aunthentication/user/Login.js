@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { loginUser } from '../services/UserService'
+import { loginUser } from '../../services/UserService'
 
 function Login( { setIsAuthorized } ) {
     const [userData, setUserData] = useState( {username: "", password: ""} )
@@ -50,7 +50,7 @@ function Login( { setIsAuthorized } ) {
         <div
         className="flex justify-left items-center background"
         style={{
-        backgroundImage: `url(${require('../assets/img/watery.webp')})`,
+        backgroundImage: `url(${require('../../assets/img/watery.webp')})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         height: '100vh',
