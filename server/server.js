@@ -24,7 +24,12 @@ app.post('/api/v1/users', (req, res) => {
 })
 
 app.get('/api/v1/users', (req, res) => {
-    usersController.getUsers().then((data) => res.json(data))
+    usersController.getUsers().then((data) => {
+        res.append('Content-Range', 'posts 0-20/20')
+        res.append('X-Total-Count','posts 0-20/20')
+        res.append('Access-Control-Expose-Headers', 'X-Total-Count');
+        res.json(data)
+    })
 })
 
 app.get('/api/v1/users/:id', (req, res) => {

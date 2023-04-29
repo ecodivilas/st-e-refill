@@ -22,6 +22,7 @@ class UsersRepository {
     
                 userData = { ...user, password: hashedPassword }
                 const createdUser = await this.db.users.create(userData)
+
                 return createdUser
             } catch (error) {
                 console.log('Error: ', error)
@@ -35,7 +36,7 @@ class UsersRepository {
     async getUsers() {
         try {
             const users = await this.db.users.findAll({
-                order: [['user_id', 'ASC']], where: {deleted_at: null}
+                order: [['id', 'ASC']], where: {deleted_at: null}
             })
             return users
         } catch (error) {

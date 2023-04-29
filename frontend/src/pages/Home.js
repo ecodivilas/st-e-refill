@@ -1,6 +1,8 @@
 import React from 'react'
 
-import Splash from './Splash'
+import UserDashboard from '../components/user_dashboard/UserDashboard'
+
+// import Splash from './Splash'
 import { getCurrentDate } from '../services/DateSetter'
 
 function Home({ isAuthorized }) {
@@ -18,7 +20,8 @@ function Home({ isAuthorized }) {
 
   return (
     <div>
-        <Splash isAuthorized={ isAuthorized } />
+        {/* <Splash isAuthorized={ isAuthorized } /> */}
+        <UserDashboard />
     </div>
   )
 }

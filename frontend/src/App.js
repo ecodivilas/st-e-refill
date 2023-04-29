@@ -21,13 +21,12 @@ import OrderSchedule from './components/orders/OrderSchedule'
 import OrderMOP from './components/orders/OrderMOP'
 import OrderSummary from './components/orders/OrderSummary'
 import ContainerCards from './components/orders/ContainerCards'
-
-
 import Register from './aunthentication/user/Register'
 import DeliveryAddressForm from './components/registration/DeliveryAddressForm'
 
 import './assets/customizedStyles/customTableStyle.css'
-
+// import UsersList from './components/user_dashboard/UserList'
+// import Posts from './components/user_dashboard/Posts'
 
 export let isAuthorize
 function App() {
@@ -42,12 +41,13 @@ isAuthorize = isAuthorized
   return (
     <div>
       <BrowserRouter>
-        <Navbar setIsAuthorized={setIsAuthorized} />
+        {/* <Navbar setIsAuthorized={setIsAuthorized} /> */}
         <Routes>
           {isAuthorized ? 
             <>
               <Route path="/delivery-address-form" element={<DeliveryAddressForm /> } />
-              <Route path="/users-dashboard" element={<UserDashboard />}/>
+              <Route path="/users-dashboard/*" element={<UserDashboard />}/>
+              {/* <Route path="/posts/*" element={<Posts />}/> */}
               <Route path="/admin-dashboard" element={<AdminDashboard />}/>
               <Route path="/order" element={<OrderTypeSelection />}/>
               <Route path="/order-container-selection" element={<ContainerSelection />}/>
@@ -64,7 +64,7 @@ isAuthorize = isAuthorized
             </>
           }
         
-          <Route path="/" element={<Home isAuthorized={isAuthorized} />} />
+          <Route path="/*" element={<Home isAuthorized={isAuthorized} />} />
           <Route path="/products-and-services" element={<ProductsnServices />} />
           <Route path="/customer-experience" element={<CustomerExperience />} />
           <Route path="/insights" element={<Insights />} />

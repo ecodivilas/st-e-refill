@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes, Model) => {
 
     Users.init(
         {
-            user_id: {
+            id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,

@@ -1,29 +1,33 @@
-import React, { useState } from 'react'
-import Sidebar from '../../common/Sidebar'
-import OrderHistory from './OrderHistory'
+import React from 'react'
+
+// import OrderHistory from './OrderHistory'
+import { Admin, Resource } from 'react-admin'
+// import { getAllUsers } from '../../services/UserService'
+import UserList from './UserList'
+import jsonServerProvider from 'ra-data-json-server'
+// import PostList from './PostList'
 
 function UserDashboard() {
-  const [open, setOpen] = useState(false);
+  // const [users, setUsers] = useState([])
+
+  // useEffect(() => {
+  //   getAllUsers()
+  //   .then((users) => {
+  //       setUsers(users)
+  //   })
+  //   .catch((error) => {
+  //       console.log(error)
+  //   })})
+  
   return (
     <div>
-         {/* <div
-        className="fixed top-0 flex justify-end items-center background w-screen -z-10 mt-24"
-        style={{
-        // filter: 'brightness(40%)',
-        backgroundImage: `url(${require('../../assets/img/watery.webp')})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        height: '100vh',
-      }}
-        ></div> */}
-        <section className="relative flex gap-2 overflow-scroll max-w-full bg-zinc-700">
-            <Sidebar open={open} setOpen={setOpen} isAdmin={true} />
-            <div className= "grow flex z-20 p-4" >
-              <div className='w-full p-2'>
-              <OrderHistory />
-              </div>
-            </div>
-        </section>
+      <Admin dataProvider={jsonServerProvider('http://localhost:3080/api/v1')}>
+        <Resource basePath='/' name='users' list={UserList} />
+      </Admin>
+      {/* <Admin dataProvider={jsonServerProvider('https://jsonplaceholder.typicode.com')}>
+        <Resource basePath='/' name='posts' list={PostList} />
+      </Admin> */}
+
     </div>
   )
 }

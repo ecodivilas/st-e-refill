@@ -1,16 +1,23 @@
-import React from 'react'
-// import { List, Datagrid, TextField, DateField, BooleanField } from 'react-admin';
-import { Admin, Resource, ListGuesser } from 'react-admin';
-import jsonServerProvider from 'ra-data-json-server';
+// // in src/App.js
+// import React from "react";
+// import { Admin, Resource } from 'react-admin'
+// import restProvider from 'ra-data-simple-rest'
 
-const dataProvider = jsonServerProvider('/api/v1/users');
+// // import { PostList } from './posts';
+
+// const App = () => (
+//     <Admin dataProvider={restProvider('/api/v1/users')}>
+//         <Resource name="users"  />
+//     </Admin>
+// );
+
+// export default App;
+
+import React from 'react'
 
 function OrderHistory() {
   return (
-    <Admin dataProvider={dataProvider}>
-        <Resource name="users" list={ListGuesser} />
-    </Admin>
-    // <div>OrderHistory</div>
+    <div>OrderHistory</div>
   )
 }
 
