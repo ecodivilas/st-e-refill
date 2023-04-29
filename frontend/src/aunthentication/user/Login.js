@@ -31,7 +31,7 @@ function Login( { setIsAuthorized } ) {
                     }
                     alert('Login Successfully! Noice Hahahah')
                     setIsAuthorized(true)
-                    navigate('/', { state: res })
+                    navigate('/users-dashboard', { state: res })
                     // window.location.reload(false)
                 }
                 else {

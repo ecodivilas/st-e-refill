@@ -7,9 +7,12 @@ let deliveryTime
 
 
 try {
-    scheduleType = localStorage.getItem("scheduleType");
-    deliveryDate = localStorage.getItem("dateValue");
-    deliveryTime = localStorage.getItem("timeValue");
+    // scheduleType = localStorage.getItem("scheduleType");
+    // deliveryDate = localStorage.getItem("dateValue");
+    // deliveryTime = localStorage.getItem("timeValue");
+    scheduleType = 'scheduled'
+    deliveryDate = ''
+    deliveryTime = ''
     
 } catch (error) {
     console.log(error)

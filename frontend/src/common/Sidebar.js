@@ -1,24 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { MdOutlineDashboard } from "react-icons/md";
 import { RiSettings4Line } from "react-icons/ri";
-import { TbReportAnalytics } from "react-icons/tb";
-import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
-import { FiMessageSquare, FiFolder, FiShoppingCart } from "react-icons/fi";
+import { AiOutlineUser } from "react-icons/ai";
+import { FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
-const Sidebar = ({open, setOpen}) => {
-  const menus = [
-    { name: "Dashboard", link: "/admin", icon: MdOutlineDashboard },
-    { name: "Users", link: "/admin", icon: AiOutlineUser },
-    // { name: "messages", link: "/admin", icon: FiMessageSquare },
-    // { name: "analytics", link: "/admin", icon: TbReportAnalytics, margin: true },
-    // { name: "File Manager", link: "/admin", icon: FiFolder },
-    { name: "Orders", link: "/admin", icon: FiShoppingCart },
-    // { name: "Saved", link: "/admin", icon: AiOutlineHeart, margin: true },
-    { name: "Setting", link: "/admin", icon: RiSettings4Line },
-  ];
-  
+
+const adminMenus = [
+  { name: "Dashboard", link: "/admin-dashboard", icon: MdOutlineDashboard },
+  { name: "Users", link: "/admin-dashboard", icon: AiOutlineUser },
+  { name: "Orders", link: "/admin-dashboard", icon: FiShoppingCart },
+  { name: "Setting", link: "/admin-dashboard", icon: RiSettings4Line },
+
+];
+
+const userMenus = [
+  {name: "Dashboard", link: "/users-dashboard", icon: MdOutlineDashboard}, 
+  {name: "Orders", link: "/users-dashboard", icon: FiShoppingCart}, 
+  {name: "Setting", link: "/users-dashboard", icon: RiSettings4Line} 
+]
+
+const Sidebar = ({open, setOpen, isAdmin}) => {
+  const [menus, setMenus] = useState( isAdmin ? adminMenus : userMenus)
+
   return (
     // <section className="flex gap-6">
       <section>
@@ -35,6 +40,7 @@ const Sidebar = ({open, setOpen}) => {
           />
         </div>
         <div className="mt-4 flex flex-col gap-4 relative">
+          {/* { sessionStorage.getItem('jwt') ? setMenus(adminMenus) : setMenus(userMenus) } */}
           {menus?.map((menu, i) => (
             <Link
               to={menu?.link}
