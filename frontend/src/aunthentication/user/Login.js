@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { loginUser } from '../../services/UserService'
 
-function Login( { setIsAuthorized } ) {
+function Login( { setIsAuthorized, setIsAdmin } ) {
     const [userData, setUserData] = useState( {username: "", password: ""} )
     const navigate = useNavigate()
 
@@ -20,19 +20,28 @@ function Login( { setIsAuthorized } ) {
             loginUser(userData).then((res)=>{
                 if (JSON.stringify(res) !== '{}' && res !== undefined) {
                     console.log(res)
-                    
-                    // Assigning Default Values Upon Login
-                    sessionStorage.setItem("jwt", res[0].jwt)
-                    localStorage.setItem("data", JSON.stringify(res[1]))
 
-                    const data = localStorage.getItem("data")
-                    if (data) {
-                        console.log("Fetch Data: ", JSON.parse(data))
+                    if (res[1].role_id !== 1) {
+                        alert("Not a customer account")
+                        console.log(res[1].role_id)
+                        navigate('/login')    
+                    } else {
+                
+                        // Assigning Default Values Upon Login
+                        sessionStorage.setItem("jwt", res[0].jwt)
+                        sessionStorage.setItem("userRole", res[0].userRole)
+                        localStorage.setItem("data", JSON.stringify(res[1]))
+
+                        const data = localStorage.getItem("data")
+                        if (data) {
+                            console.log("Fetch Data: ", JSON.parse(data))
+                        }
+                        alert('Login Successfully! Noice Hahahah')
+                        setIsAuthorized(true)
+                        sessionStorage.getItem("userRole") === '2' ? setIsAdmin(true) : setIsAdmin(false) 
+                        navigate('/', { state: res })
+                        // window.location.reload(false)
                     }
-                    alert('Login Successfully! Noice Hahahah')
-                    setIsAuthorized(true)
-                    navigate('/users-dashboard', { state: res })
-                    // window.location.reload(false)
                 }
                 else {
                     console.log("User/Password does not exist!")
@@ -82,12 +91,12 @@ function Login( { setIsAuthorized } ) {
                                     <input type="password" name="password" id="password" placeholder="••••••••" onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-r-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required />
                                 </div>
 
-                            <div className="flex items-center justify-between">
+                            <div className="flex items-center justify-start">
                                 <div className="flex items-start">
-                                    <div className="flex items-center h-5">
-                                    <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required />
+                                    <div className="flex items-center h-5 hidden">
+                                    <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"/>
                                     </div>
-                                    <div className="ml-3 text-sm">
+                                    <div className="ml-3 text-sm hidden">
                                     <label className="text-gray-500 dark:text-gray-300">Remember me</label>
                                     </div>
                                 </div>

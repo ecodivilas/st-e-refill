@@ -1,11 +1,13 @@
 import React from 'react'
 
-import UserDashboard from '../components/user_dashboard/UserDashboard'
+// import UserDashboard from '../components/user_dashboard/UserDashboard'
 
-// import Splash from './Splash'
+import Splash from './Splash'
 import { getCurrentDate } from '../services/DateSetter'
+import { isAdmin_ } from '../App'
+import AdminDashboard from '../components/admin_dashboard/AdminDashboard'
 
-function Home({ isAuthorized }) {
+function Home({ setIsAuthorized, setIsAdmin, isAuthorized }) {
 
   localStorage.setItem("totalPriceAmount", "0")
   localStorage.setItem("selectedService", " ")
@@ -20,8 +22,9 @@ function Home({ isAuthorized }) {
 
   return (
     <div>
-        {/* <Splash isAuthorized={ isAuthorized } /> */}
-        <UserDashboard />
+        {isAdmin_ ? <AdminDashboard setIsAuthorized={setIsAuthorized} setIsAdmin={setIsAdmin} /> : <Splash isAuthorized={ isAuthorized } /> }
+        
+        {/* <UserDashboard /> */}
     </div>
   )
 }

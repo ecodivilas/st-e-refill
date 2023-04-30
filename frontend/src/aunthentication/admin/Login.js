@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { loginUser } from '../../services/UserService'
 
-function Login( { setIsAuthorized } ) {
+function Login( { setIsAdmin, setIsAuthorized, setIsNavigationOut } ) {
 
 const [adminData, setAdminData] = useState( {username: "", password: ""} )
 const navigate = useNavigate()
+setIsNavigationOut(true)
 
 const handleChange = e => {
     const { name, value } = e.target
@@ -29,6 +30,7 @@ const handleSubmit = e => {
                 } else {
                     // Assigning Default Values Upon Login
                     sessionStorage.setItem("jwt", res[0].jwt)
+                    sessionStorage.setItem("userRole", res[0].userRole)
                     localStorage.setItem("data", JSON.stringify(res[1]))
     
                     const data = localStorage.getItem("data")
@@ -36,8 +38,9 @@ const handleSubmit = e => {
                         console.log("Fetch Data: ", JSON.parse(data))
                     }
                     alert('Login Successfully! Noice Hahahah')
+                    sessionStorage.getItem("userRole") === '2' ? setIsAdmin(true) : setIsAdmin(false)
                     setIsAuthorized(true)
-                    navigate('/admin-dashboard', { state: res })
+                    navigate('/', { state: res })
                     // window.location.reload(false)
                 }
                 
@@ -59,7 +62,7 @@ const handleSubmit = e => {
         className="fixed top-0 flex justify-end items-center background w-screen -z-10"
         style={{
         filter: 'brightness(40%)',
-        backgroundImage: `url(${require('../../assets/img/drinking_girl.webp')})`,
+        backgroundImage: `url(${require('../../assets/img/watery2.webp')})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         height: '100vh',

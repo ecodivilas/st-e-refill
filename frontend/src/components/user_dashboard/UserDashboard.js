@@ -24,9 +24,6 @@ function UserDashboard() {
       <Admin dataProvider={jsonServerProvider('http://localhost:3080/api/v1')}>
         <Resource basePath='/' name='users' list={UserList} />
       </Admin>
-      {/* <Admin dataProvider={jsonServerProvider('https://jsonplaceholder.typicode.com')}>
-        <Resource basePath='/' name='posts' list={PostList} />
-      </Admin> */}
 
     </div>
   )

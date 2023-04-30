@@ -5,9 +5,6 @@ import Navbar from './common/NavBar'
 import UserLogin from './aunthentication/user/Login'
 import AdminLogin from './aunthentication/admin/Login'
 
-import UserDashboard from './components/user_dashboard/UserDashboard'
-import AdminDashboard from './components/admin_dashboard/AdminDashboard'
-
 import Home from './pages/Home'
 import ProductsnServices from './pages/ProductsNServices'
 import CustomerExperience from './pages/CustomerExperience'
@@ -23,32 +20,36 @@ import OrderSummary from './components/orders/OrderSummary'
 import ContainerCards from './components/orders/ContainerCards'
 import Register from './aunthentication/user/Register'
 import DeliveryAddressForm from './components/registration/DeliveryAddressForm'
-
 import './assets/customizedStyles/customTableStyle.css'
-// import UsersList from './components/user_dashboard/UserList'
-// import Posts from './components/user_dashboard/Posts'
 
 export let isAuthorize
+export let isAdmin_
+export let isNavOut
+
 function App() {
-  
 
 const [isAuthorized, setIsAuthorized] = useState(
     sessionStorage.getItem("jwt") ? true : false
   )
 
+const [isAdmin, setIsAdmin] = useState(
+  sessionStorage.getItem("userRole") === '2' ? true : false
+)
+
+const [isNavigationOut, setIsNavigationOut] = useState(false)
+
 isAuthorize = isAuthorized
+isAdmin_ = isAdmin
+isNavOut = isNavigationOut
 
   return (
     <div>
       <BrowserRouter>
-        {/* <Navbar setIsAuthorized={setIsAuthorized} /> */}
+        {isNavigationOut ? <></> : <Navbar setIsAuthorized={setIsAuthorized} setIsAdmin={setIsAdmin} /> }
         <Routes>
           {isAuthorized ? 
             <>
               <Route path="/delivery-address-form" element={<DeliveryAddressForm /> } />
-              <Route path="/users-dashboard/*" element={<UserDashboard />}/>
-              {/* <Route path="/posts/*" element={<Posts />}/> */}
-              <Route path="/admin-dashboard" element={<AdminDashboard />}/>
               <Route path="/order" element={<OrderTypeSelection />}/>
               <Route path="/order-container-selection" element={<ContainerSelection />}/>
               <Route path="/order-schedule" element={<OrderSchedule />}/>
@@ -58,13 +59,13 @@ isAuthorize = isAuthorized
             </>
             :
             <>
-              <Route path="/login" element={<UserLogin setIsAuthorized={setIsAuthorized} /> } />
-              <Route path="/admin" element={<AdminLogin setIsAuthorized={setIsAuthorized} />}/>
+              <Route path="/login" element={<UserLogin setIsAuthorized={setIsAuthorized} setIsAdmin={setIsAdmin}  />  }  />
+              <Route path="/admin" element={<AdminLogin setIsAuthorized={setIsAuthorized} setIsAdmin={setIsAdmin} setIsNavigationOut={setIsNavigationOut} />}/>
               <Route path="/register" element={<Register /> } />
             </>
           }
         
-          <Route path="/*" element={<Home isAuthorized={isAuthorized} />} />
+          <Route path="/*" element={<Home isAuthorized={isAuthorized} setIsAdmin={setIsAdmin} setIsAuthorized={setIsAuthorized} />} />
           <Route path="/products-and-services" element={<ProductsnServices />} />
           <Route path="/customer-experience" element={<CustomerExperience />} />
           <Route path="/insights" element={<Insights />} />
@@ -75,6 +76,5 @@ isAuthorize = isAuthorized
     </div>
   )
 }
-
 
 export default App

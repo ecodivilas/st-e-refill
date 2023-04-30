@@ -36,7 +36,7 @@ class UsersRepository {
     async getUsers() {
         try {
             const users = await this.db.users.findAll({
-                order: [['id', 'ASC']], where: {deleted_at: null}
+                order: [['user_id', 'ASC']], where: {deleted_at: null}
             })
             return users
         } catch (error) {
@@ -111,7 +111,7 @@ class UsersRepository {
                                 include: [this.db.addresses]
                         })
 
-                        const generatedTokenObject = {"jwt": generatedToken}
+                        const generatedTokenObject = {"jwt": generatedToken, "userRole": verifiedUserData.role_id}
                         const updatedData = [generatedTokenObject, verifiedUserData] 
                      
                         return updatedData
