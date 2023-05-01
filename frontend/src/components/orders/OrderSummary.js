@@ -38,7 +38,20 @@ function OrderSummary() {
         }
     
     const handleOrderProceed = () => {
+        const quantities = ["updatedSlimQuantity", "updatedRoundQuantity", "updatedHalfSlimQuantity"]
+        const order_items = []
 
+        for(let i = 0; i < quantities.length ; i++){
+            if(Number(localStorage.getItem(quantities[i])) > 0){
+                order_items.push({
+                                    "container_id": containers[i].container_id,
+                                    "unit_price": containers[i].refill_price,
+                                    "quantity": Number(localStorage.getItem(quantities[i]))
+                                })
+            }
+        }
+
+        // Calling API to create order
         createPendingOrder(
             {
                 "user_id": data.user_id,
@@ -46,25 +59,9 @@ function OrderSummary() {
                 "delivery_date": localStorage.getItem("dateValue"),
                 "delivery_time": localStorage.getItem("timeValue"),
                 "mode_of_payment": localStorage.getItem("orderMOP"),
-                "status": "queue",
+                "status": "to collect",
                 "is_paid": false,
-                "order_items": [
-                    {
-                        "container_id": containers[0].container_id,
-                        "unit_price": containers[0].refill_price,
-                        "quantity": Number(localStorage.getItem('updatedSlimQuantity'))
-                    },
-                    {
-                        "container_id": containers[1].container_id,
-                        "unit_price": containers[1].refill_price,
-                        "quantity": Number(localStorage.getItem('updatedRoundQuantity'))
-                    },
-                    {
-                        "container_id": containers[2].container_id,
-                        "unit_price": containers[2].refill_price,
-                        "quantity": Number(localStorage.getItem('updatedHalfSlimQuantity'))
-                    }
-                        ]
+                "order_items": order_items
                }
         ).then((res)=>{
             alert("Order Successfully Appended!")

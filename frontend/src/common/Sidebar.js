@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { MdOutlineDashboard, MdLogout } from "react-icons/md";
 import { RiSettings4Line } from "react-icons/ri";
-import { AiOutlineUser } from "react-icons/ai";
+import { AiOutlineUser, AiOutlineHistory } from "react-icons/ai";
+import { BiPurchaseTagAlt } from "react-icons/bi";
 import { FiShoppingCart } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -17,12 +18,14 @@ const adminMenus = [
 
 const userMenus = [
   {name: "Dashboard", link: "/", icon: MdOutlineDashboard}, 
-  {name: "Orders", link: "/", icon: FiShoppingCart}, 
+  {name: "Order Now", link: "/order", icon: BiPurchaseTagAlt}, 
+  {name: "Orders", link: "/", icon: FiShoppingCart},
+  {name: "History", link: "/", icon: AiOutlineHistory}, 
   {name: "Setting", link: "/", icon: RiSettings4Line} 
 ]
 
-const Sidebar = ({open, setOpen, isAdmin, setIsAuthorized, setIsAdmin }) => {
-  const [menus, setMenus] = useState( isAdmin ? adminMenus : userMenus)
+const Sidebar = ({open, setOpen, isAdmin_, setIsAuthorized, setIsAdmin }) => {
+  const [menus, setMenus] = useState( isAdmin_ ? adminMenus : userMenus)
 
   const navigate = useNavigate()
   const handleLogout = () => {

@@ -4,8 +4,9 @@ import React from 'react'
 
 import Splash from './Splash'
 import { getCurrentDate } from '../services/DateSetter'
-import { isAdmin_ } from '../App'
+import { isAdmin_, isAuthorize } from '../App'
 import AdminDashboard from '../components/admin_dashboard/AdminDashboard'
+import UserDashboard from '../components/user_dashboard/UserDashboard'
 
 function Home({ setIsAuthorized, setIsAdmin, isAuthorized }) {
 
@@ -18,11 +19,14 @@ function Home({ setIsAuthorized, setIsAdmin, isAuthorized }) {
   localStorage.setItem("dateValue", getCurrentDate())
   localStorage.setItem("today", getCurrentDate())
   localStorage.setItem("timeValue", "00:00:00")
-  localStorage.setItem("orderMOP", "")
+  localStorage.setItem("orderMOP", "cash on delivery")
 
   return (
+    //Flipping of the Dashboard
     <div>
-        {isAdmin_ ? <AdminDashboard setIsAuthorized={setIsAuthorized} setIsAdmin={setIsAdmin} /> : <Splash isAuthorized={ isAuthorized } /> }
+        {isAdmin_ ? <AdminDashboard setIsAuthorized={setIsAuthorized} setIsAdmin={setIsAdmin} /> :
+        isAuthorize ? <UserDashboard setIsAuthorized={setIsAuthorized} setIsAdmin={setIsAdmin} /> : <Splash isAuthorized={ isAuthorized } />
+        }
         
         {/* <UserDashboard /> */}
     </div>

@@ -1,24 +1,23 @@
 import React, { useEffect, useState, useMemo  } from 'react'
 
-import EditUser from './EditUser'
-import { deleteUser, getAllUsers } from '../../services/UserService'
+// import EditUser from './EditUser'
+import { deleteOrder, getOneOrderItems } from '../../services/OrderService'
 
 import DataTable from 'react-data-table-component'
 
 import { ImCross } from 'react-icons/im'
 
-// '../../data/tableColumnHeaders'
-import { columns } from '../../data/tableColumnHeaders'
+import { columns } from '../../data/userOrdersTableHeaders'
 
 function UsersList() {
-    const [users, setUsers] = useState([])
+    const [orders, setOrders] = useState([])
     const [alertDeleteMessage, setAlertDeleteMessage] = useState('')
     const [alertEditedMessage, setAlertEditedMessage] = useState('')
     
 useEffect(() => {
-    getAllUsers()
-    .then((users) => {
-        setUsers(users)
+    getOneOrderItems(JSON.parse(localStorage.getItem('data')).user_id)
+    .then((orders) => {
+        setOrders(orders)
     })
     .catch((error) => {
         console.log(error)
@@ -28,18 +27,18 @@ useEffect(() => {
     const [records, setRecords] = useState([]);
 
     try {
-        useMemo(()=> setRecords(users),[users])
+        useMemo(()=> setRecords(orders),[orders])
     } catch (error) {
         console.log("Error: ", error)
     }
 
-    const handleDelete = (userID, userName) => {
-        deleteUser(userID)
-        setAlertDeleteMessage(`Successfully deleted user: ${userName}`)
+    const handleDelete = (orderID) => {
+        deleteOrder(orderID)
+        setAlertDeleteMessage(`Successfully deleted order ID: ${orderID}`)
     }
 
-    const handleSetAlertEdited = (userName) => {
-        setAlertEditedMessage(`Successfully edited user: ${userName}`)
+    const handleSetAlertEdited = (orderID) => {
+        setAlertEditedMessage(`Successfully edited order ID: ${orderID}`)
     }
 
     const handleDelAlertClose = () => {
@@ -51,33 +50,53 @@ useEffect(() => {
     }
 
     const handleFilter = (event) => {
-        const newData = users.filter(row => {
+        const newData = orders.filter(row => {
             console.log(columns)
-            return row.username.toLowerCase().includes(event.target.value.toLowerCase())
+            return row.orderID.includes(event.target.value)
         })
         setRecords(newData)
     }
 
+    const statusChecker = (status) => {
+        if (status === "to collect") {
+            return <button className='py-1 px-2 text-xm rounded-lg text-black font-medium bg-yellow-400'>to be collected</button>
+        }
+        else if (status === "cancelled") {
+            return <button className='py-1 px-2 text-xm rounded-lg text-white font-medium bg-gray-600'>Cancelled</button>
+        }
+        else if (status === "preparing") {
+            return <button className='py-1 px-2 text-xm rounded-lg text-white font-medium bg-teal-900'>Preparing</button>
+        }
+        else if (status === "on the way") {
+            return <button className='py-1 px-2 text-xm rounded-lg text-white font-medium bg-orange-600'>On the Way</button>
+        }
+        else if (status === "delivered") {
+            return <button className='py-1 px-2 text-xm rounded-lg text-white font-medium bg-lime-600'>Delivered</button>
+        }
+    }
+
     const customData =
         records && records.length > 0
-            ? records.map((user) => {
+            ? records.map((order) => {
                   return {
-                      username: user.username,
-                      email: user.email,
-                      first_name: user.first_name,
-                      middle_name: user.middle_name,
-                      last_name: user.last_name,
-                      gender: user.gender,
-                      mobile_number: user.mobile_number,
-                      role: user.role,
+                      order_id: order.order_id,
+                      order_date: order.order_date,
+                      name: order.name,
+                      capacity: order.capacity,
+                      quantity: order.quantity,
+                      total_price: order.total_price,
+                      is_paid: order.is_paid ?
+                        <button className='py-1 px-5 text-xm rounded-lg text-white font-medium bg-lime-600'>Paid</button>
+                        : <button className='py-1 px-5 text-xm rounded-lg text-black font-medium bg-yellow-400'>Unpaid</button>,
+                      status: statusChecker(order.status),
                       actions: (
                       <div className='flex items-center'>
-                        <EditUser user={user} handleSetAlertEdited={handleSetAlertEdited} />
+                        {/* <EditUser user={user} handleSetAlertEdited={handleSetAlertEdited} /> */}
                       <div className='flex-col gap-2 justify-center group relative py-1 px-4 overflow-visible'>
                             <button
                               className="m-0 p-0"
                               data-tooltip-target="tooltip-hover"
-                              onClick={() => handleDelete(user.id, user.username)}
+                              onClick={() => handleDelete(order.order_id)}
                           >
                               <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -90,12 +109,7 @@ useEffect(() => {
                                         clipRule="evenodd"
                                     />
                                 </svg>
-
                             </button>
-
-                            {/* <span className="absolute -top-3 left-1/2 transform !z-50 -translate-x-1/2 scale-0 rounded py-1 !px-10  text-xs text-red-800 group-hover:scale-100">
-                                                        Delete
-                            </span> */}
                           </div>
                       </div>
                       )
@@ -107,9 +121,9 @@ useEffect(() => {
     return (
         <div className="">
                 <h2 className="font-bold text-xl p-2 text-transparent bg-clip-text bg-gradient-to-r to-slate-900 from-orange-600">
-                    User Information
+                    Order History
                 </h2>
-                <input type="text" placeholder="Search..." onChange={handleFilter} className="py-1 my-2 text-sm rounded px-4 " />
+                <input type="text" placeholder="Search..." onChange={handleFilter} className="hidden py-1 my-2 text-sm rounded px-4 " />
             <div className="">
      
                 {alertEditedMessage && (

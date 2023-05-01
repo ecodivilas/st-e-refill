@@ -22,6 +22,7 @@ import Register from './aunthentication/user/Register'
 import DeliveryAddressForm from './components/registration/DeliveryAddressForm'
 import './assets/customizedStyles/customTableStyle.css'
 
+// import OrderHistory from './components/user_dashboard/OrderHistory'
 export let isAuthorize
 export let isAdmin_
 export let isNavOut
@@ -56,6 +57,7 @@ isNavOut = isNavigationOut
               <Route path="/order-mode-of-payment" element={<OrderMOP />}/>
               <Route path="/order-summary" element={<OrderSummary />}/>
               <Route path="/cards" element={<ContainerCards />}/>
+              {/* <Route path="/order-history" element={<OrderHistory />}/> */}
             </>
             :
             <>

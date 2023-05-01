@@ -145,7 +145,7 @@ const EditUser = ({ user, handleSetAlertEdited }) => {
                                                         field.defaultValue
                                                     }
                                                     onChange={handleChange}
-                                                    required
+                                                    required='true'
                                                 />
                                             </div>
                                         )

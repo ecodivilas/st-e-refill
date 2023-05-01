@@ -1,4 +1,5 @@
-const { DataTypes, Model, Sequelize } = require('sequelize')
+const { DataTypes, Model, Sequelize, QueryTypes } = require('sequelize')
+// QueryType is added for hardcored queries, still working in Sequelize
 
 const connect = () => {
     const hostName = process.env.DB_HOST
@@ -23,6 +24,8 @@ const connect = () => {
     const db = {}
     db.Sequelize = Sequelize
     db.sequelize = sequelize
+    // Added for Hardcoded Querying
+    db.QueryTypes = QueryTypes
 
     sequelize
         .authenticate()
@@ -43,9 +46,17 @@ const connect = () => {
     db.addresses.belongsTo(db.users, {foreignKey : 'user_id'});
 
     db.users.hasMany(db.orders, {foreignKey : 'user_id'})
-    db.orders.belongsTo(db.users,{foreignKey : 'user_id'})
-    
+    db.orders.belongsTo(db.users, {foreignKey : 'user_id'})
 
+    db.orders.hasMany(db.order_items, {foreignKey : 'order_id', as: 'o_to_order_items'})
+    db.order_items.belongsTo(db.orders, {foreignKey : 'order_id'})
+    
+    db.containers.hasOne(db.order_items, {foreignKey : 'container_id', as: 'c_to_order_items'});
+    db.order_items.belongsTo(db.containers, {foreignKey : 'container_id', as: 'ot_to_containers' });
+
+    // Still working on this one
+    // db.orders.belongsToMany(db.containers, { through: db.order_items, as: 'o_to_oi_containers', foreignKey : 'order_id' });
+    // db.containers.belongsToMany(db.orders, { through: db.order_items, as: 'c_to_oi_orders', foreignKey : 'container_id' });
     return db
 }
 

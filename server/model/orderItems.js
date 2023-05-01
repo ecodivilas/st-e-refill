@@ -15,6 +15,12 @@ module.exports = (sequelize, DataTypes, Model) => {
             container_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
+                //added
+                // unique: true,
+                // references: {
+                // model: this.db.containers,
+                // key: 'container_id'
+                // }
             },
             unit_price: {
                 type: DataTypes.DOUBLE,
@@ -42,6 +48,7 @@ module.exports = (sequelize, DataTypes, Model) => {
         {
             sequelize,
             modelName: 'order_items',
+            tableName: 'order_items',
             timestamps: false
         }
     )

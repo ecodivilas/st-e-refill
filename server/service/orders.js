@@ -10,6 +10,16 @@ class OrdersService {
         return await ordersRepository.createPendingOrder(order)
     }
 
+    // Customize Get only one record
+    async getOneOrderItems(id){
+        return await ordersRepository.getOneOrderItems(id)
+    }
+    
+    // Customize Get only one record
+    async getAllOrderItems(){
+        return await ordersRepository.getAllOrderItems()
+    }
+
     async getOrders() {
         return await ordersRepository.getOrders()
     }

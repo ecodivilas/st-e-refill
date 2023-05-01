@@ -47,6 +47,101 @@ class OrdersRepository {
         }
     }
 
+    async getOneOrderItems(id){
+
+        // const orders = this.db.orders.findAll({
+        //     attributes: [
+        //       'order_id',
+        //       'order_date',
+        //       [this.db.Sequelize.literal('order_items.quantity'), 'quantity'],
+        //       [this.db.Sequelize.literal('order_items.quantity * order_items.unit_price'), 'total_price'],
+        //       'is_paid',
+        //       'status'
+        //     ],
+        //     include: [{
+        //       model: this.db.order_items,
+        //       attributes: []
+        //     }],
+        //     raw: true,
+        //     where:{user_id: id}
+        //   })
+
+        // // Still working on this one
+        // const order_items = this.db.orders.findAll({
+        //     attributes: [
+        //       'order_id',
+        //       [this.db.Sequelize.literal('o_to_oi_containers.name'), 'name'],
+        //       [this.db.Sequelize.literal('o_to_oi_containers.capacity'), 'capacity'],
+        //       'order_date',
+        //       [this.db.Sequelize.literal('o_to_order_items.quantity'), 'quantity'],
+        //       [this.db.Sequelize.literal('(o_to_order_items.quantity * o_to_order_items.unit_price)'), 'total_price'],
+        //       'is_paid',
+        //       'status'
+        //       // exclude the following fields:
+        //       // 'o_to_oi_containers.order_items.created_at',
+        //       // 'o_to_oi_containers.order_items.updated_at',
+        //       // 'o_to_oi_containers.order_items.deleted_at'
+        //     ],
+        //     include: [
+        //       {
+        //         model: this.db.order_items,
+        //         // attributes: { exclude: ['created_at'] },
+        //         attributes: [],
+        //         as: 'o_to_order_items',
+        //         required: true // inner join
+        //       },
+        //       {
+        //         model: this.db.containers,
+        //         // attributes: { exclude: ['created_at'] },
+        //         attributes: [],
+        //         as: 'o_to_oi_containers',
+        //         required: true // inner join
+        
+        //       },
+        //     ],
+        //     where:{user_id: id},
+        //     raw: true,
+        //     // exclude unwanted columns
+        //     // nest: true,
+        //     // plain: true,
+        //   });
+
+        const order_items = this.db.sequelize.query(`
+        SELECT orders.order_id,
+        containers.name,
+        containers.capacity,
+        orders.order_date,
+        order_items.quantity,
+        (order_items.quantity * order_items.unit_price) AS "total_price",
+        orders.is_paid, orders.status from orders
+        INNER JOIN order_items ON orders.order_id = order_items.order_id
+        INNER JOIN containers ON containers.container_id = order_items.container_id
+        WHERE orders.user_id = ${id};
+      `, { type: this.db.QueryTypes.SELECT })
+        
+        return order_items
+    }
+
+    async getAllOrderItems() {
+        const orders = this.db.orders.findAll({
+            attributes: [
+              'order_id',
+              'order_date',
+              [this.db.Sequelize.literal('order_items.quantity'), 'quantity'],
+              [this.db.Sequelize.literal('order_items.quantity * order_items.unit_price'), 'total_price'],
+              'is_paid',
+              'status'
+            ],
+            include: [{
+              model: this.db.order_items,
+              attributes: []
+            }],
+            raw: true
+          })
+        
+        return orders
+    }
+
     async getOrders() {
         try {
             const orders = await this.db.orders.findAll({

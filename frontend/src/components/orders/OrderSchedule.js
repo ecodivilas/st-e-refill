@@ -5,15 +5,11 @@ let scheduleType
 let deliveryDate
 let deliveryTime
 
-
 try {
-    // scheduleType = localStorage.getItem("scheduleType");
-    // deliveryDate = localStorage.getItem("dateValue");
-    // deliveryTime = localStorage.getItem("timeValue");
-    scheduleType = 'scheduled'
-    deliveryDate = ''
-    deliveryTime = ''
-    
+    scheduleType = localStorage.getItem("scheduleType");
+    deliveryDate = localStorage.getItem("dateValue");
+    deliveryTime = localStorage.getItem("timeValue");
+
 } catch (error) {
     console.log(error)
 }
@@ -29,24 +25,27 @@ const updatedSchedule = {
 const [isProceed, setIsProceed] = useState(false)
 const [schedule, setSchedule] = useState(updatedSchedule);
 
- 
 const handleChange = (e) => {
 
     const { name, value } = e.target
+    console.log(name, value)
     updatedSchedule[name] = value
+    // console.log(updatedSchedule)
 
-    console.log(updatedSchedule[name], value)
+    // console.log(updatedSchedule[name], value)
 
-    setSchedule((prev) => {
-        return { ...prev, [name]: value }
-    })}
+    // setSchedule((prev) => {
+    //     return { ...prev, [name]: value }
+    // })
+}
 
     const handleNext = () => {
-    localStorage.setItem("scheduleType", updatedSchedule.schedType)
-    localStorage.setItem("dateValue", updatedSchedule.deliveryDate.toString())
-    localStorage.setItem("timeValue", updatedSchedule.deliveryTime.toString())
+        console.log("Upon handle Next: ", updatedSchedule)
+        localStorage.setItem("scheduleType", updatedSchedule.schedType)
+        localStorage.setItem("dateValue", updatedSchedule.deliveryDate.toString())
+        localStorage.setItem("timeValue", updatedSchedule.deliveryTime.toString())
+        setIsProceed((prev) => !prev)
     // console.log(updatedSchedule.deliveryDate.toString())
-    setIsProceed((prev) => !prev)
 }
 
   return (

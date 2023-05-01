@@ -35,15 +35,7 @@ export const columns = [
         sortable: true,
     },
     {
-        name: 'Role',
-        selector: (row) => row.role,
-        sortable: true,
-    },
-    {
         name: 'Actions',
-        selector: (row) => row.edit,
-    },
-    {
-        selector: (row) => row.delete,
-    },
+        selector: (row) => row.actions,
+    }
 ]

@@ -62,7 +62,7 @@ const handleSubmit = e => {
         className="fixed top-0 flex justify-end items-center background w-screen -z-10"
         style={{
         filter: 'brightness(40%)',
-        backgroundImage: `url(${require('../../assets/img/watery2.webp')})`,
+        backgroundImage: `url(${require('../../assets/img/admin.webp')})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         height: '100vh',
