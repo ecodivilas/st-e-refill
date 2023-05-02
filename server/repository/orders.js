@@ -144,9 +144,15 @@ class OrdersRepository {
 
     async getOrders() {
         try {
-            const orders = await this.db.orders.findAll({
-                order: [['order_id', 'ASC']],
-            })
+            const orders = this.db.sequelize.query(`
+            SELECT orders.order_id, users.username, order_date, delivery_date, delivery_time, mode_of_payment,
+            is_paid, status, sum(order_items.quantity * order_items.unit_price) AS "total_price"
+            FROM order_items LEFT JOIN orders ON orders.order_id = order_items.order_id
+            LEFT JOIN users ON users.user_id = orders.user_id
+            WHERE users.username IS NOT NULL AND orders.order_id IS NOT NULL
+            GROUP BY orders.order_id, users.username;
+            `, { type: this.db.QueryTypes.SELECT })
+
             return orders
         } catch (error) {
             console.log('Error: ', error)
@@ -164,17 +170,23 @@ class OrdersRepository {
     }
     
     async updateOrder(order) {
+        console.log("order object: ", order)
+
         let data = {}
 
         try {
-            data = await this.db.orders.update(
-                { ...order },
-                {
-                    where: {
-                        user_id: order.user_id,
-                    },
-                }
-            );
+            // data = await this.db.orders.update(
+            //     { ...order },
+            //     {
+            //         where: {
+            //             user_id: order.user_id,
+            //         },
+            //     }
+            // );
+            data = await this.db.sequelize.query(`
+            UPDATE orders SET mode_of_payment = '${order.mode_of_payment}',
+            status = '${order.status}', is_paid = ${order.is_paid} WHERE order_id = ${order.order_id};
+            `, { type: this.db.QueryTypes.SELECT })
         } catch (error) {
             console.log('Error: ', error)
         }

@@ -5,6 +5,7 @@ import { loginUser } from '../../services/UserService'
 function Login( { setIsAuthorized, setIsAdmin } ) {
     const [userData, setUserData] = useState( {username: "", password: ""} )
     const navigate = useNavigate()
+    sessionStorage.setItem('navigationOut', false)
 
   const handleChange = e => {
     const { name, value } = e.target

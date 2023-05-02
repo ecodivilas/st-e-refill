@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useMemo  } from 'react'
 
 import EditUser from './EditUser'
-import { deleteUser, getAllUsers } from '../../services/UserService'
+import { deleteUser, getAllUsers } from '../../../services/UserService'
 
 import DataTable from 'react-data-table-component'
 
 import { ImCross } from 'react-icons/im'
 
 // '../../data/tableColumnHeaders'
-import { columns } from '../../data/tableColumnHeaders'
+import { columns } from '../../../data/tableColumnHeaders'
 
 function UsersList() {
     const [users, setUsers] = useState([])

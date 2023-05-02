@@ -6,6 +6,7 @@ function Login( { setIsAdmin, setIsAuthorized, setIsNavigationOut } ) {
 
 const [adminData, setAdminData] = useState( {username: "", password: ""} )
 const navigate = useNavigate()
+sessionStorage.setItem('navigationOut', true)
 setIsNavigationOut(true)
 
 const handleChange = e => {

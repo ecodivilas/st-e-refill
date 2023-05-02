@@ -1,3 +1,31 @@
+// GET/FETCH ORDERS OF ALL USERS ORDERS
+export async function getAllOrders () {
+    try {
+        const response = await fetch( '/api/v1/orders' )
+        return response.json()
+    } catch (error) {
+        console.log('Error: ', error)
+    }
+}
+
+// EDIT/UPDATE Order
+export async function editOrder(order) {
+    console.log(order)
+    try {
+        const response = await fetch('/api/v1/order', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ order: order }),
+        })
+
+        if (response.status === 200) {
+            return await response.json()
+        }
+    } catch (error) {
+        console.log('Error: ', error)
+    }
+}
+
 // CREATE/POST ORDER
 export async function createPendingOrder( orderDetails ) {
     try {
@@ -12,7 +40,7 @@ export async function createPendingOrder( orderDetails ) {
     }
 }
 
-// GET/FETCH ORDERS OF ONE USER
+// GET/FETCH ORDER ITEMS OF ONE USER
 export async function getOneOrderItems ( userId ) {
     console.log( userId )
     try {

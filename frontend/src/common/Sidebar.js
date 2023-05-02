@@ -6,11 +6,12 @@ import { AiOutlineUser, AiOutlineHistory } from "react-icons/ai";
 import { BiPurchaseTagAlt } from "react-icons/bi";
 import { FiShoppingCart } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
+import { isAdmin_ } from "../App";
 
 const adminMenus = [
   { name: "Dashboard", link: "/", icon: MdOutlineDashboard },
-  { name: "Users", link: "/", icon: AiOutlineUser },
-  { name: "Orders", link: "/", icon: FiShoppingCart },
+  { name: "Users", link: "/admin/users", icon: AiOutlineUser },
+  { name: "Orders", link: "/admin/orders", icon: FiShoppingCart },
   { name: "Setting", link: "/", icon: RiSettings4Line },
   { name: "Logout", link: "/", icon: MdLogout },
 
@@ -19,12 +20,13 @@ const adminMenus = [
 const userMenus = [
   {name: "Dashboard", link: "/", icon: MdOutlineDashboard}, 
   {name: "Order Now", link: "/order", icon: BiPurchaseTagAlt}, 
-  {name: "Orders", link: "/", icon: FiShoppingCart},
+  {name: "Orders", link: "/orders", icon: FiShoppingCart},
   {name: "History", link: "/", icon: AiOutlineHistory}, 
-  {name: "Setting", link: "/", icon: RiSettings4Line} 
+  {name: "Setting", link: "/", icon: RiSettings4Line},
+  { name: "Logout", link: "/", icon: MdLogout },
 ]
 
-const Sidebar = ({open, setOpen, isAdmin_, setIsAuthorized, setIsAdmin }) => {
+const Sidebar = ({open, setOpen, setIsAuthorized, setIsAdmin }) => {
   const [menus, setMenus] = useState( isAdmin_ ? adminMenus : userMenus)
 
   const navigate = useNavigate()

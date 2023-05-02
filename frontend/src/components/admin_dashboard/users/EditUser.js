@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { editUser } from '../../services/UserService'
+import { editUser } from '../../../services/UserService'
 
 const EditUser = ({ user, handleSetAlertEdited }) => {
     const INITIAL_USER_DATA = {

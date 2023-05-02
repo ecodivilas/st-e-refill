@@ -22,6 +22,10 @@ import Register from './aunthentication/user/Register'
 import DeliveryAddressForm from './components/registration/DeliveryAddressForm'
 import './assets/customizedStyles/customTableStyle.css'
 
+// Admin Components
+import AdminUsersDashboard from './components/admin_dashboard/users/AdminUsersDashboard'
+import AdminOrdersDashboard from './components/admin_dashboard/orders/AdminOrdersDashboard'
+
 // import OrderHistory from './components/user_dashboard/OrderHistory'
 export let isAuthorize
 export let isAdmin_
@@ -46,6 +50,7 @@ isNavOut = isNavigationOut
   return (
     <div>
       <BrowserRouter>
+        {/* {isNavigationOut ? <></> : <Navbar setIsAuthorized={setIsAuthorized} setIsAdmin={setIsAdmin} /> } */}
         {isNavigationOut ? <></> : <Navbar setIsAuthorized={setIsAuthorized} setIsAdmin={setIsAdmin} /> }
         <Routes>
           {isAuthorized ? 
@@ -58,6 +63,10 @@ isNavOut = isNavigationOut
               <Route path="/order-summary" element={<OrderSummary />}/>
               <Route path="/cards" element={<ContainerCards />}/>
               {/* <Route path="/order-history" element={<OrderHistory />}/> */}
+
+              {/* Admin Component Routes */}
+              <Route path="/admin/users" element={<AdminUsersDashboard setIsAuthorized={setIsAuthorized} setIsAdmin={setIsAdmin} />}/>
+              <Route path="/admin/orders" element={<AdminOrdersDashboard setIsAuthorized={setIsAuthorized} setIsAdmin={setIsAdmin} />}/>
             </>
             :
             <>
@@ -67,7 +76,7 @@ isNavOut = isNavigationOut
             </>
           }
         
-          <Route path="/*" element={<Home isAuthorized={isAuthorized} setIsAdmin={setIsAdmin} setIsAuthorized={setIsAuthorized} />} />
+          <Route path="/*" element={<Home isAuthorized={isAuthorized} setIsAdmin={setIsAdmin} setIsAuthorized={setIsAuthorized} setIsNavigationOut={setIsNavigationOut} />} />
           <Route path="/products-and-services" element={<ProductsnServices />} />
           <Route path="/customer-experience" element={<CustomerExperience />} />
           <Route path="/insights" element={<Insights />} />

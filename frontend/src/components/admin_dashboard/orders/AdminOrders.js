@@ -1,21 +1,21 @@
 import React, { useEffect, useState, useMemo  } from 'react'
 
-// import EditUser from './EditUser'
-import { deleteOrder, getOneOrderItems } from '../../services/OrderService'
+import EditOrder from './EditOrder'
+import { deleteOrder, getAllOrders } from '../../../services/OrderService'
 
 import DataTable from 'react-data-table-component'
 
 import { ImCross } from 'react-icons/im'
 
-import { columns } from '../../data/userOrdersTableHeaders'
+import { columns } from '../../../data/adminOrdersTableHeaders'
 
-function UsersList() {
+function AdminOrders() {
     const [orders, setOrders] = useState([])
     const [alertDeleteMessage, setAlertDeleteMessage] = useState('')
     const [alertEditedMessage, setAlertEditedMessage] = useState('')
     
 useEffect(() => {
-    getOneOrderItems(JSON.parse(localStorage.getItem('data')).user_id)
+    getAllOrders()
     .then((orders) => {
         setOrders(orders)
     })
@@ -51,7 +51,6 @@ useEffect(() => {
 
     const handleFilter = (event) => {
         const newData = orders.filter(row => {
-            console.log(columns)
             return row.orderID.includes(event.target.value)
         })
         setRecords(newData)
@@ -80,18 +79,35 @@ useEffect(() => {
             ? records.map((order) => {
                   return {
                       order_id: order.order_id,
+                      username: order.username,
+                      order: <button type="button" >
+                         <svg
+                            fill="#000000"
+                            height="20px"
+                            width="20px"
+                            id="Layer_1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 42 42"
+                            enableBackground="new 0 0 42 42"
+                            xmlSpace="preserve"
+                        >
+                            <path d="M15.3,20.1c0,3.1,2.6,5.7,5.7,5.7s5.7-2.6,5.7-5.7s-2.6-5.7-5.7-5.7S15.3,17,15.3,20.1z M23.4,32.4 C30.1,30.9,40.5,22,40.5,22s-7.7-12-18-13.3c-0.6-0.1-2.6-0.1-3-0.1c-10,1-18,13.7-18,13.7s8.7,8.6,17,9.9 C19.4,32.6,22.4,32.6,23.4,32.4z M11.1,20.7c0-5.2,4.4-9.4,9.9-9.4s9.9,4.2,9.9,9.4S26.5,30,21,30S11.1,25.8,11.1,20.7z" />
+                        </svg>
+                      </button>,
                       order_date: order.order_date,
-                      name: order.name,
-                      capacity: order.capacity,
-                      quantity: order.quantity,
+                      delivery_schedule: (order.delivery_date ? order.delivery_date + " " : "") + (order.delivery_time ? order.delivery_time : ""),
                       total_price: order.total_price,
+                      mode_of_payment: order.mode_of_payment === 'gcash' ?
+                      <button className='py-1 w-16 text-xm rounded-lg text-white font-medium bg-sky-900'>Gcash</button>
+                      : <button className='py-1 w-16 text-xm rounded-lg text-white font-medium bg-slate-900'>COD</button>,
                       is_paid: order.is_paid ?
-                        <button className='py-1 px-5 text-xm rounded-lg text-white font-medium bg-lime-600'>Paid</button>
-                        : <button className='py-1 px-5 text-xm rounded-lg text-black font-medium bg-yellow-400'>Unpaid</button>,
+                        <button className='py-1 w-16 text-xm rounded-lg text-white font-medium bg-lime-600'>Paid</button>
+                        : <button className='py-1 w-16 text-xm rounded-lg text-black font-medium bg-yellow-400'>Unpaid</button>,
                       status: statusChecker(order.status),
                       actions: (
                       <div className='flex items-center'>
-                        {/* <EditUser user={user} handleSetAlertEdited={handleSetAlertEdited} /> */}
+                        <EditOrder order={order} handleSetAlertEdited={handleSetAlertEdited} />
                       <div className='flex-col gap-2 justify-center group relative py-1 px-4 overflow-visible'>
                             <button
                               className="m-0 p-0"
@@ -121,7 +137,7 @@ useEffect(() => {
     return (
         <div className="">
                 <h2 className="font-bold text-xl p-2 text-transparent bg-clip-text bg-gradient-to-r to-slate-900 from-orange-600">
-                    Order History
+                    Orders
                 </h2>
                 <input type="text" placeholder="Search..." onChange={handleFilter} className="hidden py-1 my-2 text-sm rounded px-4 " />
             <div className="">
@@ -153,10 +169,11 @@ useEffect(() => {
                     pagination
                     fixedHeader
                     fixedHeaderScrollHeight="300px"
+                    defaultSortAsc={false}
                 ></DataTable>
             </div>
         </div>
     )
 }
 
-export default UsersList
+export default AdminOrders

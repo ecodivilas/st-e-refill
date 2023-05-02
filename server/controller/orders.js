@@ -10,12 +10,12 @@ class OrdersController {
     }
 
     // Customize Get only one record
-    async getOneOrderItems(id){
+    async getOneOrderItems(id) {
         return await ordersService.getOneOrderItems(id)
     }
     
     // Customize Get only one record
-    async getAllOrderItems(){
+    async getAllOrderItems() {
         return await ordersService.getAllOrderItems()
     }
 
