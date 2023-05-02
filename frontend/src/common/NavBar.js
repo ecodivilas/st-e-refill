@@ -19,7 +19,7 @@ function Navbar({ setIsAuthorized, setIsAdmin }) {
     navigate('/login')
   }
 
-  let username
+  let username = ""
 
   return (
     <div>
@@ -31,7 +31,7 @@ function Navbar({ setIsAuthorized, setIsAdmin }) {
             {isAuthorize ? (
               <div className="flex justify-end align-bottom w-1/4 gap-4 mr-2 my-2 h-12">
                 <div className='flex items-center justify-center font-medium w-1/2 border border-10 border-slate-900'>
-                  Hi, <span className='hidden'>{username = JSON.parse(localStorage.getItem('data')).username}</span>
+                  Hi, <span className='hidden'>{username = JSON.parse(localStorage.getItem('data')).username ? username = JSON.parse(localStorage.getItem('data')).username : "" }</span>
                   {username.charAt(0).toUpperCase() + username.slice(1)}
                 </div>
                 <button type="button" onClick={handleLogout} className="text-white bg-orange-600 hover:bg-orange-600 font-medium text-base dark:bg-slate-900 dark:hover:bg-slate-800 w-1/2">Logout</button>

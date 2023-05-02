@@ -60,10 +60,13 @@ app.post('/api/v2/order', (req, res) => {
     // res.send(req.body.order)
 })
 
-
 // Customize Endpoint for fetching only the records of the user's orders and transaction history
 app.get('/api/v2/order_items/:id', (req, res) => {
     ordersController.getOneOrderItems(req.params.id).then((data) => res.json(data))
+})
+
+app.get('/api/v1/order/:id', (req, res) => {
+    ordersController.getOrder(req.params.id).then((data) => res.json(data))
 })
 
 app.put('/api/v1/order', (req, res) => {

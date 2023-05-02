@@ -17,7 +17,6 @@ let defaultUserValues = {
     role_id: 1,
 }
 
-
 let defaultAddressValues = {
     address: '',
     baranggay: '',
@@ -55,9 +54,26 @@ function Register() {
     }
 
     const isPassed = () => {
-        if (user_details.confirm_password === user_details.password && user_details.password !== "") {
+        if (user_details.confirm_password === user_details.password
+            && user_details.password !== ""
+            && user_details.username.trim() !== ""
+            && user_details.email.trim() !== ""
+            // && user_details.password.trim() !== ""
+            // && user_details.first_name.trim() !== ""
+            // && user_details.last_name.trim() !== ""
+            // && user_details.age.trim() !== ""
+            // && user_details.gender.trim() !== ""
+            // && user_details.mobile_number.trim() !== ""
+            // && user_details.gender.trim() !== ""
+            // && user_details.address.trim() !== ""
+            // && user_details.baranggay.trim() !== ""
+            // && user_details.city.trim() !== ""
+            // && user_details.country.trim() !== ""
+            ) 
+        {
             return true
-        } else {
+        }   
+        else {
             return false
         }
     }
@@ -80,7 +96,7 @@ function Register() {
             setToggle(prev =>!prev)
             console.log("User Data: ", defaultUserValues)
             console.log("Address Data: ", defaultAddressValues)
-            alert('Password Mismatched!')
+            alert('Password Mismatched! / Some Fields are empty')
         }
     }
 

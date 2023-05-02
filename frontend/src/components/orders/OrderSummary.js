@@ -59,7 +59,7 @@ function OrderSummary() {
                 "delivery_date": localStorage.getItem("dateValue"),
                 "delivery_time": localStorage.getItem("timeValue"),
                 "mode_of_payment": localStorage.getItem("orderMOP"),
-                "status": "to collect",
+                "status": "pick up",
                 "is_paid": false,
                 "order_items": order_items
                }

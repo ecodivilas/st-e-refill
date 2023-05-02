@@ -145,12 +145,12 @@ class OrdersRepository {
     async getOrders() {
         try {
             const orders = this.db.sequelize.query(`
-            SELECT orders.order_id, users.username, order_date, delivery_date, delivery_time, mode_of_payment,
-            is_paid, status, sum(order_items.quantity * order_items.unit_price) AS "total_price"
-            FROM order_items LEFT JOIN orders ON orders.order_id = order_items.order_id
-            LEFT JOIN users ON users.user_id = orders.user_id
-            WHERE users.username IS NOT NULL AND orders.order_id IS NOT NULL
-            GROUP BY orders.order_id, users.username;
+                SELECT orders.order_id, users.username, order_date, delivery_date, delivery_time, mode_of_payment,
+                is_paid, status, sum(order_items.quantity * order_items.unit_price) AS "total_price"
+                FROM order_items LEFT JOIN orders ON orders.order_id = order_items.order_id
+                LEFT JOIN users ON users.user_id = orders.user_id
+                WHERE users.username IS NOT NULL AND orders.order_id IS NOT NULL
+                GROUP BY orders.order_id, users.username;
             `, { type: this.db.QueryTypes.SELECT })
 
             return orders
@@ -162,7 +162,14 @@ class OrdersRepository {
 
     async getOrder(id) {
         try {
-            const order = await this.db.orders.findByPk(id);
+            const order = this.db.sequelize.query(`
+            SELECT orders.order_id, users.username, users.user_id, order_date, delivery_date, delivery_time, mode_of_payment,
+            is_paid, status, sum(order_items.quantity * order_items.unit_price) AS "total_price"
+            FROM order_items LEFT JOIN orders ON orders.order_id = order_items.order_id
+            LEFT JOIN users ON users.user_id = orders.user_id
+            WHERE users.username IS NOT NULL AND orders.order_id IS NOT NULL AND users.user_id = ${id}
+            GROUP BY orders.order_id, users.username, users.user_id;
+            `, { type: this.db.QueryTypes.SELECT })
             return order
         } catch (error) {
             console.log('Error: ', error)

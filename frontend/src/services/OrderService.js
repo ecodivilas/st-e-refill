@@ -8,6 +8,15 @@ export async function getAllOrders () {
     }
 }
 
+export async function getOneOrder (user_id) {
+    try {
+        const response = await fetch( `/api/v1/order/${user_id}` )
+        return response.json()
+    } catch (error) {
+        console.log('Error: ', error)
+    }
+}
+
 // EDIT/UPDATE Order
 export async function editOrder(order) {
     console.log(order)

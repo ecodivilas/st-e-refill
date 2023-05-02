@@ -20,7 +20,7 @@ const adminMenus = [
 const userMenus = [
   {name: "Dashboard", link: "/", icon: MdOutlineDashboard}, 
   {name: "Order Now", link: "/order", icon: BiPurchaseTagAlt}, 
-  {name: "Orders", link: "/orders", icon: FiShoppingCart},
+  {name: "Orders", link: "/users/orders", icon: FiShoppingCart},
   {name: "History", link: "/", icon: AiOutlineHistory}, 
   {name: "Setting", link: "/", icon: RiSettings4Line},
   { name: "Logout", link: "/", icon: MdLogout },

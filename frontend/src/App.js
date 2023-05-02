@@ -26,6 +26,9 @@ import './assets/customizedStyles/customTableStyle.css'
 import AdminUsersDashboard from './components/admin_dashboard/users/AdminUsersDashboard'
 import AdminOrdersDashboard from './components/admin_dashboard/orders/AdminOrdersDashboard'
 
+//User Components
+import UserOrdersDashboard from './components/user_dashboard/orders/UserOrdersDashboard'
+
 // import OrderHistory from './components/user_dashboard/OrderHistory'
 export let isAuthorize
 export let isAdmin_
@@ -67,6 +70,9 @@ isNavOut = isNavigationOut
               {/* Admin Component Routes */}
               <Route path="/admin/users" element={<AdminUsersDashboard setIsAuthorized={setIsAuthorized} setIsAdmin={setIsAdmin} />}/>
               <Route path="/admin/orders" element={<AdminOrdersDashboard setIsAuthorized={setIsAuthorized} setIsAdmin={setIsAdmin} />}/>
+
+              {/* User Component Routes */}
+              <Route path="/users/orders" element={<UserOrdersDashboard setIsAuthorized={setIsAuthorized} setIsAdmin={setIsAdmin} />}/>
             </>
             :
             <>
