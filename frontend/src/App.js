@@ -29,6 +29,8 @@ import AdminOrdersDashboard from './components/admin_dashboard/orders/AdminOrder
 //User Components
 import UserOrdersDashboard from './components/user_dashboard/orders/UserOrdersDashboard'
 
+import Experiment from './pages/Experiment'
+
 // import OrderHistory from './components/user_dashboard/OrderHistory'
 export let isAuthorize
 export let isAdmin_
@@ -58,6 +60,7 @@ isNavOut = isNavigationOut
         <Routes>
           {isAuthorized ? 
             <>
+              <Route path="/experiment" element={<Experiment/> } />
               <Route path="/delivery-address-form" element={<DeliveryAddressForm /> } />
               <Route path="/order" element={<OrderTypeSelection />}/>
               <Route path="/order-container-selection" element={<ContainerSelection />}/>

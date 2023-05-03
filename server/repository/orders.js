@@ -111,6 +111,7 @@ class OrdersRepository {
         containers.name,
         containers.capacity,
         orders.order_date,
+        containers.refill_price,
         order_items.quantity,
         (order_items.quantity * order_items.unit_price) AS "total_price",
         orders.is_paid, orders.status from orders

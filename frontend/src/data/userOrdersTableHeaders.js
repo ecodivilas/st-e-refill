@@ -25,7 +25,7 @@ export const columns = [
         sortable: true,
     },
     {
-        name: 'Total Price',
+        name: 'Total Price (₱)',
         selector: (row) => row.total_price,
         sortable: true,
     },

@@ -30,7 +30,7 @@ function Navbar({ setIsAuthorized, setIsAdmin }) {
           </div>
             {isAuthorize ? (
               <div className="flex justify-end align-bottom w-1/4 gap-4 mr-2 my-2 h-12">
-                <div className='flex items-center justify-center font-medium w-1/2 border border-10 border-slate-900'>
+                <div className='flex items-center justify-center font-medium w-1/2'>
                   Hi, <span className='hidden'>{username = JSON.parse(localStorage.getItem('data')).username ? username = JSON.parse(localStorage.getItem('data')).username : "" }</span>
                   {username.charAt(0).toUpperCase() + username.slice(1)}
                 </div>
