@@ -13,7 +13,6 @@ function Login({ setIsAdmin, setIsAuthorized, setIsNavigationOut }) {
         setAdminData((prev) => {
             return { ...prev, [name]: value }
         })
-        console.log(name, value)
     }
 
     const handleSubmit = (e) => {
