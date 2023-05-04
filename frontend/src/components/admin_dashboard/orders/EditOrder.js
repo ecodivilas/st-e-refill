@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { editOrder } from '../../../services/OrderService'
 
-const EditOrder = ({ order, handleSetAlertEdited }) => {
+const EditOrder = ({ handleSetAlertEdited, order }) => {
     const INITIAL_USER_DATA = {
         order_id: order.order_id ?? '',
         username: order.username ?? '',
@@ -12,7 +12,7 @@ const EditOrder = ({ order, handleSetAlertEdited }) => {
         total_price: order.total_price ?? '',
         mode_of_payment: order.mode_of_payment ?? '',
         is_paid: order.is_paid ?? '',
-        status: order.status ?? ''
+        status: order.status ?? '',
     }
 
     const editFormParams = [
@@ -87,7 +87,7 @@ const EditOrder = ({ order, handleSetAlertEdited }) => {
             placeholder: 'Status',
             name: 'status',
             defaultValue: order.status,
-        }
+        },
     ]
 
     const [orderData, setUserData] = useState(INITIAL_USER_DATA)
@@ -155,59 +155,145 @@ const EditOrder = ({ order, handleSetAlertEdited }) => {
                                                         {field.label}
                                                     </label>
                                                 </div>
-                                                {(field.id !== 9 && field.id !== 8 && field.id !== 7) ?
-                                                <>
-                                                    <input key={field.id}
-                                                        className="grow rounded-md h-5"
-                                                        type={field.type}
-                                                        placeholder={
-                                                            field.placeholder
-                                                        }
-                                                        name={field.name}
-                                                        // defaultValue={
-                                                        //     field.defaultValue
-                                                        // }
-                                                        value={field.defaultValue}
-                                                        onChange={handleChange}
-                                                        required='true'
-                                                        readOnly
-                                                    />
-                                                </>:
-                                                <>
-                                                {field.name === 'mode_of_payment' ?
+                                                {field.id !== 9 &&
+                                                field.id !== 8 &&
+                                                field.id !== 7 ? (
                                                     <>
-                                                        <select key={field.id} name={field.name} defaultValue={field.defaultValue} onChange={handleChange} className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-sm block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
-                                                            <option value=""></option>
-                                                            <option value="gcash">Gcash</option>
-                                                            <option value="cash_on_delivery">Cash on Delivery</option>
-                                                        </select>
-                                                    </> : <></>}
-                                                {field.name === 'is_paid' ?
-                                                <>
-                                                    <select key={field.id} name={field.name} defaultValue={field.defaultValue} onChange={handleChange} className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-sm block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
-                                                        <option value=""></option>
-                                                        <option value="true">Paid</option>
-                                                        <option value="false">Unpaid</option>
-                                                    </select>
-                                                </> : <></>}
-                                                {field.name === 'status' ?
-                                                <>
-                                                    <select key={field.id} name={field.name} defaultValue={field.defaultValue} onChange={handleChange} className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-sm block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
-                                                        <option value=""></option>
-                                                        <option value="pick up">Pick Up</option>
-                                                        <option value="cancelled">Cancelled</option>
-                                                        <option value="preparing">Preparing</option>
-                                                        <option value="on the way">On the Way</option>
-                                                        <option value="delivered">Delivered</option>
-                                                    </select>
-                                                </> : <></>}
-                                                </>}
+                                                        <input
+                                                            key={field.id}
+                                                            className="grow rounded-md h-5"
+                                                            type={field.type}
+                                                            placeholder={
+                                                                field.placeholder
+                                                            }
+                                                            name={field.name}
+                                                            // defaultValue={
+                                                            //     field.defaultValue
+                                                            // }
+                                                            value={
+                                                                field.defaultValue
+                                                            }
+                                                            onChange={
+                                                                handleChange
+                                                            }
+                                                            required="true"
+                                                            readOnly
+                                                        />
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        {field.name ===
+                                                        'mode_of_payment' ? (
+                                                            <>
+                                                                <select
+                                                                    key={
+                                                                        field.id
+                                                                    }
+                                                                    name={
+                                                                        field.name
+                                                                    }
+                                                                    defaultValue={
+                                                                        field.defaultValue
+                                                                    }
+                                                                    onChange={
+                                                                        handleChange
+                                                                    }
+                                                                    className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-sm block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                                                >
+                                                                    <option value=""></option>
+                                                                    <option value="gcash">
+                                                                        Gcash
+                                                                    </option>
+                                                                    <option value="cash_on_delivery">
+                                                                        Cash on
+                                                                        Delivery
+                                                                    </option>
+                                                                </select>
+                                                            </>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {field.name ===
+                                                        'is_paid' ? (
+                                                            <>
+                                                                <select
+                                                                    key={
+                                                                        field.id
+                                                                    }
+                                                                    name={
+                                                                        field.name
+                                                                    }
+                                                                    defaultValue={
+                                                                        field.defaultValue
+                                                                    }
+                                                                    onChange={
+                                                                        handleChange
+                                                                    }
+                                                                    className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-sm block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                                                >
+                                                                    <option value=""></option>
+                                                                    <option value="true">
+                                                                        Paid
+                                                                    </option>
+                                                                    <option value="false">
+                                                                        Unpaid
+                                                                    </option>
+                                                                </select>
+                                                            </>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                        {field.name ===
+                                                        'status' ? (
+                                                            <>
+                                                                <select
+                                                                    key={
+                                                                        field.id
+                                                                    }
+                                                                    name={
+                                                                        field.name
+                                                                    }
+                                                                    defaultValue={
+                                                                        field.defaultValue
+                                                                    }
+                                                                    onChange={
+                                                                        handleChange
+                                                                    }
+                                                                    className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-sm block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                                                >
+                                                                    <option value=""></option>
+                                                                    <option value="pick up">
+                                                                        Pick Up
+                                                                    </option>
+                                                                    <option value="cancelled">
+                                                                        Cancelled
+                                                                    </option>
+                                                                    <option value="preparing">
+                                                                        Preparing
+                                                                    </option>
+                                                                    <option value="on the way">
+                                                                        On the
+                                                                        Way
+                                                                    </option>
+                                                                    <option value="delivered">
+                                                                        Delivered
+                                                                    </option>
+                                                                </select>
+                                                            </>
+                                                        ) : (
+                                                            <></>
+                                                        )}
+                                                    </>
+                                                )}
                                             </div>
                                         )
                                     })}
 
                                     <div className="flex justify-between">
-                                        <button onClick={handleEditedMessage} className="bg-gray-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
+                                        <button
+                                            onClick={handleEditedMessage}
+                                            className="bg-gray-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded"
+                                        >
                                             Save
                                         </button>
                                         <button

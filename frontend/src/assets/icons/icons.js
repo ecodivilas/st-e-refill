@@ -11,6 +11,7 @@ import { FaCartArrowDown, FaHome } from 'react-icons/fa'
 import { FiShoppingCart } from 'react-icons/fi'
 import { GiWaterBottle } from 'react-icons/gi'
 import { HiMenuAlt3 } from 'react-icons/hi'
+import { ImCross } from 'react-icons/im'
 import { MdLogout, MdOutlineDashboard } from 'react-icons/md'
 import { RiSettings4Line } from 'react-icons/ri'
 
@@ -27,6 +28,7 @@ export {
     FiShoppingCart,
     GiWaterBottle,
     HiMenuAlt3,
+    ImCross,
     MdLogout,
     MdOutlineDashboard,
     RiSettings4Line,
