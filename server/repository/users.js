@@ -11,15 +11,14 @@ class UsersRepository {
     }
 
     async createUser(user) {
-
-        if(ValidateEmail(user.email)){
+        if (ValidateEmail(user.email)) {
             let userData = {}
 
             try {
                 const password = user.password
                 const salt = bcrypt.genSaltSync(10)
                 const hashedPassword = bcrypt.hashSync(password, salt)
-    
+
                 userData = { ...user, password: hashedPassword }
                 const createdUser = await this.db.users.create(userData)
 
@@ -28,15 +27,15 @@ class UsersRepository {
                 console.log('Error: ', error)
             }
         } else {
-            return "Email is not Valid"
+            return 'Email is not Valid'
         }
-        
     }
 
     async getUsers() {
         try {
             const users = await this.db.users.findAll({
-                order: [['user_id', 'ASC']], where: {deleted_at: null}
+                order: [['user_id', 'ASC']],
+                where: { deleted_at: null },
             })
             return users
         } catch (error) {
@@ -57,8 +56,14 @@ class UsersRepository {
     async deleteUser(id) {
         console.log(id)
         try {
-            const isAddressDestroyed = await this.db.addresses.update({ deleted_at: new Date }, { where:{"user_id": id}})
-            const user = await this.db.users.update({ deleted_at: new Date }, { where:{"user_id": id}})
+            const isAddressDestroyed = await this.db.addresses.update(
+                { deleted_at: new Date() },
+                { where: { user_id: id } }
+            )
+            const user = await this.db.users.update(
+                { deleted_at: new Date() },
+                { where: { user_id: id } }
+            )
             return user
         } catch (error) {
             console.log('Error: ', error)
@@ -85,51 +90,60 @@ class UsersRepository {
 
     // Login w/ JWT
     async loginUser(loginCredentials) {
-            console.log("Login Credentials", loginCredentials.username)
+        console.log('Login Credentials', loginCredentials.username)
 
         try {
             const password = loginCredentials.password
-            console.log("Password", password)
+            console.log('Password', password)
 
             const user = await this.db.users.findOne({
                 where: {
-                    username: loginCredentials.username
-                }
+                    username: loginCredentials.username,
+                },
             })
 
-            if(!user){
-                throw new Error('database failed to connect');
+            if (!user) {
+                throw new Error('database failed to connect')
             } else {
                 try {
-                    const passwordMatch = await bcrypt.compare(password, user.password)
-                    
-                    if (passwordMatch) {
-                        const generatedToken = generateAccessToken({ username: loginCredentials.username })
-                        if (generatedToken){
-                            const verifiedUserData = await this.db.users.findOne({
-                                where: { "user_id": user.user_id },
-                                include: [this.db.addresses]
-                        })
+                    const passwordMatch = await bcrypt.compare(
+                        password,
+                        user.password
+                    )
 
-                        const generatedTokenObject = {"jwt": generatedToken, "userRole": verifiedUserData.role_id}
-                        const updatedData = [generatedTokenObject, verifiedUserData] 
-                     
-                        return updatedData
+                    if (passwordMatch) {
+                        const generatedToken = generateAccessToken({
+                            username: loginCredentials.username,
+                        })
+                        if (generatedToken) {
+                            const verifiedUserData =
+                                await this.db.users.findOne({
+                                    where: { user_id: user.user_id },
+                                    include: [this.db.addresses],
+                                })
+
+                            const generatedTokenObject = {
+                                jwt: generatedToken,
+                                userRole: verifiedUserData.role_id,
+                            }
+                            const updatedData = [
+                                generatedTokenObject,
+                                verifiedUserData,
+                            ]
+
+                            return updatedData
                         }
-                        
                     } else {
                         throw passwordMatch
                     }
                 } catch (error) {
-                   console.log('Error: ', error)
+                    console.log('Error: ', error)
                 }
             }
-        
         } catch (error) {
-                console.log('Error: ', error)
+            console.log('Error: ', error)
         }
     }
-
 
     // Register User
     async registerUser(user) {
@@ -146,22 +160,22 @@ class UsersRepository {
             if (createdUser) {
                 user.address.user_id = createdUser.user_id
                 try {
-                    const createAddress = await this.db.addresses.create(user.address)
-                    if(createAddress) {
-                        console.log("User and Address Successfully Created")
-                        return "Successful"
+                    const createAddress = await this.db.addresses.create(
+                        user.address
+                    )
+                    if (createAddress) {
+                        console.log('User and Address Successfully Created')
+                        return 'Successful'
                     } else {
-                        return "Address was not created"
+                        return 'Address was not created'
                     }
                 } catch (error) {
-                    console.log("Error: ", error)
+                    console.log('Error: ', error)
                     return error
                 }
-                
             } else {
                 return true
             }
-
         } catch (error) {
             console.log('Error: ', error)
         }
