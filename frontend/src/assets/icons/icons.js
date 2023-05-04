@@ -3,4 +3,5 @@ import { FaCartArrowDown } from "react-icons/fa"
 import { GiWaterBottle } from "react-icons/gi"
 import { MdLogout } from "react-icons/md"
 
-export { AiOutlineCaretDown, AiOutlineCaretUp,  AiOutlinePlus, AiOutlineMinus, FaCartArrowDown, GiWaterBottle, MdLogout }
+export { AiOutlineCaretDown, AiOutlineCaretUp,  AiOutlinePlus,
+    AiOutlineMinus, FaCartArrowDown, GiWaterBottle, MdLogout }

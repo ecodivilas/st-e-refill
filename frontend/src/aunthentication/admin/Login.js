@@ -59,7 +59,7 @@ const handleSubmit = e => {
 
   return (
         <>
-         <div
+         {/* <div
         className="fixed top-0 flex justify-end items-center background w-screen -z-10"
         style={{
         filter: 'brightness(40%)',
@@ -68,9 +68,12 @@ const handleSubmit = e => {
         backgroundSize: 'cover',
         height: '100vh',
       }}
-        ></div>
-        <section className="w-[98vw] flex justify-end z-10">
-            <div className="w-[98vw] flex flex-cols items-center justify-end px-6 py-8 mx-auto md:h-screen lg:py-0 mr-20">
+        ></div> */}
+        <div className="fixed top-0  w-screen h-screen -z-10 bg-slate-600">
+            
+        </div>
+        <section className="w-full flex justify-center z-10">
+            <div className="w-full flex flex-cols items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 mr-20">
                 <div className="w-[380px] z-10 bg-white h-[380px] mb-27 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
