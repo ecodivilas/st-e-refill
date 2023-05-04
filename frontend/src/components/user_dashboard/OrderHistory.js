@@ -1,9 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react'
 
-// import EditUser from './EditUser'
+import '../../App'
 import { getOneOrderItems } from '../../services/OrderService'
 import DataTable from 'react-data-table-component'
-import { ImCross } from '../../assets/icons/icons'
 import { columns } from '../../data/userOrdersTableHeaders'
 
 function OrderHistory() {
@@ -28,7 +27,6 @@ function OrderHistory() {
 
     const handleFilter = (event) => {
         const newData = orders.filter((row) => {
-            console.log(columns)
             return row.orderID.includes(event.target.value)
         })
         setRecords(newData)

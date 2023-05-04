@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { loginUser } from '../../services/UserService'
+import '../../App'
 
 function Login({ setIsAuthorized, setIsAdmin }) {
     const [userData, setUserData] = useState({ username: '', password: '' })
@@ -16,14 +17,12 @@ function Login({ setIsAuthorized, setIsAdmin }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        try {
-            loginUser(userData).then((res) => {
-                if (JSON.stringify(res) !== '{}' && res !== undefined) {
-                    console.log(res)
 
+        loginUser(userData)
+            .then((res) => {
+                if (JSON.stringify(res) !== '{}' && res !== undefined) {
                     if (res[1].role_id !== 1) {
                         alert('Not a customer account')
-                        console.log(res[1].role_id)
                         navigate('/login')
                     } else {
                         // Assigning default values upon login
@@ -43,9 +42,7 @@ function Login({ setIsAuthorized, setIsAdmin }) {
                     alert("User/Password doesn't exist!")
                 }
             })
-        } catch (error) {
-            console.log('Error: ', error)
-        }
+            .catch((error) => console.log(error))
     }
 
     return (

@@ -58,15 +58,15 @@ export async function getOneOrderItems(userId) {
     }
 }
 
-// GET/FETCH ORDERS OF ALL USERS ORDERS
-export async function getAllOrderItems() {
-    try {
-        const response = await fetch('/api/v2/order_items')
-        return response.json()
-    } catch (error) {
-        console.log('Error: ', error)
-    }
-}
+// // GET/FETCH ORDERS OF ALL USERS ORDERS
+// export async function getAllOrderItems() {
+//     try {
+//         const response = await fetch('/api/v2/order_items')
+//         return response.json()
+//     } catch (error) {
+//         console.log('Error: ', error)
+//     }
+// }
 
 // DELETE User
 export async function deleteOrder(userId) {

@@ -12,27 +12,30 @@ function PersonalDataForm({ defaultUserValues, handleUserChange }) {
                             {item.label}
                         </label>
                         {item.id === 'gender' ? (
-                            <select name="gender" defaultValue={defaultUserValues[item.name]} onChange={handleUserChange} className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-sm block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                            <select
+                                name="gender"
+                                defaultValue={defaultUserValues[item.name]}
+                                onChange={handleUserChange}
+                                className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-sm block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                            >
                                 <option value=""></option>
                                 <option value="M">Male</option>
                                 <option value="F">Female</option>
                             </select>
                         ) : (
-                        <input
-                            type={item.type}
-                            name={item.name}
-                            defaultValue={defaultUserValues[item.name]}
-                            placeholder={
-                                item.placeholder
-                            }
-                            onChange={handleUserChange}
-                            className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-sm block !w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                            required='true'
-                        />
+                            <input
+                                type={item.type}
+                                name={item.name}
+                                defaultValue={defaultUserValues[item.name]}
+                                placeholder={item.placeholder}
+                                onChange={handleUserChange}
+                                className="px-2 mt-2 h-8 bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-sm block !w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                required={true}
+                            />
                         )}
                     </div>
-                ))}              
-                </div>
+                ))}
+            </div>
         </div>
     )
 }

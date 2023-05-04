@@ -98,14 +98,12 @@ const EditOrder = ({ order, handleSetAlertEdited }) => {
         setUserData((prev) => {
             return { ...prev, [name]: value }
         })
-        console.log(name, value)
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         editOrder(orderData)
             .then(() => {
-                console.log(orderData)
                 toggleModal()
             })
             .catch((error) => {

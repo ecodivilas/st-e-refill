@@ -66,7 +66,7 @@ const EditUser = ({ user, handleSetAlertEdited }) => {
             placeholder: 'Mobile No.',
             name: 'mobile_number',
             defaultValue: user.mobile_number,
-        }
+        },
     ]
 
     const [userData, setUserData] = useState(INITIAL_USER_DATA)
@@ -77,14 +77,12 @@ const EditUser = ({ user, handleSetAlertEdited }) => {
         setUserData((prev) => {
             return { ...prev, [name]: value }
         })
-        console.log(name, value)
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         editUser(userData)
             .then(() => {
-                console.log(userData)
                 toggleModal()
             })
             .catch((error) => {
@@ -134,7 +132,8 @@ const EditUser = ({ user, handleSetAlertEdited }) => {
                                                         {field.label}
                                                     </label>
                                                 </div>
-                                                <input key={field.id}
+                                                <input
+                                                    key={field.id}
                                                     className="grow rounded-md h-5"
                                                     type={field.type}
                                                     placeholder={
@@ -145,14 +144,17 @@ const EditUser = ({ user, handleSetAlertEdited }) => {
                                                         field.defaultValue
                                                     }
                                                     onChange={handleChange}
-                                                    required='true'
+                                                    required="true"
                                                 />
                                             </div>
                                         )
                                     })}
 
                                     <div className="flex justify-between">
-                                        <button onClick={handleEditedMessage} className="bg-gray-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
+                                        <button
+                                            onClick={handleEditedMessage}
+                                            className="bg-gray-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded"
+                                        >
                                             Save
                                         </button>
                                         <button
