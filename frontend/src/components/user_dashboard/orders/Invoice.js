@@ -249,7 +249,6 @@ function Invoice({ order }) {
                                     <div className="w-1/4 text-center text-xs uppercase">
                                         Status
                                     </div>
-                                    {/* <div className="w-1/3 text-center text-xs uppercase">Due By</div> */}
                                     <div className="w-1/4 text-right text-xs uppercase">
                                         Total Due
                                     </div>

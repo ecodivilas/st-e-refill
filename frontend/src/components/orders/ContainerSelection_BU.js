@@ -38,9 +38,10 @@ function ContainerSelection() {
 
     const [totalPriceAmount, setTotalPriceAmount] = useState(0)
 
-    const slimPriceAmount = slimQuantity * dbContainers[0].refill_price
-    const roundPriceAmount = roundQuantity * dbContainers[1].refill_price
-    const halfSlimPriceAmount = halfSlimQuantity * dbContainers[2].refill_price
+    const slimPriceAmount = updatedSlimQuantity * dbContainers[0].refill_price
+    const roundPriceAmount = updatedRoundQuantity * dbContainers[1].refill_price
+    const halfSlimPriceAmount =
+        updatedHalfSlimQuantity * dbContainers[2].refill_price
 
     useEffect(() => {
         getAllContainers()
@@ -56,41 +57,38 @@ function ContainerSelection() {
         )
     }, [slimPriceAmount, roundPriceAmount, halfSlimPriceAmount])
 
-    const quantityStates = [
-        {
-            id: 1,
-            quantity: slimQuantity,
-            uiStateSetter: setSlimQuantity,
-            localName: 'updatedSlimQuantity',
-        },
-        {
-            id: 2,
-            quantity: roundQuantity,
-            uiStateSetter: setRoundQuantity,
-            localName: 'updatedRoundQuantity',
-        },
-        {
-            id: 3,
-            quantity: halfSlimQuantity,
-            uiStateSetter: setHalfSlimQuantity,
-            localName: 'updatedHalfSlimQuantity',
-        },
-    ]
-
     const handleDecrementQuantity = (id) => {
-        const result = quantityStates.filter((state) => state.id === id)
-        const data = result[0]
-        if (data.quantity > 0) {
-            data.quantity--
-            data.uiStateSetter(data.quantity)
+        if (id === 1) {
+            if (updatedSlimQuantity > 0) {
+                setSlimQuantity(slimQuantity - 1)
+                updatedSlimQuantity = updatedSlimQuantity - 1
+            }
+        } else if (id === 2) {
+            if (updatedRoundQuantity > 0) {
+                setRoundQuantity(roundQuantity - 1)
+                updatedRoundQuantity = updatedRoundQuantity - 1
+            }
+        } else if (id === 3) {
+            if (updatedHalfSlimQuantity > 0) {
+                setHalfSlimQuantity(halfSlimQuantity - 1)
+                updatedHalfSlimQuantity = updatedHalfSlimQuantity - 1
+            }
         }
     }
 
     const handleIncrementQuantity = (id) => {
-        const result = quantityStates.filter((state) => state.id === id)
-        const data = result[0]
-        data.quantity++
-        data.uiStateSetter(data.quantity)
+        if (id === 1) {
+            setSlimQuantity((previousState) => {
+                return previousState + 1
+            })
+            updatedSlimQuantity = updatedSlimQuantity + 1
+        } else if (id === 2) {
+            setRoundQuantity(roundQuantity + 1)
+            updatedRoundQuantity = updatedRoundQuantity + 1
+        } else if (id === 3) {
+            setHalfSlimQuantity(halfSlimQuantity + 1)
+            updatedHalfSlimQuantity = updatedHalfSlimQuantity + 1
+        }
     }
 
     const handleNext = () => {
@@ -98,16 +96,22 @@ function ContainerSelection() {
             'totalPriceAmount',
             totalPriceAmount.toFixed(2).toString()
         )
-        // Map every quantity and set to local storage
-        quantityStates.map((state) => {
-            return (
-                localStorage.setItem(
-                    state.localName,
-                    state.quantity.toString()
-                ),
-                state.uiStateSetter(0)
-            )
-        })
+        localStorage.setItem(
+            'updatedSlimQuantity',
+            updatedSlimQuantity.toString()
+        )
+        localStorage.setItem(
+            'updatedRoundQuantity',
+            updatedRoundQuantity.toString()
+        )
+        localStorage.setItem(
+            'updatedHalfSlimQuantity',
+            updatedHalfSlimQuantity.toString()
+        )
+
+        setSlimQuantity(0)
+        setRoundQuantity(0)
+        setHalfSlimQuantity(0)
 
         setIsProceed((prev) => !prev)
     }
