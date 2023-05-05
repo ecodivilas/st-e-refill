@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
 import { getOneOrderItems } from '../../../services/OrderService'
+import { CrossSVGIcon, PreviewSVGIcon } from '../../../assets/icons/svgs/svgs'
+import { statuses } from '../../../data/InvoiceData'
 
 const formatDate = (dateString) => {
     //'2023-05-03'
@@ -13,38 +15,15 @@ const formatDate = (dateString) => {
     return formattedDate
 }
 
-const statusChecker = (status) => {
-    if (status === 'pick up') {
-        return (
-            <button className="p-1 w-20 text-xs font-bold rounded-lg text-black  bg-yellow-400">
-                Pick Up
-            </button>
-        )
-    } else if (status === 'cancelled') {
-        return (
-            <button className="py-1 w-20 text-xs rounded-lg text-white font-bold bg-gray-600">
-                Cancelled
-            </button>
-        )
-    } else if (status === 'preparing') {
-        return (
-            <button className="py-1 w-20 text-xs rounded-lg text-white font-bold bg-teal-900">
-                Preparing
-            </button>
-        )
-    } else if (status === 'on the way') {
-        return (
-            <button className="py-1 w-20 text-xs rounded-lg text-white font-bold bg-orange-600">
-                On the Way
-            </button>
-        )
-    } else if (status === 'delivered') {
-        return (
-            <button className="py-1 w-20 text-xs rounded-lg text-white font-bold bg-lime-600">
-                Delivered
-            </button>
-        )
-    }
+const showStatusBadge = (s) => {
+    const result = statuses.filter((status) => status.status === s)
+    return (
+        <button
+            className={`p-1 w-${result[0].width} text-xs font-bold rounded-lg text-${result[0].textColor}  bg-${result[0].bgColor}`}
+        >
+            {result[0].label}
+        </button>
+    )
 }
 
 const paymentChecker = (payment) => {
@@ -106,21 +85,7 @@ function Invoice({ order }) {
                     className="m-0 p-0 !hover:text-red-600"
                     onClick={toggleModal}
                 >
-                    <svg
-                        width="16px"
-                        height="16px"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            fill="#5C5F62"
-                            d="M16.707 6.293l3 3a.998.998 0 010 1.414l-3 3a.997.997 0 01-1.631-.324 1 1 0 01.217-1.09L16.586 11H12a1 1 0 110-2h4.586l-1.293-1.293a1 1 0 111.414-1.414zM3.293 6.293a1 1 0 111.414 1.414L3.414 9H8a1 1 0 010 2H3.414l1.293 1.293a1.003 1.003 0 010 1.414 1 1 0 01-1.414 0l-3-3a.998.998 0 010-1.414l3-3z"
-                        />
-                        <path
-                            fill="#5C5F62"
-                            d="M1 1.5A1.5 1.5 0 012.5 0h15A1.5 1.5 0 0119 1.5V6l-2-2V2H3v2L1 6V1.5zM17 18v-2l2-2v4.5a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 011 18.5V14l2 2v2h14z"
-                        />
-                    </svg>
+                    {PreviewSVGIcon}
                 </button>
             </span>
 
@@ -141,19 +106,7 @@ function Invoice({ order }) {
                                 </div>
                                 <div>
                                     <button className="" onClick={toggleModal}>
-                                        <svg
-                                            className="hover:text-red-400 text-red-600"
-                                            id="Layer_1"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            xmlnsXlink="http://www.w3.org/1999/xlink"
-                                            width="20px"
-                                            height="20px"
-                                            viewBox="0 0 100 100"
-                                            enableBackground="new 0 0 100 100"
-                                            xmlSpace="preserve"
-                                        >
-                                            <path d="M84.707,68.752L65.951,49.998l18.75-18.752c0.777-0.777,0.777-2.036,0-2.813L71.566,15.295 c-0.777-0.777-2.037-0.777-2.814,0L49.999,34.047l-18.75-18.752c-0.746-0.747-2.067-0.747-2.814,0L15.297,28.431 c-0.373,0.373-0.583,0.88-0.583,1.407c0,0.527,0.21,1.034,0.583,1.407L34.05,49.998L15.294,68.753 c-0.373,0.374-0.583,0.88-0.583,1.407c0,0.528,0.21,1.035,0.583,1.407l13.136,13.137c0.373,0.373,0.881,0.583,1.41,0.583 c0.525,0,1.031-0.21,1.404-0.583l18.755-18.755l18.756,18.754c0.389,0.388,0.896,0.583,1.407,0.583c0.511,0,1.019-0.195,1.408-0.583 l13.138-13.137C85.484,70.789,85.484,69.53,84.707,68.752z" />
-                                        </svg>
+                                        {CrossSVGIcon}
                                     </button>
                                 </div>
                             </div>
@@ -314,7 +267,7 @@ function Invoice({ order }) {
                                             {paymentChecker(order.is_paid)}
                                         </div>
                                         <div className="w-1/4 text-center">
-                                            {statusChecker(order.status)}
+                                            {showStatusBadge(order.status)}
                                         </div>
                                         <div className="w-1/4 text-right text-orange-600">
                                             ₱{order.total_price}

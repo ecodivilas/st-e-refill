@@ -1,0 +1,42 @@
+export const statuses = [
+    {
+        id: 1,
+        status: 'pick up',
+        textColor: 'black',
+        bgColor: 'yellow-400',
+        label: 'Pick Up',
+        width: 20,
+    },
+    {
+        id: 2,
+        status: 'cancelled',
+        textColor: 'black',
+        bgColor: 'yellow-400',
+        label: 'Cancelled',
+        width: 20,
+    },
+    {
+        id: 3,
+        status: 'preparing',
+        textColor: 'black',
+        bgColor: 'yellow-400',
+        label: 'Preparing',
+        width: 20,
+    },
+    {
+        id: 4,
+        status: 'on the way',
+        textColor: 'black',
+        bgColor: 'yellow-400',
+        label: 'On the Way',
+        width: 20,
+    },
+    {
+        id: 5,
+        status: 'delivered',
+        textColor: 'black',
+        bgColor: 'yellow-400',
+        label: 'Delivered',
+        width: 20,
+    },
+]

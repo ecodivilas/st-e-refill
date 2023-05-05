@@ -4,9 +4,7 @@ import { Navigate } from 'react-router-dom'
 import { AiOutlinePlus, AiOutlineMinus } from '../../assets/icons/icons'
 import { getAllContainers } from '../../services/ContainerService'
 
-let updatedSlimQuantity
-let updatedRoundQuantity
-let updatedHalfSlimQuantity
+let updatedSlimQuantity, updatedRoundQuantity, updatedHalfSlimQuantity
 
 try {
     updatedSlimQuantity = Number(localStorage.getItem('updatedSlimQuantity'))
@@ -124,7 +122,7 @@ function ContainerSelection() {
             containerPicture: (
                 <img
                     className="h-20 mx-10"
-                    src={require('./img/slim.webp')}
+                    src={require('../../assets/img/containers/slim.webp')}
                     alt="home_button"
                 />
             ),
@@ -136,7 +134,7 @@ function ContainerSelection() {
             containerPicture: (
                 <img
                     className="h-20 mx-10"
-                    src={require('./img/round.webp')}
+                    src={require('../../assets/img/containers/round.webp')}
                     alt="home_button"
                 />
             ),
@@ -148,7 +146,7 @@ function ContainerSelection() {
             containerPicture: (
                 <img
                     className="h-14 mx-10 my-3"
-                    src={require('./img/half_slim.webp')}
+                    src={require('../../assets/img/containers/half_slim.webp')}
                     alt="home_button"
                 />
             ),
