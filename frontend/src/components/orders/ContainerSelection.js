@@ -4,20 +4,20 @@ import { Navigate } from 'react-router-dom'
 import { AiOutlinePlus, AiOutlineMinus } from '../../assets/icons/icons'
 import { getAllContainers } from '../../services/ContainerService'
 
-let updatedSlimQuantity, updatedRoundQuantity, updatedHalfSlimQuantity
+// Local Storage Getter
+const getLSData = (item) => localStorage.getItem(item)
 
-try {
-    updatedSlimQuantity = Number(localStorage.getItem('updatedSlimQuantity'))
-    updatedRoundQuantity = Number(localStorage.getItem('updatedRoundQuantity'))
-    updatedHalfSlimQuantity = Number(
-        localStorage.getItem('updatedHalfSlimQuantity')
-    )
-} catch (error) {
-    updatedSlimQuantity = 0
-    updatedRoundQuantity = 0
-    updatedHalfSlimQuantity = 0
-    console.log('Error: ', error)
-}
+let updatedSlimQuantity = getLSData('updatedSlimQuantity')
+    ? Number(getLSData('updatedSlimQuantity'))
+    : 0
+
+let updatedRoundQuantity = getLSData('updatedRoundQuantity')
+    ? Number(getLSData('updatedRoundQuantity'))
+    : 0
+
+let updatedHalfSlimQuantity = getLSData('updatedHalfSlimQuantity')
+    ? Number(getLSData('updatedHalfSlimQuantity'))
+    : 0
 
 function ContainerSelection() {
     // From the database
@@ -112,7 +112,8 @@ function ContainerSelection() {
         setIsProceed((prev) => !prev)
     }
 
-    const additionalData = [
+    // Adapter data before render()
+    const uiData = [
         {
             id: 1,
             containerPicture: (
@@ -191,7 +192,7 @@ function ContainerSelection() {
                                     >
                                         <td className="px-6 py-4 flex justify-center">
                                             {
-                                                additionalData[
+                                                uiData[
                                                     container.container_id - 1
                                                 ].containerPicture
                                             }
@@ -220,7 +221,7 @@ function ContainerSelection() {
                                                 <div className="px-4 bg-white py-1">
                                                     <span className="text-lg text-black">
                                                         {
-                                                            additionalData[
+                                                            uiData[
                                                                 container.container_id -
                                                                     1
                                                             ].quantity
@@ -241,7 +242,7 @@ function ContainerSelection() {
                                         </td>
                                         <td className="text-lg px-6 py-4 dark:text-white text-center">
                                             {parseInt(
-                                                additionalData[
+                                                uiData[
                                                     container.container_id - 1
                                                 ].priceAmount
                                             ).toFixed(2)}
