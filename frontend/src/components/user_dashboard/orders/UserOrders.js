@@ -5,7 +5,7 @@ import { deleteOrder, getOneOrder } from '../../../services/OrderService'
 import Invoice from './Invoice'
 import DataTable from 'react-data-table-component'
 
-import { ImCross } from 'react-icons/im'
+import { ImCross } from '../../../assets/icons/icons'
 
 import { columns } from '../../../data/adminOrdersTableHeaders'
 
@@ -18,6 +18,7 @@ function UserOrders() {
         getOneOrder(JSON.parse(localStorage.getItem('data')).user_id)
             .then((orders) => {
                 setOrders(orders)
+                return true
             })
             .catch((error) => {
                 console.log(error)

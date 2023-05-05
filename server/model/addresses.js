@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes, Model) => {
             user_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
-                underscored: true
+                underscored: true,
             },
             address: {
                 type: DataTypes.STRING,
@@ -31,31 +31,36 @@ module.exports = (sequelize, DataTypes, Model) => {
                 allowNull: false,
             },
             tin: {
-                type: DataTypes.INTEGER
+                type: DataTypes.INTEGER,
             },
             description: {
-                type: DataTypes.STRING
+                type: DataTypes.STRING,
             },
             created_at: {
                 type: DataTypes.DATE,
                 defaultValue: sequelize.literal('NOW()'),
-                allowNull: false
+                allowNull: false,
             },
             updated_at: {
                 type: DataTypes.DATE,
                 defaultValue: sequelize.literal('NOW()'),
-                allowNull: false
+                allowNull: false,
+            },
+            archieved_at: {
+                type: DataTypes.DATE,
+                defaultValue: null,
+                allowNull: true,
             },
             deleted_at: {
                 type: DataTypes.DATE,
                 defaultValue: null,
-                allowNull: true
-            }
+                allowNull: true,
+            },
         },
         {
             sequelize,
             modelName: 'delivery_addresses',
-            timestamps: false
+            timestamps: false,
         }
     )
 

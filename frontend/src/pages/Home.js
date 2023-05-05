@@ -2,7 +2,8 @@ import React from 'react'
 
 import Splash from './Splash'
 import { getCurrentDate } from '../services/DateSetter'
-import { isAdmin_, isAuthorize } from '../App'
+// import { isAdmin_, isAuthorize } from '../App'
+import '../App'
 import AdminHomeDashboard from '../components/admin_dashboard/home/AdminHomeDashboard'
 import UserDashboard from '../components/user_dashboard/UserDashboard'
 
@@ -11,6 +12,8 @@ function Home({
     setIsAdmin,
     isAuthorized,
     setIsNavigationOut,
+    isAdmin_,
+    isAuthorize,
 }) {
     localStorage.setItem('totalPriceAmount', '0')
     localStorage.setItem('selectedService', ' ')

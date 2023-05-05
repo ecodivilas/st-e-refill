@@ -157,6 +157,8 @@ function App() {
                                 setIsAdmin={setIsAdmin}
                                 setIsAuthorized={setIsAuthorized}
                                 setIsNavigationOut={setIsNavigationOut}
+                                isAdmin_={isAdmin_}
+                                isAuthorize={isAuthorize}
                             />
                         }
                     />

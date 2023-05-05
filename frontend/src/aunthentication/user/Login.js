@@ -41,6 +41,7 @@ function Login({ setIsAuthorized, setIsAdmin }) {
                 } else {
                     alert("User/Password doesn't exist!")
                 }
+                return true
             })
             .catch((error) => console.log(error))
     }

@@ -2,11 +2,12 @@ module.exports = (sequelize, DataTypes, Model) => {
     class OrderItems extends Model {}
 
     OrderItems.init(
-        {   order_item_id: {
+        {
+            order_item_id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 allowNull: false,
-                autoIncrement: true
+                autoIncrement: true,
             },
             order_id: {
                 type: DataTypes.INTEGER,
@@ -15,12 +16,6 @@ module.exports = (sequelize, DataTypes, Model) => {
             container_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
-                //added
-                // unique: true,
-                // references: {
-                // model: this.db.containers,
-                // key: 'container_id'
-                // }
             },
             unit_price: {
                 type: DataTypes.DOUBLE,
@@ -32,24 +27,29 @@ module.exports = (sequelize, DataTypes, Model) => {
             created_at: {
                 type: DataTypes.DATE,
                 defaultValue: sequelize.literal('NOW()'),
-                allowNull: false
+                allowNull: false,
             },
             updated_at: {
                 type: DataTypes.DATE,
                 defaultValue: sequelize.literal('NOW()'),
-                allowNull: false
+                allowNull: false,
+            },
+            archieved_at: {
+                type: DataTypes.DATE,
+                defaultValue: null,
+                allowNull: true,
             },
             deleted_at: {
                 type: DataTypes.DATE,
                 defaultValue: null,
-                allowNull: true
-            }
+                allowNull: true,
+            },
         },
         {
             sequelize,
             modelName: 'order_items',
             tableName: 'order_items',
-            timestamps: false
+            timestamps: false,
         }
     )
 

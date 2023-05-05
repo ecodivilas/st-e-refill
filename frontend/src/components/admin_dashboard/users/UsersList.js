@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react'
+import '../../../App'
 
 import EditUser from './EditUser'
 import { deleteUser, getAllUsers } from '../../../services/UserService'

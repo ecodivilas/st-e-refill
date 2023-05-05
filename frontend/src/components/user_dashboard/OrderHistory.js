@@ -33,10 +33,10 @@ function OrderHistory() {
     }
 
     const statusChecker = (status) => {
-        if (status === 'to collect') {
+        if (status === 'pick up') {
             return (
                 <button className="py-1 w-24 text-xm rounded-lg text-black font-medium bg-yellow-400">
-                    To be Collected
+                    Pick Up
                 </button>
             )
         } else if (status === 'cancelled') {

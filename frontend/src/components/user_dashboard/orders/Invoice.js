@@ -235,48 +235,52 @@ function Invoice({ order }) {
 
                                 {/* As table body data */}
                                 <div className="leading-9 tracking-wide">
-                                    {orderItemsDetails.map((order_item) => {
-                                        return (
-                                            <>
-                                                {Number(
-                                                    orderDetails[0].order_id
-                                                ) ===
-                                                Number(order_item.order_id) ? (
-                                                    <>
-                                                        <div className="flex justify-between font-bold">
-                                                            <div className="w-2/5 text-left">
-                                                                {
-                                                                    order_item.name
-                                                                }{' '}
-                                                                {
-                                                                    order_item.capacity
-                                                                }
+                                    {orderItemsDetails.map(
+                                        (order_item, index) => {
+                                            return (
+                                                <div key={index}>
+                                                    {Number(
+                                                        orderDetails[0].order_id
+                                                    ) ===
+                                                    Number(
+                                                        order_item.order_id
+                                                    ) ? (
+                                                        <>
+                                                            <div className="flex justify-between font-bold">
+                                                                <div className="w-2/5 text-left">
+                                                                    {
+                                                                        order_item.name
+                                                                    }{' '}
+                                                                    {
+                                                                        order_item.capacity
+                                                                    }
+                                                                </div>
+                                                                <div className="w-1/5 text-center">
+                                                                    {
+                                                                        order_item.refill_price
+                                                                    }
+                                                                </div>
+                                                                <div className="w-1/5 text-center">
+                                                                    {
+                                                                        order_item.quantity
+                                                                    }
+                                                                </div>
+                                                                <div className="w-1/5 text-right text-orange-600">
+                                                                    {
+                                                                        order_item.total_price
+                                                                    }
+                                                                </div>
                                                             </div>
-                                                            <div className="w-1/5 text-center">
-                                                                {
-                                                                    order_item.refill_price
-                                                                }
-                                                            </div>
-                                                            <div className="w-1/5 text-center">
-                                                                {
-                                                                    order_item.quantity
-                                                                }
-                                                            </div>
-                                                            <div className="w-1/5 text-right text-orange-600">
-                                                                {
-                                                                    order_item.total_price
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <div></div>
-                                                    </>
-                                                )}
-                                            </>
-                                        )
-                                    })}
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <div></div>
+                                                        </>
+                                                    )}
+                                                </div>
+                                            )
+                                        }
+                                    )}
                                 </div>
                             </div>
 

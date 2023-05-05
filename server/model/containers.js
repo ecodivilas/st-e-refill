@@ -2,11 +2,12 @@ module.exports = (sequelize, DataTypes, Model) => {
     class Containers extends Model {}
 
     Containers.init(
-        {   container_id: {
+        {
+            container_id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 allowNull: false,
-                autoIncrement: true
+                autoIncrement: true,
             },
             name: {
                 type: DataTypes.STRING,
@@ -18,29 +19,34 @@ module.exports = (sequelize, DataTypes, Model) => {
                 type: DataTypes.STRING,
             },
             picture: {
-                type: DataTypes.BLOB("long"),
+                type: DataTypes.BLOB('long'),
             },
             created_at: {
                 type: DataTypes.DATE,
                 defaultValue: sequelize.literal('NOW()'),
-                allowNull: false
+                allowNull: false,
             },
             updated_at: {
                 type: DataTypes.DATE,
                 defaultValue: sequelize.literal('NOW()'),
-                allowNull: false
+                allowNull: false,
+            },
+            archieved_at: {
+                type: DataTypes.DATE,
+                defaultValue: null,
+                allowNull: true,
             },
             deleted_at: {
                 type: DataTypes.DATE,
                 defaultValue: null,
-                allowNull: true
-            }
+                allowNull: true,
+            },
         },
         {
             sequelize,
             modelName: 'containers',
             tableName: 'containers',
-            timestamps: false
+            timestamps: false,
         }
     )
 

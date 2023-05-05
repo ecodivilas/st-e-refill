@@ -52,23 +52,28 @@ module.exports = (sequelize, DataTypes, Model) => {
             created_at: {
                 type: DataTypes.DATE,
                 defaultValue: sequelize.literal('NOW()'),
-                allowNull: false
+                allowNull: false,
             },
             updated_at: {
                 type: DataTypes.DATE,
                 defaultValue: sequelize.literal('NOW()'),
-                allowNull: false
+                allowNull: false,
+            },
+            archieved_at: {
+                type: DataTypes.DATE,
+                defaultValue: null,
+                allowNull: true,
             },
             deleted_at: {
                 type: DataTypes.DATE,
                 defaultValue: null,
-                allowNull: true
-            }
+                allowNull: true,
+            },
         },
         {
             sequelize,
             modelName: 'users',
-            timestamps: false
+            timestamps: false,
             // timestamps: {
             //     createdAt: 'created_at',
             //     updatedAt: 'updated_at'

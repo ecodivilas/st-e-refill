@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Sidebar from '../../../common/Sidebar'
 import AdminOrders from './AdminOrders'
+import '../../../App'
 
 function AdminOrdersDashboard({ setIsAdmin, setIsAuthorized }) {
     const [open, setOpen] = useState(false)

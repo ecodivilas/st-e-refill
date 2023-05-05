@@ -31,7 +31,12 @@ function AdminOrders() {
 
     const handleDelete = (orderID) => {
         deleteOrder(orderID)
-        setAlertDeleteMessage(`Successfully deleted order ID: ${orderID}`)
+            .then(() => {
+                setAlertDeleteMessage(
+                    `Successfully deleted order ID: ${orderID}`
+                )
+            })
+            .catch((error) => console.log(error))
     }
 
     const handleSetAlertEdited = (orderID) => {

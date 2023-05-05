@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Sidebar from '../../../common/Sidebar'
 import AdminHome from './AdminHome'
+import '../../../App'
 
 function AdminHomeDashboard({ setIsAdmin, setIsAuthorized }) {
     const [open, setOpen] = useState(false)
