@@ -21,6 +21,11 @@ function UsersList() {
             .catch((error) => {
                 console.log(error)
             })
+
+        // Clean-up
+        return () => {
+            setUsers([])
+        }
     }, [alertDeleteMessage, alertEditedMessage])
 
     const [records, setRecords] = useState([])
@@ -33,14 +38,11 @@ function UsersList() {
 
     const handleDelete = (userID, userName) => {
         deleteUser(userID)
-            .then(() =>
+            .then(
+                (res) => setAlertDeleteMessage(),
                 setAlertDeleteMessage(`Successfully deleted user: ${userName}`)
             )
             .catch((error) => console.log(error))
-    }
-
-    const handleSetAlertEdited = (userName) => {
-        setAlertEditedMessage(`Successfully edited user: ${userName}`)
     }
 
     const handleDelAlertClose = () => {
@@ -76,7 +78,7 @@ function UsersList() {
                           <div className="flex items-center">
                               <EditUser
                                   user={user}
-                                  handleSetAlertEdited={handleSetAlertEdited}
+                                  setAlertEditedMessage={setAlertEditedMessage}
                               />
                               <div className="flex-col gap-2 justify-center group relative py-1 px-4 overflow-visible">
                                   <button

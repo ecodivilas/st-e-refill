@@ -168,7 +168,7 @@ const EditOrder = ({ handleSetAlertEdited, order }) => {
                                                             onChange={
                                                                 handleChange
                                                             }
-                                                            required="true"
+                                                            required={true}
                                                             readOnly
                                                         />
                                                     </>

@@ -20,13 +20,6 @@ let updatedHalfSlimQuantity = getLSData('updatedHalfSlimQuantity')
     : 0
 
 function ContainerSelection() {
-    // From the database
-    const [dbContainers, setContainers] = useState([
-        { refill_price: 0 },
-        { refill_price: 0 },
-        { refill_price: 0 },
-    ])
-
     // Navigation and passing of data
     const [isProceed, setIsProceed] = useState(false)
 
@@ -37,6 +30,12 @@ function ContainerSelection() {
     )
 
     const [totalPriceAmount, setTotalPriceAmount] = useState(0)
+
+    const [dbContainers, setContainers] = useState([
+        { refill_price: 0 },
+        { refill_price: 0 },
+        { refill_price: 0 },
+    ])
 
     const slimPriceAmount = slimQuantity * dbContainers[0].refill_price
     const roundPriceAmount = roundQuantity * dbContainers[1].refill_price
@@ -51,9 +50,23 @@ function ContainerSelection() {
                 console.log(error)
             })
 
+        // Cleanup on unmount
+        return () =>
+            setContainers([
+                { refill_price: 0 },
+                { refill_price: 0 },
+                { refill_price: 0 },
+            ])
+    }, [])
+
+    useEffect(() => {
         setTotalPriceAmount(
             slimPriceAmount + roundPriceAmount + halfSlimPriceAmount
         )
+
+        return () => {
+            setTotalPriceAmount(0)
+        }
     }, [slimPriceAmount, roundPriceAmount, halfSlimPriceAmount])
 
     const quantityStates = [
