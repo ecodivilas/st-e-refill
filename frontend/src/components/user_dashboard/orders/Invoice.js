@@ -64,15 +64,15 @@ function Invoice({ order }) {
 
     const orderDetails = [order]
 
-    useEffect(() => {
-        getOneOrderItems(order.user_id)
-            .then((order_items) => {
-                setOrderItemsDetails(order_items)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-    })
+    // useEffect(() => {
+    //     getOneOrderItems(order.user_id)
+    //         .then((order_items) => {
+    //             setOrderItemsDetails(order_items)
+    //         })
+    //         .catch((error) => {
+    //             console.log(error)
+    //         })
+    // })
 
     const toggleModal = (e) => {
         setShowModal(!showModal)

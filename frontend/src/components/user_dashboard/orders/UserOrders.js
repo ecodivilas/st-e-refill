@@ -34,13 +34,19 @@ function UserOrders() {
     }
 
     const handleDelete = (orderID) => {
-        deleteOrder(orderID)
-            .then(() => {
-                setAlertDeleteMessage(
-                    `Successfully deleted order ID: ${orderID}`
-                )
-            })
-            .catch((error) => console.log(error))
+        const confirmed = window.confirm(
+            'Are you sure you want to delete this order?'
+        )
+        if (confirmed) {
+            deleteOrder(orderID)
+                .then(() => {
+                    setAlertDeleteMessage()
+                    setAlertDeleteMessage(
+                        `Successfully deleted order ID: ${orderID}`
+                    )
+                })
+                .catch((error) => console.log(error))
+        }
     }
 
     const handleSetAlertEdited = (orderID) => {

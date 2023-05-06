@@ -68,19 +68,15 @@ export async function getOneOrderItems(userId) {
 //     }
 // }
 
-// DELETE User
-export async function deleteOrder(userId) {
-    // try {
-    //     const confirmed = window.confirm(
-    //         'Are you sure you want to delete this user?'
-    //     )
-    //     if (confirmed) {
-    //         const response = await fetch(`/api/v1/users/${userId}`, {
-    //             method: 'DELETE',
-    //         })
-    //         return await response.json()
-    //     }
-    // } catch (error) {
-    //     console.log('Error: ', error)
-    // }
+// DELETE User Order
+export async function deleteOrder(orderId) {
+    console.log('Order ID: ', orderId)
+    try {
+        const response = await fetch(`/api/v1/orders/${orderId}`, {
+            method: 'DELETE',
+        })
+        return await response.json()
+    } catch (error) {
+        console.log('Error: ', error)
+    }
 }
