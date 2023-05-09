@@ -1,31 +1,24 @@
 const ordersRepository = require('../repository/orders')
 
 class OrdersService {
-    async createOrder(order) {
-        return await ordersRepository.createOrder(order)
-    }
-    
-    // Customize create orders
     async createPendingOrder(order) {
         return await ordersRepository.createPendingOrder(order)
     }
 
-    // Customize Get only one record
-    async getOneOrderItems(id){
-        return await ordersRepository.getOneOrderItems(id)
-    }
-    
-    // Customize Get only one record
-    async getAllOrderItems(){
+    async getAllOrderItems() {
         return await ordersRepository.getAllOrderItems()
     }
 
-    async getOrders() {
-        return await ordersRepository.getOrders()
+    async getOneOrderItems(id) {
+        return await ordersRepository.getOneOrderItems(id)
     }
 
-    async getOrder(id) {
-        return await ordersRepository.getOrder(id)
+    async getAllOrders() {
+        return await ordersRepository.getAllOrders()
+    }
+
+    async getOneOrder(id) {
+        return await ordersRepository.getOneOrder(id)
     }
 
     async updateOrder(order) {

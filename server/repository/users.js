@@ -10,24 +10,39 @@ class UsersRepository {
         this.db = connect()
     }
 
-    async createUser(user) {
-        if (ValidateEmail(user.email)) {
-            let userData = {}
+    // Register / Create User
+    async registerUser(user) {
+        let userData = {}
 
-            try {
-                const password = user.password
-                const salt = bcrypt.genSaltSync(10)
-                const hashedPassword = bcrypt.hashSync(password, salt)
+        try {
+            const password = user.user.password
+            const salt = bcrypt.genSaltSync(10)
+            const hashedPassword = bcrypt.hashSync(password, salt)
 
-                userData = { ...user, password: hashedPassword }
-                const createdUser = await this.db.users.create(userData)
+            userData = { ...user.user, password: hashedPassword }
 
-                return createdUser
-            } catch (error) {
-                console.log('Error: ', error)
+            const createdUser = await this.db.users.create(userData)
+            if (createdUser) {
+                user.address.user_id = createdUser.user_id
+                try {
+                    const createAddress = await this.db.addresses.create(
+                        user.address
+                    )
+                    if (createAddress) {
+                        console.log('User and Address Successfully Created')
+                        return 'Successful'
+                    } else {
+                        return 'Address was not created'
+                    }
+                } catch (error) {
+                    console.log('Error: ', error)
+                    return error
+                }
+            } else {
+                return true
             }
-        } else {
-            return 'Email is not Valid'
+        } catch (error) {
+            console.log('Error: ', error)
         }
     }
 
@@ -53,23 +68,6 @@ class UsersRepository {
         }
     }
 
-    async deleteUser(id) {
-        console.log(id)
-        try {
-            const isAddressDestroyed = await this.db.addresses.update(
-                { deleted_at: new Date() },
-                { where: { user_id: id } }
-            )
-            const user = await this.db.users.update(
-                { deleted_at: new Date() },
-                { where: { user_id: id } }
-            )
-            return user
-        } catch (error) {
-            console.log('Error: ', error)
-        }
-    }
-
     async updateUser(user) {
         let data = {}
 
@@ -86,6 +84,23 @@ class UsersRepository {
             console.log('Error: ', error)
         }
         return data
+    }
+
+    async deleteUser(id) {
+        console.log(id)
+        try {
+            const isAddressDestroyed = await this.db.addresses.update(
+                { deleted_at: new Date() },
+                { where: { user_id: id } }
+            )
+            const user = await this.db.users.update(
+                { deleted_at: new Date() },
+                { where: { user_id: id } }
+            )
+            return user
+        } catch (error) {
+            console.log('Error: ', error)
+        }
     }
 
     // Login w/ JWT
@@ -139,42 +154,6 @@ class UsersRepository {
                 } catch (error) {
                     console.log('Error: ', error)
                 }
-            }
-        } catch (error) {
-            console.log('Error: ', error)
-        }
-    }
-
-    // Register User
-    async registerUser(user) {
-        let userData = {}
-
-        try {
-            const password = user.user.password
-            const salt = bcrypt.genSaltSync(10)
-            const hashedPassword = bcrypt.hashSync(password, salt)
-
-            userData = { ...user.user, password: hashedPassword }
-
-            const createdUser = await this.db.users.create(userData)
-            if (createdUser) {
-                user.address.user_id = createdUser.user_id
-                try {
-                    const createAddress = await this.db.addresses.create(
-                        user.address
-                    )
-                    if (createAddress) {
-                        console.log('User and Address Successfully Created')
-                        return 'Successful'
-                    } else {
-                        return 'Address was not created'
-                    }
-                } catch (error) {
-                    console.log('Error: ', error)
-                    return error
-                }
-            } else {
-                return true
             }
         } catch (error) {
             console.log('Error: ', error)

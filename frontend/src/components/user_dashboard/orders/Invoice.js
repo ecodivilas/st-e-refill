@@ -15,6 +15,23 @@ const formatDate = (dateString) => {
     return formattedDate
 }
 
+const formatTime = (timeString) => {
+    const [hours, minutes, seconds] = timeString.split(':')
+
+    const date = new Date()
+    date.setHours(parseInt(hours))
+    date.setMinutes(parseInt(minutes))
+    date.setSeconds(parseInt(seconds))
+
+    const formattedTime = date.toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true,
+    })
+
+    return formattedTime
+}
+
 const showStatusBadge = (s) => {
     const result = statuses.filter((status) => status.status === s)
     return (
@@ -64,15 +81,18 @@ function Invoice({ order }) {
 
     const orderDetails = [order]
 
-    // useEffect(() => {
-    //     getOneOrderItems(order.user_id)
-    //         .then((order_items) => {
-    //             setOrderItemsDetails(order_items)
-    //         })
-    //         .catch((error) => {
-    //             console.log(error)
-    //         })
-    // })
+    useEffect(() => {
+        getOneOrderItems(order.user_id)
+            .then((order_items) => {
+                setOrderItemsDetails(order_items)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+
+        // Cleanup
+        return () => setOrderItemsDetails([])
+    }, [order])
 
     const toggleModal = (e) => {
         setShowModal(!showModal)
@@ -122,7 +142,7 @@ function Invoice({ order }) {
                                         <span className="">
                                             Date Issued:{' '}
                                             <span className="font-bold">
-                                                {formatDate('2023-05-02')}
+                                                {formatDate(order.order_date)}
                                             </span>
                                         </span>
                                     </div>
@@ -130,7 +150,9 @@ function Invoice({ order }) {
                                         <span className="">
                                             Delivery Date:{' '}
                                             <span className="font-bold">
-                                                {formatDate('2023-05-02')}
+                                                {formatDate(
+                                                    order.delivery_date
+                                                )}
                                             </span>
                                         </span>
                                     </div>
@@ -138,7 +160,9 @@ function Invoice({ order }) {
                                         <span className="">
                                             Delivery Time:{' '}
                                             <span className="font-bold">
-                                                1:30 PM
+                                                {formatTime(
+                                                    order.delivery_time
+                                                )}
                                             </span>
                                         </span>
                                     </div>

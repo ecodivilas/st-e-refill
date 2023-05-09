@@ -1,7 +1,7 @@
 const usersService = require('../service/users')
 class UsersController {
-    async createUser(user) {
-        return await usersService.createUser(user)
+    async registerUser(user) {
+        return await usersService.registerUser(user)
     }
 
     async getUsers() {
@@ -22,10 +22,6 @@ class UsersController {
 
     async loginUser(loginCredentials) {
         return await usersService.loginUser(loginCredentials)
-    }
-
-    async registerUser(user) {
-        return await usersService.registerUser(user)
     }
 }
 

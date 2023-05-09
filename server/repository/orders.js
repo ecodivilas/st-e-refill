@@ -7,15 +7,6 @@ class OrdersRepository {
         this.db = connect()
     }
 
-    // async createOrder(order) {
-    //     try {
-    //         const createdOrder = await this.db.orders.create(order)
-    //         return createdOrder
-    //     } catch (error) {
-    //         console.log('Error: ', error)
-    //     }
-    // }
-
     // Customize Create Order
     async createPendingOrder(order) {
         const { order_items, ...newOrder } = order
@@ -44,82 +35,45 @@ class OrdersRepository {
         }
     }
 
-    async getOneOrderItems(id) {
-        // const orders = this.db.orders.findAll({
-        //     attributes: [
-        //       'order_id',
-        //       'order_date',
-        //       [this.db.Sequelize.literal('order_items.quantity'), 'quantity'],
-        //       [this.db.Sequelize.literal('order_items.quantity * order_items.unit_price'), 'total_price'],
-        //       'is_paid',
-        //       'status'
-        //     ],
-        //     include: [{
-        //       model: this.db.order_items,
-        //       attributes: []
-        //     }],
-        //     raw: true,
-        //     where:{user_id: id}
-        //   })
+    async getAllOrders() {
+        try {
+            const orders = this.db.sequelize.query(
+                `
+                SELECT orders.order_id, users.username, order_date, delivery_date, delivery_time, mode_of_payment,
+                is_paid, status, sum(order_items.quantity * order_items.unit_price) AS "total_price"
+                FROM order_items LEFT JOIN orders ON orders.order_id = order_items.order_id
+                LEFT JOIN users ON users.user_id = orders.user_id
+                WHERE users.username IS NOT NULL AND orders.order_id IS NOT NULL
+                GROUP BY orders.order_id, users.username;
+            `,
+                { type: this.db.QueryTypes.SELECT }
+            )
 
-        // // Still working on this one
-        // const order_items = this.db.orders.findAll({
-        //     attributes: [
-        //       'order_id',
-        //       [this.db.Sequelize.literal('o_to_oi_containers.name'), 'name'],
-        //       [this.db.Sequelize.literal('o_to_oi_containers.capacity'), 'capacity'],
-        //       'order_date',
-        //       [this.db.Sequelize.literal('o_to_order_items.quantity'), 'quantity'],
-        //       [this.db.Sequelize.literal('(o_to_order_items.quantity * o_to_order_items.unit_price)'), 'total_price'],
-        //       'is_paid',
-        //       'status'
-        //       // exclude the following fields:
-        //       // 'o_to_oi_containers.order_items.created_at',
-        //       // 'o_to_oi_containers.order_items.updated_at',
-        //       // 'o_to_oi_containers.order_items.deleted_at'
-        //     ],
-        //     include: [
-        //       {
-        //         model: this.db.order_items,
-        //         // attributes: { exclude: ['created_at'] },
-        //         attributes: [],
-        //         as: 'o_to_order_items',
-        //         required: true // inner join
-        //       },
-        //       {
-        //         model: this.db.containers,
-        //         // attributes: { exclude: ['created_at'] },
-        //         attributes: [],
-        //         as: 'o_to_oi_containers',
-        //         required: true // inner join
+            return orders
+        } catch (error) {
+            console.log('Error: ', error)
+            return []
+        }
+    }
 
-        //       },
-        //     ],
-        //     where:{user_id: id},
-        //     raw: true,
-        //     // exclude unwanted columns
-        //     // nest: true,
-        //     // plain: true,
-        //   });
-
-        const order_items = this.db.sequelize.query(
-            `
-        SELECT orders.order_id,
-        containers.name,
-        containers.capacity,
-        orders.order_date,
-        containers.refill_price,
-        order_items.quantity,
-        (order_items.quantity * order_items.unit_price) AS "total_price",
-        orders.is_paid, orders.status from orders
-        INNER JOIN order_items ON orders.order_id = order_items.order_id
-        INNER JOIN containers ON containers.container_id = order_items.container_id
-        WHERE orders.user_id = ${id} and orders.deleted_at is null;
-      `,
-            { type: this.db.QueryTypes.SELECT }
-        )
-
-        return order_items
+    async getOneOrder(id) {
+        try {
+            const order = this.db.sequelize.query(
+                `
+            SELECT orders.order_id, users.username, users.user_id, order_date, delivery_date, delivery_time, mode_of_payment,
+            is_paid, status, sum(order_items.quantity * order_items.unit_price) AS "total_price"
+            FROM order_items LEFT JOIN orders ON orders.order_id = order_items.order_id
+            LEFT JOIN users ON users.user_id = orders.user_id
+            WHERE users.username IS NOT NULL AND orders.order_id IS NOT NULL AND users.user_id = ${id}
+            AND orders.archieved_at is null AND orders.deleted_at is null
+            GROUP BY orders.order_id, users.username, users.user_id;
+            `,
+                { type: this.db.QueryTypes.SELECT }
+            )
+            return order
+        } catch (error) {
+            console.log('Error: ', error)
+        }
     }
 
     async getAllOrderItems() {
@@ -149,45 +103,25 @@ class OrdersRepository {
         return orders
     }
 
-    async getOrders() {
-        try {
-            const orders = this.db.sequelize.query(
-                `
-                SELECT orders.order_id, users.username, order_date, delivery_date, delivery_time, mode_of_payment,
-                is_paid, status, sum(order_items.quantity * order_items.unit_price) AS "total_price"
-                FROM order_items LEFT JOIN orders ON orders.order_id = order_items.order_id
-                LEFT JOIN users ON users.user_id = orders.user_id
-                WHERE users.username IS NOT NULL AND orders.order_id IS NOT NULL
-                GROUP BY orders.order_id, users.username;
-            `,
-                { type: this.db.QueryTypes.SELECT }
-            )
+    async getOneOrderItems(id) {
+        const order_items = this.db.sequelize.query(
+            `
+        SELECT orders.order_id,
+        containers.name,
+        containers.capacity,
+        orders.order_date,
+        containers.refill_price,
+        order_items.quantity,
+        (order_items.quantity * order_items.unit_price) AS "total_price",
+        orders.is_paid, orders.status from orders
+        INNER JOIN order_items ON orders.order_id = order_items.order_id
+        INNER JOIN containers ON containers.container_id = order_items.container_id
+        WHERE orders.user_id = ${id} and orders.deleted_at is null;
+      `,
+            { type: this.db.QueryTypes.SELECT }
+        )
 
-            return orders
-        } catch (error) {
-            console.log('Error: ', error)
-            return []
-        }
-    }
-
-    async getOrder(id) {
-        try {
-            const order = this.db.sequelize.query(
-                `
-            SELECT orders.order_id, users.username, users.user_id, order_date, delivery_date, delivery_time, mode_of_payment,
-            is_paid, status, sum(order_items.quantity * order_items.unit_price) AS "total_price"
-            FROM order_items LEFT JOIN orders ON orders.order_id = order_items.order_id
-            LEFT JOIN users ON users.user_id = orders.user_id
-            WHERE users.username IS NOT NULL AND orders.order_id IS NOT NULL AND users.user_id = ${id}
-            AND orders.archieved_at is null AND orders.deleted_at is null
-            GROUP BY orders.order_id, users.username, users.user_id;
-            `,
-                { type: this.db.QueryTypes.SELECT }
-            )
-            return order
-        } catch (error) {
-            console.log('Error: ', error)
-        }
+        return order_items
     }
 
     async updateOrder(order) {
@@ -196,19 +130,9 @@ class OrdersRepository {
         let data = {}
 
         try {
-            // data = await this.db.orders.update(
-            //     { ...order },
-            //     {
-            //         where: {
-            //             user_id: order.user_id,
-            //         },
-            //     }
-            // );
             data = await this.db.sequelize.query(
-                `
-            UPDATE orders SET mode_of_payment = '${order.mode_of_payment}',
-            status = '${order.status}', is_paid = ${order.is_paid} WHERE order_id = ${order.order_id};
-            `,
+                `UPDATE orders SET mode_of_payment = '${order.mode_of_payment}',
+                status = '${order.status}', is_paid = ${order.is_paid} WHERE order_id = ${order.order_id};`,
                 { type: this.db.QueryTypes.SELECT }
             )
         } catch (error) {

@@ -1,8 +1,8 @@
 const usersRepository = require('../repository/users')
 
 class UsersService {
-    async createUser(user) {
-        return await usersRepository.createUser(user)
+    async registerUser(user) {
+        return await usersRepository.registerUser(user)
     }
 
     async getUsers() {
@@ -21,14 +21,8 @@ class UsersService {
         return await usersRepository.deleteUser(id)
     }
 
-    // Login
     async loginUser(loginCredentials) {
         return await usersRepository.loginUser(loginCredentials)
-    }
-
-    // Register
-    async registerUser(user) {
-        return await usersRepository.registerUser(user)
     }
 }
 
