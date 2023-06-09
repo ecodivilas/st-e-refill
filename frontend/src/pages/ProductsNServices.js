@@ -1,6 +1,32 @@
 import React from 'react'
 
 function ProductsNServices() {
+    const products = [
+        {
+            id: 1,
+            name: 'Purified Water (Gallon)',
+        },
+        {
+            id: 2,
+            name: 'Purified Water (500ml)',
+        },
+        {
+            id: 3,
+            name: 'Mineral Water (Gallon)',
+        },
+        {
+            id: 4,
+            name: 'Alkaline Water (Gallon)',
+        },
+        {
+            id: 5,
+            name: 'Distilled Water (Gallon)',
+        },
+        {
+            id: 6,
+            name: 'Ionized Water (Gallon)',
+        },
+    ]
     return (
         // <div className="flex items-center justify-center bg-green-700 text-white h-[100vh] font-bold text-3xl pb-32">Products And Services</div>
         <div className="bg-gray-100 h-[100vh] pt-16">
@@ -10,12 +36,13 @@ function ProductsNServices() {
                         <h2 className="text-2xl font-bold mb-3">Products</h2>
 
                         <ul>
-                            <li className="mb-2">Purified Water (Gallon)</li>
-                            <li className="mb-2">Purified Water (500ml)</li>
-                            <li className="mb-2">Mineral Water (Gallon)</li>
-                            <li className="mb-2">Alkaline Water (Gallon)</li>
-                            <li className="mb-2">Distilled Water (Gallon)</li>
-                            <li className="mb-2">Ionized Water (Gallon)</li>
+                            {products.map((product) => {
+                                return (
+                                    <li className="mb-2" key={product.id}>
+                                        {product.name}
+                                    </li>
+                                )
+                            })}
                         </ul>
                     </div>
 
